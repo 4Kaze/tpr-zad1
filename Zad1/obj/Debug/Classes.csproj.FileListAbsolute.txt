@@ -1,0 +1,6 @@
+C:\Users\btmik\source\repos\Zad1\Zad1\bin\Debug\Zad1.dll
+C:\Users\btmik\source\repos\Zad1\Zad1\bin\Debug\Zad1.pdb
+C:\Users\btmik\source\repos\Zad1\Zad1\obj\Debug\Classes.csprojAssemblyReference.cache
+C:\Users\btmik\source\repos\Zad1\Zad1\obj\Debug\Classes.csproj.CoreCompileInputs.cache
+C:\Users\btmik\source\repos\Zad1\Zad1\obj\Debug\Zad1.dll
+C:\Users\btmik\source\repos\Zad1\Zad1\obj\Debug\Zad1.pdb
