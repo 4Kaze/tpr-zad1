@@ -8,14 +8,24 @@ namespace Zad1
 {
     public class Catalog
     {
-        public Catalog( string NewCode, string Name)
+        public long Code { get; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Author Author { get; set; }
+
+        public Catalog(long code, string title, string description, Author author)
         {
-            Code = NewCode;
-            ProductName = Name;
-            Details = "";
+            Code = code;
+            Title = title;
+            Description = description;
+            Author = author;
         }
-        public string Code { get; }
-        public string Details { get; set; }
-        public string ProductName { get; }
+
+        public override bool Equals(Object obj)
+        {
+            if (!(obj is Catalog)) return false;
+            return ((Catalog)obj).Code == Code;
+        }
+
     }
 }
