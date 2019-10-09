@@ -1,3 +1,3 @@
 Jacek Stańczyk 216890
 
-Bartłomiej Mikołajczyk WPISZ-SWÓJ-INDEKS-XD
+Bartłomiej Mikołajczyk 216837
