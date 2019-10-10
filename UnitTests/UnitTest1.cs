@@ -7,34 +7,63 @@ namespace UnitTests
     public class AtomicClassesTest
     {
         [TestMethod]
-        public void CatalogTest()
+        public void AuthorConstructorTest()
         {
-            Catalog catalog = new Catalog("N1", "Pride and Prejudice");
-            Assert.AreEqual("N1", catalog.Code);
-            Assert.AreEqual("Pride and Prejudice", catalog.ProductName);
-            Assert.AreEqual(catalog.Details, "");
-            catalog.Details = "Informacja";
-            Assert.AreEqual(catalog.Details, "Informacja");
+            System.DateTimeOffset date = System.DateTimeOffset.Now;
+            Author author = new Author(1, "Jane", "Austen", date);
+            Assert.AreEqual(author.Code, 1);
+            Assert.AreEqual(author.Name, "Jane");
+            Assert.AreEqual(author.Surname, "Austen");
+            Assert.AreEqual(author.DateOfBirth, date);
         }
 
         [TestMethod]
-        public void ClientTest()
+        public void CatalogConstructorTest()
         {
-            Client client1 = new Client("C1", "Stan", "Peacock", "Michelles 42");
-            Assert.AreEqual("C1", client1.Code);
-            Assert.AreEqual("Stan", client1.Name);
-            Assert.AreEqual("Peacock", client1.Surname);
-            Assert.AreEqual("Michelles 42", client1.Adress);
-            client1.Adress = "St Johnson 12";
-            Assert.AreEqual("St Johnson 12", client1.Adress);
+            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("1/28/1813"));
+            Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", author);
+            Assert.AreEqual(1, catalog.Code);
+            Assert.AreEqual("Pride and Prejudice", catalog.Title);
+            Assert.AreEqual("This is description", catalog.Description);
+            Assert.AreEqual(author, catalog.Author);
+        }
 
-            Client client2 = new Client("C2", "Mike", "Podolsky");
-            Assert.AreEqual("C2", client2.Code);
-            Assert.AreEqual("Mike", client2.Name);
-            Assert.AreEqual("Podolsky", client2.Surname);
-            Assert.AreEqual("", client2.Adress);
-            client2.Adress = "St Leslie 2";
-            Assert.AreEqual("St Leslie 2", client2.Adress);
+        [TestMethod]
+        public void PersonConstructorTest()
+        {
+            Person person = new Person(1, "Stan", "Peacock", "Michelles 42");
+            Assert.AreEqual(1, person.Code);
+            Assert.AreEqual("Stan", person.Name);
+            Assert.AreEqual("Peacock", person.Surname);
+            Assert.AreEqual("Michelles 42", person.Adress);
+        }
+
+        [TestMethod]
+        public void StatedescriptionConstructorTest()
+        {
+            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("1/28/1813"));
+            Catalog book = new Catalog(1, "Pride and Prejudice", "This is description", author);
+            System.DateTimeOffset date = System.DateTimeOffset.Now;
+            StateDescription stateDescription = new StateDescription(1, book, date, "here");
+            Assert.AreEqual(stateDescription.Code, 1);
+            Assert.AreEqual(stateDescription.Book, book);
+            Assert.AreEqual(stateDescription.PurchaseDate, date);
+            Assert.AreEqual(stateDescription.Location, "here");
+        }
+
+        [TestMethod]
+        public void EventConstructorTest()
+        {
+            Person person = new Person(1, "Mike", "Podolsky");
+            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("1/28/1813"));
+            Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", author);
+            StateDescription stateDescription = new StateDescription(1, catalog, System.DateTimeOffset.Now, "Here");
+            System.DateTimeOffset date = System.DateTimeOffset.Now;
+            Event happening = new Event(1, person, stateDescription, date);
+            Assert.AreEqual(1, happening.Code);
+            Assert.AreEqual(person, happening.Causer);
+            Assert.AreEqual(stateDescription, happening.BookState);
+            Assert.AreEqual(date, happening.BorrowDate);
         }
     }
 }

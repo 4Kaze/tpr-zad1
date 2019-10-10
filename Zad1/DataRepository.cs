@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zad1
 {
-    class DataRepository
+    public class DataRepository
     {
     }
 }
