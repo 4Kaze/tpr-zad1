@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zad1
 {
-    public class Happening
+    public class Event
     {
         public long Code { get; }
         public Person Causer { get; }
@@ -14,7 +14,7 @@ namespace Zad1
         public DateTimeOffset BorrowDate { get; }
         public DateTimeOffset ReturnDate { get; set; }
 
-        public Happening(long code, Person causer, StateDescription bookState, DateTimeOffset borrowDate)
+        public Event(long code, Person causer, StateDescription bookState, DateTimeOffset borrowDate)
         {
             Code = code;
             Causer = causer;
@@ -24,8 +24,8 @@ namespace Zad1
 
         public override bool Equals(Object obj)
         {
-            if (!(obj is Happening)) return false;
-            return ((Happening)obj).Code == Code;
+            if (!(obj is Event)) return false;
+            return ((Event)obj).Code == Code;
         }
     }
 }

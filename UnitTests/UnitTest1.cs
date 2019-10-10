@@ -6,6 +6,16 @@ namespace UnitTests
     [TestClass]
     public class AtomicClassesTest
     {
+        [TestMethod]
+        public void AuthorConstructorTest()
+        {
+            System.DateTimeOffset date = System.DateTimeOffset.Now;
+            Author author = new Author(1, "Jane", "Austen", date);
+            Assert.AreEqual(author.Code, 1);
+            Assert.AreEqual(author.Name, "Jane");
+            Assert.AreEqual(author.Surname, "Austen");
+            Assert.AreEqual(author.DateOfBirth, date);
+        }
 
         [TestMethod]
         public void CatalogConstructorTest()
