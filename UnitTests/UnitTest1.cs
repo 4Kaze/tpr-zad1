@@ -39,7 +39,20 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void HappeningConstructorTest()
+        public void StatedescriptionConstructorTest()
+        {
+            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("1/28/1813"));
+            Catalog book = new Catalog(1, "Pride and Prejudice", "This is description", author);
+            System.DateTimeOffset date = System.DateTimeOffset.Now;
+            StateDescription stateDescription = new StateDescription(1, book, date, "here");
+            Assert.AreEqual(stateDescription.Code, 1);
+            Assert.AreEqual(stateDescription.Book, book);
+            Assert.AreEqual(stateDescription.PurchaseDate, date);
+            Assert.AreEqual(stateDescription.Location, "here");
+        }
+
+        [TestMethod]
+        public void EventConstructorTest()
         {
             Person person = new Person(1, "Mike", "Podolsky");
             Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("1/28/1813"));
