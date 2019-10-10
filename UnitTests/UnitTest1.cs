@@ -6,6 +6,7 @@ namespace UnitTests
     [TestClass]
     public class AtomicClassesTest
     {
+
         [TestMethod]
         public void CatalogConstructorTest()
         {
@@ -35,9 +36,9 @@ namespace UnitTests
             Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", author);
             StateDescription stateDescription = new StateDescription(1, catalog, System.DateTimeOffset.Now, "Here");
             System.DateTimeOffset date = System.DateTimeOffset.Now;
-            Happening happening = new Happening(1, person, stateDescription, date);
+            Event happening = new Event(1, person, stateDescription, date);
             Assert.AreEqual(1, happening.Code);
-            Assert.AreEqual(person, happening.Person);
+            Assert.AreEqual(person, happening.Causer);
             Assert.AreEqual(stateDescription, happening.BookState);
             Assert.AreEqual(date, happening.BorrowDate);
         }
