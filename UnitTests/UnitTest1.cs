@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Globalization;
 using Zad1;
 
 namespace UnitTests
@@ -20,7 +21,7 @@ namespace UnitTests
         [TestMethod]
         public void CatalogConstructorTest()
         {
-            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("1/28/1813"));
+            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("28/01/1813"));
             Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", author);
             Assert.AreEqual(1, catalog.Code);
             Assert.AreEqual("Pride and Prejudice", catalog.Title);
@@ -41,7 +42,7 @@ namespace UnitTests
         [TestMethod]
         public void StatedescriptionConstructorTest()
         {
-            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("1/28/1813"));
+            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("28/01/1813"));
             Catalog book = new Catalog(1, "Pride and Prejudice", "This is description", author);
             System.DateTimeOffset date = System.DateTimeOffset.Now;
             StateDescription stateDescription = new StateDescription(1, book, date, "here");
@@ -55,7 +56,7 @@ namespace UnitTests
         public void EventConstructorTest()
         {
             Person person = new Person(1, "Mike", "Podolsky");
-            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("1/28/1813"));
+            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("28/01/1813"));
             Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", author);
             StateDescription stateDescription = new StateDescription(1, catalog, System.DateTimeOffset.Now, "Here");
             System.DateTimeOffset date = System.DateTimeOffset.Now;

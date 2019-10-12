@@ -9,7 +9,7 @@ namespace Zad1
         public StateDescription BookState { get; }
         public DateTimeOffset BorrowDate { get; }
         public DateTimeOffset ReturnDate { get; set; }
-
+        
         public Event(long code, Person causer, StateDescription bookState, DateTimeOffset borrowDate)
         {
             Code = code;
