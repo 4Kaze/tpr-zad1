@@ -7,18 +7,17 @@ namespace UnitTests
     [TestClass]
     public class DataManagmentTests
     {
-        [TestMethod]
-        public void DataContextTest()
-        { 
-            Dictionary<long, Catalog> exampleBooks = new Dictionary<long, Catalog>();
-            DataContext data = new DataContext();
-        }
 
         [TestMethod]
         public void DataRepositoryOperations()
         {
             Person person = new Person(1, "Stan", "Peacock", "Michelles 42");
+            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("28/01/1813"));
+            Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", author);
+
             DataRepository repository = new DataRepository();
+
+            
 
             //Person Collection
             Assert.AreEqual(null, repository.GetPerson(0));
@@ -30,6 +29,14 @@ namespace UnitTests
             Assert.AreEqual(person, repository.GetPerson(0));
             repository.DeletePersonByReference(person);
             Assert.AreEqual(null, repository.GetPerson(0));
+
+            //Catalog Collection
+            Assert.AreEqual(null, repository.GetCatalog(0));
+            repository.AddCatalog(catalog);
+            Assert.AreEqual(1, repository.CatalogKey);
+            Assert.AreEqual(catalog, repository.GetCatalog(0));
+            repository.DeleteCatalogByIndex(0);
+            Assert.AreEqual(null, repository.GetCatalog(0));
         }
     }
 }
