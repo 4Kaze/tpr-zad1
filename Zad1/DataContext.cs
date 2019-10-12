@@ -17,5 +17,7 @@ namespace Zad1
             transactions = new ObservableCollection<Event>();
             descriptions = new List<StateDescription>();
         }
+
+
     }
 }

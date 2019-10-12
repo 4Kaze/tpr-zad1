@@ -9,5 +9,43 @@ namespace Zad1
         {
             dataManagment = new DataContext();
         }
+
+
+
+        public void AddPerson(Person person)
+        {
+            dataManagment.clients.Add(person);
+        }
+
+
+        public void DeletePersonByReference(Person person)
+        {
+            if (dataManagment.clients.Contains(person))
+            {
+                dataManagment.clients.Remove(person);
+            }
+        }
+
+
+        public void DeletePersonByIndex(int index)
+        {
+            if (dataManagment.clients.Count > index)
+            {
+                dataManagment.clients.RemoveAt(index);
+            }
+        }
+
+
+        public Person GetPerson(int index)
+        {
+            if (dataManagment.clients.Count > index)
+            {
+                return dataManagment.clients[index];
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
