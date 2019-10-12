@@ -5,7 +5,7 @@ namespace Zad1
     public class DataRepository
     {
         private long catalogKey;
-        private DataContext dataManagment;
+        private DataContext dataContext;
         private IFillInterface fillInterface;
 
         public long CatalogKey
@@ -17,51 +17,52 @@ namespace Zad1
         {
             this.catalogKey = 0;
             this.fillInterface = fillInterface;
-            dataManagment = new DataContext();
-            this.fillInterface.FillData(dataManagment);
+            this.dataContext = new DataContext();
+            this.fillInterface.FillData(dataContext);
         }
 
 
         public DataRepository()
         {
-            dataManagment = new DataContext();
+            this.catalogKey = 0;
+            this.dataContext = new DataContext();
         }
 
 
         // Person Operations
         public void AddPerson(Person person)
         {
-            dataManagment.clients.Add(person);
+            dataContext.Clients.Add(person);
         }
 
 
         public int DeletePersonByReference(Person person)
         {
-            if (dataManagment.clients.Contains(person))
+            if (dataContext.Clients.Contains(person))
             {
-                dataManagment.clients.Remove(person);
-                return 0;
+                dataContext.Clients.Remove(person);
+                return 1;
             }
-            return 1;
+            return 0;
         }
 
 
         public int DeletePersonByIndex(int index)
         {
-            if (dataManagment.clients.Count > index)
+            if (dataContext.Clients.Count > index)
             {
-                dataManagment.clients.RemoveAt(index);
-                return 0;
+                dataContext.Clients.RemoveAt(index);
+                return 1;
             }
-            return 1;
+            return 0;
         }
 
 
         public Person GetPerson(int index)
         {
-            if (dataManagment.clients.Count > index)
+            if (dataContext.Clients.Count > index)
             {
-                return dataManagment.clients[index];
+                return dataContext.Clients[index];
             }
             else
             {
@@ -72,28 +73,27 @@ namespace Zad1
         // Catalog Operations
         public void AddCatalog(Catalog catalog)
         {
-            dataManagment.books.Add(this.catalogKey, catalog);
-            this.catalogKey += 1;
+            dataContext.Books.Add(this.catalogKey++, catalog);
         }
         
 
 
         public int DeleteCatalogByIndex(int index)
         {
-            if (dataManagment.books.ContainsKey(index))
+            if (dataContext.Books.ContainsKey(index))
             {
-                dataManagment.books.Remove(index);
-                return 0;
+                dataContext.Books.Remove(index);
+                return 1;
             }
-            return 1;
+            return 0;
         }
 
 
         public Catalog GetCatalog(int index)
         {
-            if (dataManagment.books.Count > index)
+            if (dataContext.Books.Count > index)
             {
-                return dataManagment.books[index];
+                return dataContext.Books[index];
             }
             else
             {

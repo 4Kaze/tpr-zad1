@@ -12,12 +12,10 @@ namespace UnitTests
         public void DataRepositoryOperations()
         {
             Person person = new Person(1, "Stan", "Peacock", "Michelles 42");
-            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.Parse("28/01/1813"));
+            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null));
             Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", author);
 
             DataRepository repository = new DataRepository();
-
-            
 
             //Person Collection
             Assert.AreEqual(null, repository.GetPerson(0));

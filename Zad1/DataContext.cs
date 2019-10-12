@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Zad1
 {
     public class DataContext
     {
-        public List<Person> clients;
-        public Dictionary<long, Catalog> books;
-        public ObservableCollection<Event> transactions;
-        public List<StateDescription> descriptions;
+        public List<Person> Clients;
+        public Dictionary<long, Catalog> Books;
+        public ObservableCollection<Event> Transactions;
+        public List<StateDescription> Descriptions;
         public DataContext()
         {
-            clients = new List<Person>();
-            books = new Dictionary<long, Catalog>();
-            transactions = new ObservableCollection<Event>();
-            descriptions = new List<StateDescription>();
+            Clients = new List<Person>();
+            Books = new Dictionary<long, Catalog>();
+            Transactions = new ObservableCollection<Event>();
+            Descriptions = new List<StateDescription>();
         }
 
 
