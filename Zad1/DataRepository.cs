@@ -7,7 +7,7 @@ namespace Zad1
     {
         private long catalogKey;
         private DataContext dataContext;
-        private IFillInterface fillInterface;
+        private IFillInterface IfillInterface;
 
         public long CatalogKey
         {
@@ -17,9 +17,9 @@ namespace Zad1
         public DataRepository(IFillInterface fillInterface)
         {
             this.catalogKey = 0;
-            this.fillInterface = fillInterface;
+            this.IfillInterface = fillInterface;
             this.dataContext = new DataContext();
-            this.fillInterface.FillData(dataContext);
+            this.IfillInterface.FillData(dataContext);
         }
 
 

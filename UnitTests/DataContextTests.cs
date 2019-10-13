@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Zad1;
+using App;
 
 namespace UnitTests
 {
@@ -18,9 +19,23 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void DataContextFillTest()
+        public void DataContextFillConstatnTest()
         {
             IFillInterface fillInterface = new FillConstant();
+            DataContext dataContext = new DataContext();
+            fillInterface.FillData(dataContext);
+            Assert.AreEqual(3, dataContext.Books.Count);
+            Assert.AreEqual(3, dataContext.Clients.Count);
+            Assert.AreEqual(3, dataContext.Descriptions.Count);
+            Assert.AreEqual(3, dataContext.Transactions.Count);
+        }
+
+
+
+        [TestMethod]
+        public void DataContextFillRandomTest()
+        {
+            IFillInterface fillInterface = new FillRandom();
             DataContext dataContext = new DataContext();
             fillInterface.FillData(dataContext);
             Assert.AreEqual(3, dataContext.Books.Count);

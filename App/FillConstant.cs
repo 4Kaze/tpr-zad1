@@ -1,4 +1,6 @@
-﻿namespace Zad1
+﻿using Zad1;
+
+namespace App
 {
     public class FillConstant : IFillInterface
     {
