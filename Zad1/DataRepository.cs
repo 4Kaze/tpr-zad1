@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Zad1
 {
@@ -57,6 +58,12 @@ namespace Zad1
             return 0;
         }
 
+        public List<Person> GetAllPersons()
+        {
+            return dataContext.Clients;
+        }
+
+
 
         public Person GetPerson(int index)
         {
@@ -86,6 +93,12 @@ namespace Zad1
                 return 1;
             }
             return 0;
+        }
+
+
+        public Dictionary<long, Catalog> GetAllCatalogs()
+        {
+            return dataContext.Books;
         }
 
 

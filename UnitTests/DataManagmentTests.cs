@@ -15,7 +15,10 @@ namespace UnitTests
             Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null));
             Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", author);
 
-            DataRepository repository = new DataRepository();
+            Dictionary<long, Catalog> catalogs = null;
+            List<Person> persons = null;
+
+           DataRepository repository = new DataRepository();
 
             //Person Collection
             Assert.AreEqual(null, repository.GetPerson(0));
@@ -25,6 +28,16 @@ namespace UnitTests
             Assert.AreEqual(null, repository.GetPerson(0));
             repository.AddPerson(person);
             Assert.AreEqual(person, repository.GetPerson(0));
+
+            Assert.AreEqual(persons, null);
+            Assert.AreEqual(catalogs, null);
+
+            persons = repository.GetAllPersons();
+            catalogs = repository.GetAllCatalogs();
+
+            Assert.AreNotEqual(persons, null);
+            Assert.AreNotEqual(catalogs, null);
+
             repository.DeletePersonByReference(person);
             Assert.AreEqual(null, repository.GetPerson(0));
 
