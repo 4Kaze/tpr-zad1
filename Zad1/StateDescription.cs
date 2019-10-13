@@ -25,5 +25,12 @@ namespace Zad1
             return ((StateDescription)obj).Code == Code;
         }
 
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (23 * 37) ^ Code.GetHashCode();
+            }
+        }
     }
 }

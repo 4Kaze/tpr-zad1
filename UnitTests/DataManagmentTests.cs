@@ -25,7 +25,7 @@ namespace UnitTests
             Assert.AreEqual(null, repository.GetPerson(0));
             repository.AddPerson(person);
             Assert.AreEqual(person, repository.GetPerson(0));
-            repository.DeletePersonByReference(person);
+            repository.DeletePerson(person);
             Assert.AreEqual(null, repository.GetPerson(0));
 
             //Catalog Collection
@@ -33,7 +33,7 @@ namespace UnitTests
             repository.AddCatalog(catalog);
             Assert.AreEqual(1, repository.CatalogKey);
             Assert.AreEqual(catalog, repository.GetCatalog(0));
-            repository.DeleteCatalogByIndex(0);
+            repository.DeleteCatalogByKey(0);
             Assert.AreEqual(null, repository.GetCatalog(0));
         }
     }

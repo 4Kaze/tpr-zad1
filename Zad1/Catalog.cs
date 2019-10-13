@@ -23,5 +23,13 @@ namespace Zad1
             return ((Catalog)obj).Code == Code;
         }
 
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (7 * 17) ^ Code.GetHashCode();
+            }
+        }
+
     }
 }

@@ -23,5 +23,13 @@ namespace Zad1
             if (!(obj is Event)) return false;
             return ((Event)obj).Code == Code;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (19 * 29) ^ Code.GetHashCode();
+            }
+        }
     }
 }

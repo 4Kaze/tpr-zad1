@@ -24,5 +24,13 @@ namespace Zad1
             return ((Person)obj).Code == Code;
         }
 
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (31 * 5) ^ Code.GetHashCode();
+            }
+        }
+
     }
 }

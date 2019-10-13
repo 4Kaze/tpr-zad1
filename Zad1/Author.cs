@@ -22,5 +22,13 @@ namespace Zad1
             if (!(obj is Author)) return false;
             return ((Author)obj).Code == Code;
         }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return (11 * 13) ^ Code.GetHashCode();
+            }
+        }
     }
 }
