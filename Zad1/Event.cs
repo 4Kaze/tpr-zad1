@@ -18,6 +18,11 @@ namespace Zad1
             BorrowDate = borrowDate;
         }
 
+        public override string ToString()
+        {
+            return "Event id " + this.Code + " causer: " + this.Causer + ", book state" + this.BookState + ", borrow date: " + this.BorrowDate + ".";
+        }
+
         public override bool Equals(Object obj)
         {
             if (!(obj is Event)) return false;

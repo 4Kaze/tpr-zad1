@@ -15,6 +15,7 @@ namespace UnitTests
             Assert.AreEqual(author.Name, "Jane");
             Assert.AreEqual(author.Surname, "Austen");
             Assert.AreEqual(author.DateOfBirth, date);
+            Assert.AreEqual(author.ToString(), "Author id 1 name: Jane Austen, Date of Birth: " + date + ".");
         }
 
         [TestMethod]
@@ -26,8 +27,11 @@ namespace UnitTests
             Assert.AreEqual("Pride and Prejudice", catalog.Title);
             Assert.AreEqual("This is description", catalog.Description);
             Assert.AreEqual(author, catalog.Author);
-        }
+            Assert.AreEqual(catalog.ToString(), "Book id 1 Title: Pride and Prejudice, description: This is description, author: " + author.ToString());
 
+           
+        }
+        
         [TestMethod]
         public void PersonConstructorTest()
         {
@@ -36,6 +40,7 @@ namespace UnitTests
             Assert.AreEqual("Stan", person.Name);
             Assert.AreEqual("Peacock", person.Surname);
             Assert.AreEqual("Michelles 42", person.Adress);
+            Assert.AreEqual(person.ToString(), "Person id 1 name: Stan Peacock, with adress: Michelles 42.");
         }
 
         [TestMethod]
@@ -49,6 +54,7 @@ namespace UnitTests
             Assert.AreEqual(stateDescription.Book, book);
             Assert.AreEqual(stateDescription.PurchaseDate, date);
             Assert.AreEqual(stateDescription.Location, "here");
+            Assert.AreEqual(stateDescription.ToString(), "StateDescription id 1 catalog: " + book + ", purchase date: " + date + ", where here.");
         }
 
         [TestMethod]
@@ -64,6 +70,7 @@ namespace UnitTests
             Assert.AreEqual(person, happening.Causer);
             Assert.AreEqual(stateDescription, happening.BookState);
             Assert.AreEqual(date, happening.BorrowDate);
+            Assert.AreEqual(happening.ToString(), "Event id 1 causer: " + person.ToString() + ", book state" + stateDescription.ToString() + ", borrow date: " + date.ToString() + ".");
         }
 
         [TestMethod]

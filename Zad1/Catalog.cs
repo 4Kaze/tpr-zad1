@@ -17,6 +17,12 @@ namespace Zad1
             Author = author;
         }
 
+
+        public override string ToString()
+        {
+            return "Book id " + this.Code + " Title: " + this.Title + ", description: " + this.Description + ", author: " + this.Author;
+        }
+
         public override bool Equals(Object obj)
         {
             if (!(obj is Catalog)) return false;

@@ -18,6 +18,12 @@ namespace Zad1
             this.Adress = adress;
         }
 
+
+        public override string ToString()
+        {
+            return "Person id " + this.Code + " name: " + this.Name + " " + this.Surname + ", with adress: " + this.Adress + ".";
+        }
+
         public override bool Equals(Object obj)
         {
             if (!(obj is Person)) return false;

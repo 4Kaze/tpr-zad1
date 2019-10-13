@@ -19,6 +19,11 @@ namespace Zad1
             Location = location;
         }
 
+        public override string ToString()
+        {
+            return "StateDescription id " + this.Code + " catalog: " + this.Book + ", purchase date: " + this.PurchaseDate + ", where " + this.Location + ".";
+        }
+
         public override bool Equals(Object obj)
         {
             if (!(obj is StateDescription)) return false;

@@ -17,6 +17,12 @@ namespace Zad1
             DateOfBirth = dateOfBirth;
         }
 
+        public override string ToString()
+        {
+            return "Author id " + this.Code + " name: " + this.Name + " " + this.Surname + ", Date of Birth: " + this.DateOfBirth + ".";
+        }
+
+
         public override bool Equals(Object obj)
         {
             if (!(obj is Author)) return false;
