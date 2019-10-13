@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Zad1
 {
-    public class DataRepository
+    public class DataRepository : IRepositoryInterface
     {
         private long catalogKey;
         private DataContext dataContext;
