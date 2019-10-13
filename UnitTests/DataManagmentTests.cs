@@ -210,6 +210,293 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void RepositoryPersonMultipleItemsTest()
+        {
+            DataRepository dr = new DataRepository();
+            List<Person> persons = new List<Person>();
+            for(int i = 0; i < 100; i++)
+            {
+                Person p = new Person(i, "Name" + i.ToString(), "Surname" + i.ToString());
+                persons.Add(p);
+                dr.AddPerson(p);
+            }
+            for(int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(persons[i], dr.GetPerson(i));
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(persons[i], dr.GetPersonByCode(persons[i].Code));
+            }
+
+            int count1 = 0;
+            List<Person> personsToRemove = new List<Person>();
+            for (int i = 0; i < 100; i += 9)
+            {
+                personsToRemove.Add(persons[i]);
+            }
+
+            foreach(Person p in personsToRemove)
+            {
+                count1 += 1;
+                persons.Remove(p);
+                Assert.AreEqual(1, dr.DeletePerson(p));
+            }
+
+            foreach(Person p in persons)
+            {
+                Assert.IsNotNull(dr.GetPersonByCode(p.Code));
+            }
+
+            int count2 = 0;
+            IEnumerator<Person> enumerator = dr.GetAllPersons().GetEnumerator();
+            while (enumerator.MoveNext()) count2++;
+            Assert.AreEqual(100-count1, count2);
+
+            List<int> indexesToRemove = new List<int>();
+
+            for (int i = 0; i < count2; i += 8)
+            {
+                indexesToRemove.Add(i);
+            }
+
+            int count3 = 0;
+            foreach(int index in indexesToRemove)
+            {
+                count1 += 1;
+                persons.RemoveAt(index - count3);
+                Assert.AreEqual(1, dr.DeletePersonByIndex(index - count3));
+                count3 += 1;
+            }
+
+            foreach (Person p in persons)
+            {
+                Assert.IsNotNull(dr.GetPersonByCode(p.Code));
+            }
+
+            count2 = 0;
+            enumerator = dr.GetAllPersons().GetEnumerator();
+            while (enumerator.MoveNext()) count2++;
+            Assert.AreEqual(100 - count1, count2);
+        }
+
+        [TestMethod]
+        public void RepositoryCatalogMultipleItemsTest()
+        {
+            DataRepository dr = new DataRepository();
+            List<Catalog> catalogs = new List<Catalog>();
+            for (int i = 0; i < 100; i++)
+            {
+                Catalog catalog = new Catalog(i, "Title"+i.ToString(), "Description"+i.ToString(), new Author(i, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null)));
+                catalogs.Add(catalog);
+                dr.AddCatalog(catalog);
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(catalogs[i], dr.GetCatalog(i));
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(catalogs[i], dr.GetCatalogByCode(catalogs[i].Code));
+            }
+
+            List<int> indexesToRemove = new List<int>();
+
+            for (int i = 0; i < 100; i += 8)
+            {
+                indexesToRemove.Add(i);
+            }
+
+            int count1 = 0;
+            foreach (int index in indexesToRemove)
+            {
+                catalogs.RemoveAt(index - count1);
+                Assert.AreEqual(1, dr.DeleteCatalogByKey(index));
+                count1 += 1;
+            }
+
+            foreach (Catalog p in catalogs)
+            {
+                Assert.IsNotNull(dr.GetCatalogByCode(p.Code));
+            }
+
+            int count2 = 0;
+            IEnumerator<KeyValuePair<long, Catalog>> enumerator = dr.GetAllCatalogs().GetEnumerator();
+            while (enumerator.MoveNext()) count2++;
+            Assert.AreEqual(100 - count1, count2);
+
+            List<Catalog> catalogsToRemove = new List<Catalog>();
+            for (int i = 0; i < count2; i += 9)
+            {
+                catalogsToRemove.Add(catalogs[i]);
+            }
+
+            foreach (Catalog p in catalogsToRemove)
+            {
+                count1 += 1;
+                catalogs.Remove(p);
+                Assert.AreEqual(1, dr.DeleteCatalog(p));
+            }
+
+            foreach (Catalog p in catalogs)
+            {
+                Assert.IsNotNull(dr.GetCatalogByCode(p.Code));
+            }
+
+            count2 = 0;
+            enumerator = dr.GetAllCatalogs().GetEnumerator();
+            while (enumerator.MoveNext()) count2++;
+            Assert.AreEqual(100 - count1, count2);
+        }
+
+        [TestMethod]
+        public void RepositoryStateDescriptionMultipleItemsTest()
+        {
+            DataRepository dr = new DataRepository();
+            List<StateDescription> stateDescriptions = new List<StateDescription>();
+            for (int i = 0; i < 100; i++)
+            {
+                StateDescription stateDescription = new StateDescription(i, new Catalog(i, "Pride and Prejudice", "This is description", new Author(i, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here");
+                stateDescriptions.Add(stateDescription);
+                dr.AddStateDescription(stateDescription);
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(stateDescriptions[i], dr.GetStateDescription(i));
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(stateDescriptions[i], dr.GetStateDescriptionByCode(stateDescriptions[i].Code));
+            }
+
+            int count1 = 0;
+            List<StateDescription> stateDescriptionsToRemove = new List<StateDescription>();
+            for (int i = 0; i < 100; i += 9)
+            {
+                stateDescriptionsToRemove.Add(stateDescriptions[i]);
+            }
+
+            foreach (StateDescription p in stateDescriptionsToRemove)
+            {
+                count1 += 1;
+                stateDescriptions.Remove(p);
+                Assert.AreEqual(1, dr.DeleteStateDescription(p));
+            }
+
+            foreach (StateDescription p in stateDescriptions)
+            {
+                Assert.IsNotNull(dr.GetStateDescriptionByCode(p.Code));
+            }
+
+            int count2 = 0;
+            IEnumerator<StateDescription> enumerator = dr.GetAllStateDescriptions().GetEnumerator();
+            while (enumerator.MoveNext()) count2++;
+            Assert.AreEqual(100 - count1, count2);
+
+            List<int> indexesToRemove = new List<int>();
+
+            for (int i = 0; i < count2; i += 8)
+            {
+                indexesToRemove.Add(i);
+            }
+
+            int count3 = 0;
+            foreach (int index in indexesToRemove)
+            {
+                count1 += 1;
+                stateDescriptions.RemoveAt(index - count3);
+                Assert.AreEqual(1, dr.DeleteStateDescriptionByIndex(index - count3));
+                count3 += 1;
+            }
+
+            foreach (StateDescription p in stateDescriptions)
+            {
+                Assert.IsNotNull(dr.GetStateDescriptionByCode(p.Code));
+            }
+
+            count2 = 0;
+            enumerator = dr.GetAllStateDescriptions().GetEnumerator();
+            while (enumerator.MoveNext()) count2++;
+            Assert.AreEqual(100 - count1, count2);
+        }
+
+        [TestMethod]
+        public void RepositoryTransactionMultipleItemsTest()
+        {
+            DataRepository dr = new DataRepository();
+            List<Event> transactions = new List<Event>();
+            for (int i = 0; i < 100; i++)
+            {
+                Event transaction = new Event(i, new Person(i, "Stan", "Peacock", "Michelles 42"), new StateDescription(i, new Catalog(i, "Pride and Prejudice", "This is description", new Author(i, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+                transactions.Add(transaction);
+                dr.AddTransaction(transaction);
+            }
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(transactions[i], dr.GetTransaction(i));
+            }
+
+            for (int i = 0; i < 100; i++)
+            {
+                Assert.AreEqual(transactions[i], dr.GetTransactionByCode(transactions[i].Code));
+            }
+
+            int count1 = 0;
+            List<Event> transactionsToRemove = new List<Event>();
+            for (int i = 0; i < 100; i += 9)
+            {
+                transactionsToRemove.Add(transactions[i]);
+            }
+
+            foreach (Event p in transactionsToRemove)
+            {
+                count1 += 1;
+                transactions.Remove(p);
+                Assert.AreEqual(1, dr.DeleteTransaction(p));
+            }
+
+            foreach (Event p in transactions)
+            {
+                Assert.IsNotNull(dr.GetTransactionByCode(p.Code));
+            }
+
+            int count2 = 0;
+            IEnumerator<Event> enumerator = dr.GetAllTransactions().GetEnumerator();
+            while (enumerator.MoveNext()) count2++;
+            Assert.AreEqual(100 - count1, count2);
+
+            List<int> indexesToRemove = new List<int>();
+
+            for (int i = 0; i < count2; i += 8)
+            {
+                indexesToRemove.Add(i);
+            }
+
+            int count3 = 0;
+            foreach (int index in indexesToRemove)
+            {
+                count1 += 1;
+                transactions.RemoveAt(index - count3);
+                Assert.AreEqual(1, dr.DeleteTransactionByIndex(index - count3));
+                count3 += 1;
+            }
+
+            foreach (Event p in transactions)
+            {
+                Assert.IsNotNull(dr.GetTransactionByCode(p.Code));
+            }
+
+            count2 = 0;
+            enumerator = dr.GetAllTransactions().GetEnumerator();
+            while (enumerator.MoveNext()) count2++;
+            Assert.AreEqual(100 - count1, count2);
+        }
+
+
+        [TestMethod]
         public void DataRepositoryOperations()
         {
             Person person = new Person(1, "Stan", "Peacock", "Michelles 42");
