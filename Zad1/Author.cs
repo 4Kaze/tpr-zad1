@@ -4,7 +4,7 @@ namespace Zad1
 {
     public class Author
     {
-        public long Code { get; }
+        public long Code { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTimeOffset DateOfBirth { get; }

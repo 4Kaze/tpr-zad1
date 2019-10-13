@@ -4,7 +4,7 @@ namespace Zad1
 {
     public class Event
     {
-        public long Code { get; }
+        public long Code { get; set;  }
         public Person Causer { get; }
         public StateDescription BookState { get; }
         public DateTimeOffset BorrowDate { get; }

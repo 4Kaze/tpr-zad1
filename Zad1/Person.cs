@@ -5,7 +5,7 @@ namespace Zad1
     public class Person
     {
         
-        public long Code { get; }
+        public long Code { get; set; }
         public string Name { set; get; }
         public string Surname { set; get; }
         public string Adress { set; get; }

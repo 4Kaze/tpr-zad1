@@ -4,7 +4,7 @@ namespace Zad1
 {
     public class StateDescription
     {
-        public long Code { get; }
+        public long Code { get; set; }
         public Catalog Book { set; get; }
         public bool Availabile { set; get; }
         public DateTimeOffset PurchaseDate { get; }

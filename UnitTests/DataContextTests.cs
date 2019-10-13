@@ -8,10 +8,13 @@ namespace UnitTests
     public class DataContextTests
     {
         [TestMethod]
-        public void DataContextTest()
-        { 
-            Dictionary<long, Catalog> exampleBooks = new Dictionary<long, Catalog>();
-            DataContext data = new DataContext();
+        public void DataContextConstructorTest()
+        {
+            DataContext dc = new DataContext();
+            Assert.IsNotNull(dc.Clients);
+            Assert.IsNotNull(dc.Books);
+            Assert.IsNotNull(dc.Transactions);
+            Assert.IsNotNull(dc.Descriptions);
         }
 
         [TestMethod]

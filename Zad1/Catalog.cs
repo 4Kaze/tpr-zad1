@@ -4,7 +4,7 @@ namespace Zad1
 {
     public class Catalog
     {
-        public long Code { get; }
+        public long Code { get; set;  }
         public string Title { get; set; }
         public string Description { get; set; }
         public Author Author { get; set; }

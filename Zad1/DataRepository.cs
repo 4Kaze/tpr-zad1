@@ -202,9 +202,11 @@ namespace Zad1
         public int UpdateCatalog(Catalog catalog) {
            foreach(KeyValuePair<long, Catalog> pair in dataContext.Books)
            {
-                if(pair.Value.Code == catalog.Code)
+                if (pair.Value.Code == catalog.Code)
+                {
                     dataContext.Books[pair.Key] = catalog;
                     return 1;
+                }
            }
            return 0;
         }
@@ -242,9 +244,11 @@ namespace Zad1
 
             foreach(KeyValuePair<long, Catalog> pair in dataContext.Books)
             {
-                if(pair.Value.Code == catalog.Code)
+                if (pair.Value.Code == catalog.Code)
+                {
                     dataContext.Books.Remove(pair.Key);
                     return 1;
+                }
             }
 
             return 0;
