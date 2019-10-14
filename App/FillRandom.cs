@@ -7,106 +7,88 @@ namespace App
     {
 
         private Random random;
+        private static int personID = -1;
+        private static int catalogID = -1;
+        private static int eventID = -1;
+        private static int authorID = -1;
+        private static int descriptionID = -1;
 
         public FillRandom()
         {
             this.random = new Random();
+
+            if (personID == -1)
+            {
+                personID = random.Next();
+                catalogID = random.Next();
+                eventID = random.Next();
+                authorID = random.Next();
+                descriptionID = random.Next();
+            }
         }
+
+        private string[] firstNames = { "Mark", "Shaun", "Linda", "Laura", "Sam", "Travis", "Marisha", "Liam", "Ashley", "Talisian" };
+        private string[] secondNames = { "Torck", "Breuer", "Samberg", "Pickock", "Bauger", "Lewisky", "McScott", "Olivers", "Shaumbach", "Pvaretti" };
+        private string[] address = { "Pickand 12", "St Johns 51", "Pilbers 42", "Southernt 1", "Schunzen 9", "Olkies 24", "St ulwen 37", "Libritz 91", "Uge 42", "Pvara 42" };
+        private string[] titles = { "Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5", "Topic 6", "Topic 7", "Topic 8", "Topic 9", "Topic 10" };
+        private string[] descriptions = { "Description 1", "Description 2", "Description 3", "Description 4", "Description 5", "Description 6", "Description 7", "Description 8", "Description 9", "Description 10" };
+        private string[] places = { "Place 1", "Place 2", "Place 3", "Place 4", "Place 5", "Place 6", "Place 7", "Place 8", "Place 9", "Place 10" };
+
 
         public void FillData(DataContext dataContext)
         {
-            string[] firstNames = {"Mark", "Shaun", "Linda", "Laura", "Sam", "Travis", "Marisha", "Liam", "Ashley", "Talisian"};
-            string[] secondNames = { "Torck", "Breuer", "Samberg", "Pickock", "Bauger", "Lewisky", "McScott", "Olivers", "Shaumbach", "Pvaretti" };
-            string[] address = { "Pickand 12", "St Johns 51", "Pilbers 42", "Southernt 1", "Schunzen 9", "Olkies 24", "St ulwen 37", "Libritz 91", "Uge 42", "Pvara 42" };
-            string[] titles = { "Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5", "Topic 6", "Topic 7", "Topic 8", "Topic 9", "Topic 10" };
-            string[] descriptions = { "Description 1", "Description 2", "Description 3", "Description 4", "Description 5", "Description 6", "Description 7", "Description 8", "Description 9", "Description 10" };
-            string[] places = { "Place 1", "Place 2", "Place 3", "Place 4", "Place 5", "Place 6", "Place 7", "Place 8", "Place 9", "Place 10" };
-
-
-
-            // Person Data FIll
-            Person person1 = this.CreatePerson(1, firstNames, secondNames, address);
-            Person person2 = this.CreatePerson(2, firstNames, secondNames, address);
-            Person person3 = this.CreatePerson(3, firstNames, secondNames, address);
-
-            dataContext.Clients.Add(person1);
-            dataContext.Clients.Add(person2);
-            dataContext.Clients.Add(person3);
-
-
-
-            // Catalog Data Fill
-            Author author1 = this.CreateAuthor(1, firstNames, secondNames);
-            Author author2 = this.CreateAuthor(2, firstNames, secondNames);
-            Author author3 = this.CreateAuthor(3, firstNames, secondNames);
-
-            Catalog catalog1 = CreateCatalog(1, titles, descriptions, author1);
-            Catalog catalog2 = CreateCatalog(2, titles, descriptions, author2);
-            Catalog catalog3 = CreateCatalog(3, titles, descriptions, author3);
-
-
-            dataContext.Books.Add(1, catalog1);
-            dataContext.Books.Add(2, catalog2);
-            dataContext.Books.Add(3, catalog3);
-
-
-            // StateDescription Data Fill
-            StateDescription stateDescription1 = this.CreateStateDescription(1, catalog1, places);
-            StateDescription stateDescription2 = this.CreateStateDescription(2, catalog2, places);
-            StateDescription stateDescription3 = this.CreateStateDescription(3, catalog3, places);
-
-            dataContext.Descriptions.Add(stateDescription1);
-            dataContext.Descriptions.Add(stateDescription2);
-            dataContext.Descriptions.Add(stateDescription3);
-
-
-            //Event Data Fill
-            Event happening1 = this.CreateEvent(1, person1, stateDescription1);
-            Event happening2 = this.CreateEvent(2, person2, stateDescription2);
-            Event happening3 = this.CreateEvent(3, person3, stateDescription3);
-
-            dataContext.Transactions.Add(happening1);
-            dataContext.Transactions.Add(happening2);
-            dataContext.Transactions.Add(happening3);
+            for(int i = 0; i < 25; i++)
+            {
+                Event e = CreateEvent();
+                dataContext.Transactions.Add(e);
+                dataContext.Clients.Add(e.Causer);
+                dataContext.Descriptions.Add(e.BookState);
+                dataContext.Books.Add(i, e.BookState.Book);
+            }
         }
 
 
-        public Person CreatePerson(int id, string[] names, string[] surnames, string[] address)
+        public Person CreatePerson()
         {
-            return new Person(id, this.RandString(names), this.RandString(surnames), this.RandString(address));
+            return new Person(personID++, this.getRandomString(firstNames), this.getRandomString(secondNames), this.getRandomString(address));
         }
 
 
-        public Author CreateAuthor(int id, string[] names, string[] surnames)
+        public Author CreateAuthor()
         {
-            System.DateTimeOffset date = System.DateTimeOffset.Now;
-            return new Author(id, this.RandString(names), this.RandString(surnames), date);
+            return new Author(authorID++, this.getRandomString(firstNames), this.getRandomString(secondNames), getRandomDate());
         }
 
 
-        public Catalog CreateCatalog(int id, string[] titles, string[] descriptions, Author author)
+        public Catalog CreateCatalog()
         {
-            return new Catalog(id, this.RandString(titles), this.RandString(descriptions), author);
+            return new Catalog(catalogID++, this.getRandomString(firstNames), this.getRandomString(secondNames), CreateAuthor());
         }
 
 
-        public StateDescription CreateStateDescription(int id, Catalog catalog, string[] places)
+        public StateDescription CreateStateDescription()
         {
-            System.DateTimeOffset date = System.DateTimeOffset.Now;
-            return new StateDescription(id, catalog, date, this.RandString(places));
+            return new StateDescription(descriptionID++, CreateCatalog(), getRandomDate(), this.getRandomString(places));
         }
 
 
-        public Event CreateEvent(int id, Person person, StateDescription stateDescription)
+        public Event CreateEvent()
         {
-            System.DateTimeOffset date = System.DateTimeOffset.Now;
-            return new Event(id, person, stateDescription, date);
+            return new Event(eventID++, CreatePerson(), CreateStateDescription(), getRandomDate());
         }
 
 
-        public string RandString(string[] data)
+        private string getRandomString(string[] data)
         {
             return data[this.random.Next(10)];
+        }
+
+        private DateTimeOffset getRandomDate()
+        {
+            DateTimeOffset start = DateTimeOffset.ParseExact("01/01/1900", "dd/MM/yyyy", null);
+            DateTimeOffset end = DateTimeOffset.Now;
+            start.AddMinutes(random.Next(0, end.Subtract(start).Minutes - 1));
+            return start;
         }
     }
 }

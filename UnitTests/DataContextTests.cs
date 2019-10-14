@@ -37,11 +37,12 @@ namespace UnitTests
         {
             IFillInterface fillInterface = new FillRandom();
             DataContext dataContext = new DataContext();
+            int amount = 25;
             fillInterface.FillData(dataContext);
-            Assert.AreEqual(3, dataContext.Books.Count);
-            Assert.AreEqual(3, dataContext.Clients.Count);
-            Assert.AreEqual(3, dataContext.Descriptions.Count);
-            Assert.AreEqual(3, dataContext.Transactions.Count);
+            Assert.AreEqual(amount, dataContext.Books.Count);
+            Assert.AreEqual(amount, dataContext.Clients.Count);
+            Assert.AreEqual(amount, dataContext.Descriptions.Count);
+            Assert.AreEqual(amount, dataContext.Transactions.Count);
         }
     }
 }
