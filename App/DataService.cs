@@ -7,13 +7,11 @@ namespace App
 {
     public class DataService
     {
-        private IRepositoryInterface repositoryInterface;
+        private IRepositoryInterface repository;
         public DataService(IRepositoryInterface repositoryInterface)
         {
-            this.repositoryInterface = repositoryInterface;
+            this.repository = repositoryInterface;
         }
-
-
 
         public string ViewList(IEnumerable<Object> items)
         {
@@ -25,11 +23,6 @@ namespace App
             return answer;
         }
 
-
-
-
-
-
         public string ViewList(Dictionary<long, Catalog> items)
         {
             string answer = "";
@@ -40,27 +33,34 @@ namespace App
             return answer;
         }
 
-
-        //zaczynając od elementów wykazu(np.czytelnicy, klienci),
-        //za nimi zdarzenia odpowiadające kolejnym elementom wykazu(np.wypożyczenia książek, faktury),
-        //które przechodząc przez opisy stanu będą indentyfikować pozycje katalogu(np.wypożyczone książki, zakupione towary).
-
-
         public string FullView()
         {
             string answer = "";
-            foreach (Person person in repositoryInterface.GetAllPersons())
+            foreach (Person person in repository.GetAllPersons())
             {
                 answer += person.ToString() + "\n";
-                foreach(Event happening in repositoryInterface.GetAllTransactions())
+                foreach(Event happening in repository.GetAllTransactions())
                 {
-                    if(happening.Causer == person)
+                    if(happening.Causer.Equals(person))
                     {
-                        answer += happening.BookState.Book.ToString() + "\n";
+                        answer += "\t" + happening.ToString() + "\n";
+                        answer += "\t\t" + happening.BookState.Book.ToString() + "\n";
                     }
                 }
             }
             return answer;
+        }
+
+        public int BorrowBook(Person person, long bookStateCode)
+        {
+            StateDescription state = repository.GetStateDescriptionByCode(bookStateCode);
+            if (state == null) return 0;
+            if (!state.Availabile) return 0;
+
+            state.Availabile = false;
+            repository.AddTransaction(new Event(person, state, DateTimeOffset.Now));
+
+            return 1;
         }
 
 

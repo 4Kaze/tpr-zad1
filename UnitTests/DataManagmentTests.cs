@@ -11,7 +11,7 @@ namespace UnitTests
         public void RepositoryPersonCRUDTest()
         {
             DataRepository repository = new DataRepository();
-            Person person = new Person(1, "Stan", "Peacock", "Michelles 42");
+            Person person = new Person("Stan", "Peacock", "Michelles 42");
             repository.AddPerson(person);
             Assert.AreEqual(person, repository.GetPerson(0));
             Assert.AreEqual(person, repository.GetPersonByCode(person.Code));
@@ -25,8 +25,7 @@ namespace UnitTests
             while (enumerator.MoveNext()) count++;
             Assert.AreEqual(1, count);
 
-            Person person2 = new Person(1, "Stan", "Peacock", "Michelles 42");
-            person2.Code = 2;
+            Person person2 = new Person("Stan", "Peacock", "Michelles 42");
             repository.UpdatePerson(0, person2);
             Assert.AreEqual(person2, repository.GetPerson(0));
 
@@ -61,7 +60,7 @@ namespace UnitTests
         public void RepositoryCatalogCRUDTest()
         {
             DataRepository repository = new DataRepository();
-            Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", new Author(1, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null)));
+            Catalog catalog = new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null)));
             repository.AddCatalog(catalog);
             Assert.AreEqual(catalog, repository.GetCatalog(0));
             Assert.AreEqual(catalog, repository.GetCatalogByCode(catalog.Code));
@@ -75,8 +74,7 @@ namespace UnitTests
             while (enumerator.MoveNext()) count++;
             Assert.AreEqual(1, count);
 
-            Catalog catalog2 = new Catalog(1, "Pride and Prejudice", "This is description", new Author(1, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null)));
-            catalog2.Code = 2;
+            Catalog catalog2 = new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null)));
             repository.UpdateCatalog(0, catalog2);
             Assert.AreEqual(catalog2, repository.GetCatalog(0));
 
@@ -111,7 +109,7 @@ namespace UnitTests
         public void RepositoryStateDescriptionCRUDTest()
         {
             DataRepository repository = new DataRepository();
-            StateDescription stateDescription = new StateDescription(1, new Catalog(1, "Pride and Prejudice", "This is description", new Author(1, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here");
+            StateDescription stateDescription = new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here");
             repository.AddStateDescription(stateDescription);
             Assert.AreEqual(stateDescription, repository.GetStateDescription(0));
             Assert.AreEqual(stateDescription, repository.GetStateDescriptionByCode(stateDescription.Code));
@@ -125,8 +123,7 @@ namespace UnitTests
             while (enumerator.MoveNext()) count++;
             Assert.AreEqual(1, count);
 
-            StateDescription stateDescription2 = new StateDescription(1, new Catalog(1, "Pride and Prejudice", "This is description", new Author(1, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here");
-            stateDescription2.Code = 2;
+            StateDescription stateDescription2 = new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here");
             repository.UpdateStateDescription(0, stateDescription2);
             Assert.AreEqual(stateDescription2, repository.GetStateDescription(0));
 
@@ -161,7 +158,7 @@ namespace UnitTests
         public void RepositoryTransactionCRUDTest()
         {
             DataRepository repository = new DataRepository();
-            Event transaction = new Event(1, new Person(1, "Stan", "Peacock", "Michelles 42"), new StateDescription(1, new Catalog(1, "Pride and Prejudice", "This is description", new Author(1, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             repository.AddTransaction(transaction);
             Assert.AreEqual(transaction, repository.GetTransaction(0));
             Assert.AreEqual(transaction, repository.GetTransactionByCode(transaction.Code));
@@ -175,8 +172,7 @@ namespace UnitTests
             while (enumerator.MoveNext()) count++;
             Assert.AreEqual(1, count);
 
-            Event transaction2 = new Event(1, new Person(1, "Stan", "Peacock", "Michelles 42"), new StateDescription(1, new Catalog(1, "Pride and Prejudice", "This is description", new Author(1, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
-            transaction2.Code = 2;
+            Event transaction2 = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             repository.UpdateTransaction(0, transaction2);
             Assert.AreEqual(transaction2, repository.GetTransaction(0));
 
@@ -216,7 +212,7 @@ namespace UnitTests
             List<Person> persons = new List<Person>();
             for(int i = 0; i < 100; i++)
             {
-                Person p = new Person(i, "Name" + i.ToString(), "Surname" + i.ToString());
+                Person p = new Person("Name" + i.ToString(), "Surname" + i.ToString());
                 persons.Add(p);
                 dr.AddPerson(p);
             }
@@ -288,7 +284,7 @@ namespace UnitTests
             List<Catalog> catalogs = new List<Catalog>();
             for (int i = 0; i < 100; i++)
             {
-                Catalog catalog = new Catalog(i, "Title"+i.ToString(), "Description"+i.ToString(), new Author(i, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null)));
+                Catalog catalog = new Catalog("Title"+i.ToString(), "Description"+i.ToString(), new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null)));
                 catalogs.Add(catalog);
                 dr.AddCatalog(catalog);
             }
@@ -358,7 +354,7 @@ namespace UnitTests
             List<StateDescription> stateDescriptions = new List<StateDescription>();
             for (int i = 0; i < 100; i++)
             {
-                StateDescription stateDescription = new StateDescription(i, new Catalog(i, "Pride and Prejudice", "This is description", new Author(i, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here");
+                StateDescription stateDescription = new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here");
                 stateDescriptions.Add(stateDescription);
                 dr.AddStateDescription(stateDescription);
             }
@@ -430,7 +426,7 @@ namespace UnitTests
             List<Event> transactions = new List<Event>();
             for (int i = 0; i < 100; i++)
             {
-                Event transaction = new Event(i, new Person(i, "Stan", "Peacock", "Michelles 42"), new StateDescription(i, new Catalog(i, "Pride and Prejudice", "This is description", new Author(i, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+                Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
                 transactions.Add(transaction);
                 dr.AddTransaction(transaction);
             }
@@ -499,9 +495,9 @@ namespace UnitTests
         [TestMethod]
         public void DataRepositoryOperations()
         {
-            Person person = new Person(1, "Stan", "Peacock", "Michelles 42");
-            Author author = new Author(1, "Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null));
-            Catalog catalog = new Catalog(1, "Pride and Prejudice", "This is description", author);
+            Person person = new Person("Stan", "Peacock", "Michelles 42");
+            Author author = new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null));
+            Catalog catalog = new Catalog("Pride and Prejudice", "This is description", author);
 
             IEnumerable<KeyValuePair<long, Catalog>> catalogs = null;
             IEnumerable<Person> persons = null;

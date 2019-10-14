@@ -4,15 +4,16 @@ namespace Zad1
 {
     public class Event
     {
-        public long Code { get; set;  }
+        private static long nextID = 0;
+        public long Code { get; set; }
         public Person Causer { get; }
         public StateDescription BookState { get; }
         public DateTimeOffset BorrowDate { get; }
         public DateTimeOffset ReturnDate { get; set; }
         
-        public Event(long code, Person causer, StateDescription bookState, DateTimeOffset borrowDate)
+        public Event(Person causer, StateDescription bookState, DateTimeOffset borrowDate)
         {
-            Code = code;
+            Code = getNextID();
             Causer = causer;
             BookState = bookState;
             BorrowDate = borrowDate;
@@ -35,6 +36,11 @@ namespace Zad1
             {
                 return (19 * 29) ^ Code.GetHashCode();
             }
+        }
+
+        public static long getNextID()
+        {
+            return nextID++;
         }
     }
 }

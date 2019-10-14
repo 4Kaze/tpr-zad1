@@ -4,15 +4,16 @@ namespace Zad1
 {
     public class StateDescription
     {
+        private static long nextID = 0;
         public long Code { get; set; }
         public Catalog Book { set; get; }
         public bool Availabile { set; get; }
         public DateTimeOffset PurchaseDate { get; }
         public string Location { set; get; }
 
-        public StateDescription(long code, Catalog book, DateTimeOffset purchaseDate, string location)
+        public StateDescription(Catalog book, DateTimeOffset purchaseDate, string location)
         {
-            Code = code;
+            Code = getNextID();
             Book = book;
             Availabile = true;
             PurchaseDate = purchaseDate;
@@ -36,6 +37,11 @@ namespace Zad1
             {
                 return (23 * 37) ^ Code.GetHashCode();
             }
+        }
+
+        public static long getNextID()
+        {
+            return nextID++;
         }
     }
 }

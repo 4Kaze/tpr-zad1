@@ -4,14 +4,15 @@ namespace Zad1
 {
     public class Catalog
     {
-        public long Code { get; set;  }
+        private static long nextID = 0;
+        public long Code { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public Author Author { get; set; }
 
-        public Catalog(long code, string title, string description, Author author)
+        public Catalog(string title, string description, Author author)
         {
-            Code = code;
+            Code = getNextID();
             Title = title;
             Description = description;
             Author = author;
@@ -35,6 +36,11 @@ namespace Zad1
             {
                 return (7 * 17) ^ Code.GetHashCode();
             }
+        }
+
+        public static long getNextID()
+        {
+            return nextID++;
         }
 
     }

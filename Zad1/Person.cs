@@ -4,15 +4,16 @@ namespace Zad1
 {
     public class Person
     {
-        
+
+        private static long nextID = 0;
         public long Code { get; set; }
         public string Name { set; get; }
         public string Surname { set; get; }
         public string Adress { set; get; }
 
-        public Person(long code, string name, string surname, string adress = null)
+        public Person(string name, string surname, string adress = null)
         {
-            this.Code = code;
+            this.Code = getNextID();
             this.Name = name;
             this.Surname = surname;
             this.Adress = adress;
@@ -36,6 +37,11 @@ namespace Zad1
             {
                 return (31 * 5) ^ Code.GetHashCode();
             }
+        }
+
+        public static long getNextID()
+        {
+            return nextID++;
         }
 
     }

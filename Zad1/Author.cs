@@ -4,14 +4,15 @@ namespace Zad1
 {
     public class Author
     {
+        private static long nextID = 0;
         public long Code { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTimeOffset DateOfBirth { get; }
 
-        public Author(long code, string name, string surname, DateTimeOffset dateOfBirth)
+        public Author(string name, string surname, DateTimeOffset dateOfBirth)
         {
-            Code = code;
+            Code = getNextID();
             Name = name;
             Surname = surname;
             DateOfBirth = dateOfBirth;
@@ -35,6 +36,11 @@ namespace Zad1
             {
                 return (11 * 13) ^ Code.GetHashCode();
             }
+        }
+
+        public static long getNextID()
+        {
+            return nextID++;
         }
     }
 }

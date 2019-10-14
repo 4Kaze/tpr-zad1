@@ -7,24 +7,10 @@ namespace App
     {
 
         private Random random;
-        private static int personID = -1;
-        private static int catalogID = -1;
-        private static int eventID = -1;
-        private static int authorID = -1;
-        private static int descriptionID = -1;
 
         public FillRandom()
         {
             this.random = new Random();
-
-            if (personID == -1)
-            {
-                personID = random.Next();
-                catalogID = random.Next();
-                eventID = random.Next();
-                authorID = random.Next();
-                descriptionID = random.Next();
-            }
         }
 
         private string[] firstNames = { "Mark", "Shaun", "Linda", "Laura", "Sam", "Travis", "Marisha", "Liam", "Ashley", "Talisian" };
@@ -50,31 +36,31 @@ namespace App
 
         public Person CreatePerson()
         {
-            return new Person(personID++, this.getRandomString(firstNames), this.getRandomString(secondNames), this.getRandomString(address));
+            return new Person(this.getRandomString(firstNames), this.getRandomString(secondNames), this.getRandomString(address));
         }
 
 
         public Author CreateAuthor()
         {
-            return new Author(authorID++, this.getRandomString(firstNames), this.getRandomString(secondNames), getRandomDate());
+            return new Author(this.getRandomString(firstNames), this.getRandomString(secondNames), getRandomDate());
         }
 
 
         public Catalog CreateCatalog()
         {
-            return new Catalog(catalogID++, this.getRandomString(firstNames), this.getRandomString(secondNames), CreateAuthor());
+            return new Catalog(this.getRandomString(firstNames), this.getRandomString(secondNames), CreateAuthor());
         }
 
 
         public StateDescription CreateStateDescription()
         {
-            return new StateDescription(descriptionID++, CreateCatalog(), getRandomDate(), this.getRandomString(places));
+            return new StateDescription(CreateCatalog(), getRandomDate(), this.getRandomString(places));
         }
 
 
         public Event CreateEvent()
         {
-            return new Event(eventID++, CreatePerson(), CreateStateDescription(), getRandomDate());
+            return new Event(CreatePerson(), CreateStateDescription(), getRandomDate());
         }
 
 
@@ -90,5 +76,6 @@ namespace App
             start.AddMinutes(random.Next(0, end.Subtract(start).Minutes - 1));
             return start;
         }
+
     }
 }
