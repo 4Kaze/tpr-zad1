@@ -18,5 +18,10 @@ namespace Zad1
         {
 
         }
+
+        public ItemDoesNotExistException(long key, IEnumerable collection) : base(string.Format("Item with key {0} does not exist in {1}", key, collection))
+        {
+
+        }
     }
 }

@@ -38,24 +38,24 @@ namespace Zad1
 
 
         // Update
-        int UpdatePerson(int index, Person person);
-        int UpdateCatalog(long key, Catalog catalog);
-        int UpdateTransaction(int index, Event transaction);
-        int UpdateStateDescription(int index, StateDescription description);
-        int UpdatePerson(Person person);
-        int UpdateCatalog(Catalog catalog);
-        int UpdateTransaction(Event transaction);
-        int UpdateStateDescription(StateDescription description);
+        void UpdatePerson(int index, Person person);
+        void UpdateCatalog(long key, Catalog catalog);
+        void UpdateTransaction(int index, Event transaction);
+        void UpdateStateDescription(int index, StateDescription description);
+        void UpdatePerson(Person person);
+        void UpdateCatalog(Catalog catalog);
+        void UpdateTransaction(Event transaction);
+        void UpdateStateDescription(StateDescription description);
 
 
         // Delete
-        int DeletePerson(Person person);
-        int DeleteCatalog(Catalog catalog);
-        int DeleteTransaction(Event transaction);
-        int DeleteStateDescription(StateDescription stateDescription);
-        int DeletePersonByIndex(int index);
-        int DeleteCatalogByKey(long key);
-        int DeleteTransactionByIndex(int index);
-        int DeleteStateDescriptionByIndex(int index);
+        void DeletePerson(Person person);
+        void DeleteCatalog(Catalog catalog);
+        void DeleteTransaction(Event transaction);
+        void DeleteStateDescription(StateDescription stateDescription);
+        void DeletePersonByIndex(int index);
+        void DeleteCatalogByKey(long key);
+        void DeleteTransactionByIndex(int index);
+        void DeleteStateDescriptionByIndex(int index);
     }
 }

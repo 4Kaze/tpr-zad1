@@ -32,72 +32,56 @@ namespace Zad1
         // Add
         public void AddPerson(Person person)
         {
-            dataContext.Clients.Add(person);
+            if (!dataContext.Clients.Contains(person))
+                dataContext.Clients.Add(person);
+            else
+                throw new ItemAlreadyExistsException(person, dataContext.Clients);
         }
 
         public void AddCatalog(Catalog catalog)
         {
-            dataContext.Books.Add(this.catalogKey++, catalog);
+            if (!dataContext.Books.ContainsValue(catalog))
+                dataContext.Books.Add(this.catalogKey++, catalog);
+            else
+                throw new ItemAlreadyExistsException(catalog, dataContext.Books);
         }
 
         public void AddTransaction(Event transaction)
         {
-            dataContext.Transactions.Add(transaction);
+            if (!dataContext.Transactions.Contains(transaction))
+                dataContext.Transactions.Add(transaction);
+            else
+                throw new ItemAlreadyExistsException(transaction, dataContext.Transactions);
         }
 
         public void AddStateDescription(StateDescription description)
         {
-            dataContext.Descriptions.Add(description);
+            if (!dataContext.Descriptions.Contains(description))
+                dataContext.Descriptions.Add(description);
+            else
+                throw new ItemAlreadyExistsException(description, dataContext.Descriptions);
         }
 
         // Get by index
 
         public Person GetPerson(int index)
         {
-            if (dataContext.Clients.Count > index)
-            {
-                return dataContext.Clients[index];
-            }
-            else
-            {
-                return null;
-            }
+            return dataContext.Clients[index];
         }
 
         public Catalog GetCatalog(long key)
         {
-            if (dataContext.Books.ContainsKey(key))
-            {
-                return dataContext.Books[key];
-            }
-            else
-            {
-                return null;
-            }
+            return dataContext.Books[key];
         }
 
         public Event GetTransaction(int index)
         {
-            if (dataContext.Transactions.Count > index)
-            {
-                return dataContext.Transactions[index];
-            }
-            else
-            {
-                return null;
-            }
+            return dataContext.Transactions[index];
         }
 
         public StateDescription GetStateDescription(int index)
         {
-            if (dataContext.Descriptions.Count > index)
-            {
-                return dataContext.Descriptions[index];
-            }
-            else
-            {
-                return null;
-            }
+             return dataContext.Descriptions[index];
         }
 
         // Get by code
@@ -156,85 +140,67 @@ namespace Zad1
 
         // Update
 
-        public int UpdatePerson(int index, Person person) {
-            if(dataContext.Clients.Count > index)
-            {
-                dataContext.Clients[index] = person;
-                return 1;
-            }
-            return 0;
-        }
-
-        public int UpdateCatalog(long key, Catalog catalog) {
-            if(dataContext.Books.ContainsKey(key))
-            {
-                dataContext.Books[key] = catalog;
-                return 1;
-            }
-            return 0;
-        }
-
-        public int UpdateTransaction(int index, Event transaction) {
-            if(dataContext.Transactions.Count > index)
-            {
-                dataContext.Transactions[index] = transaction;
-                return 1;
-            }
-            return 0;
-        }
-
-        public int UpdateStateDescription(int index, StateDescription description) {
-            if(dataContext.Descriptions.Count > index)
-            {
-                dataContext.Descriptions[index] = description;
-                return 1;
-            }
-            return 0;
-        }
-
-        public int UpdatePerson(Person person) {
-            int index = dataContext.Clients.IndexOf(person);
-            if(index == -1) return 0;
+        public void UpdatePerson(int index, Person person) {
             dataContext.Clients[index] = person;
-            return 1;
         }
 
-        public int UpdateCatalog(Catalog catalog) {
+        public void UpdateCatalog(long key, Catalog catalog) {
+            dataContext.Books[key] = catalog;
+        }
+
+        public void UpdateTransaction(int index, Event transaction) {
+            dataContext.Transactions[index] = transaction;
+        }
+
+        public void UpdateStateDescription(int index, StateDescription description) {
+            dataContext.Descriptions[index] = description;
+        }
+
+        public void UpdatePerson(Person person) {
+            int index = dataContext.Clients.IndexOf(person);
+
+            if(index == -1)
+                throw new ItemDoesNotExistException(person, dataContext.Clients);
+
+            dataContext.Clients[index] = person;
+        }
+
+        public void UpdateCatalog(Catalog catalog) {
            foreach(KeyValuePair<long, Catalog> pair in dataContext.Books)
            {
                 if (pair.Value.Code == catalog.Code)
                 {
                     dataContext.Books[pair.Key] = catalog;
-                    return 1;
+                    return;
                 }
            }
-           return 0;
+           throw new ItemDoesNotExistException(catalog, dataContext.Books);
         }
 
-        public int UpdateTransaction(Event transaction) {
+        public void UpdateTransaction(Event transaction) {
             int index = dataContext.Transactions.IndexOf(transaction);
-            if (index == -1) return 0;
+
+            if (index == -1)
+                throw new ItemDoesNotExistException(transaction, dataContext.Transactions);
+
             dataContext.Transactions[index] = transaction;
-            return 1;
         }
 
-        public int UpdateStateDescription(StateDescription description) {
+        public void UpdateStateDescription(StateDescription description) {
             int index = dataContext.Descriptions.IndexOf(description);
-            if(index == -1) return 0;
+
+            if(index == -1)
+                throw new ItemDoesNotExistException(description, dataContext.Descriptions);
+
             dataContext.Descriptions[index] = description;
-            return 1;
         }
 
         // Delete
 
-        public int DeletePerson(Person person)
+        public void DeletePerson(Person person)
         {
-            if (dataContext.Clients.Contains(person))
-            {
-                dataContext.Clients.Remove(person);
-                return 1;
-            }
-            return 0;
+            if(!dataContext.Clients.Remove(person))
+                throw new ItemDoesNotExistException(person, dataContext.Clients);
         }
 
         public void DeleteCatalog(Catalog catalog)
@@ -259,7 +225,8 @@ namespace Zad1
 
         public void DeleteStateDescription(StateDescription stateDescription)
         {
-            dataContext.Descriptions.Remove(stateDescription);
+            if(!dataContext.Descriptions.Remove(stateDescription))
+                throw new ItemDoesNotExistException(stateDescription, dataContext.Descriptions);
         }
 
         public void DeletePersonByIndex(int index)
@@ -269,7 +236,8 @@ namespace Zad1
 
         public void DeleteCatalogByKey(long key)
         {
-            dataContext.Books.Remove(key);
+            if(!dataContext.Books.Remove(key))
+                throw new ItemDoesNotExistException(key, dataContext.Books);
         }
 
         public void DeleteTransactionByIndex(int index)
