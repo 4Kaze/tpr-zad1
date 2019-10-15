@@ -237,81 +237,50 @@ namespace Zad1
             return 0;
         }
 
-        public int DeleteCatalog(Catalog catalog)
+        public void DeleteCatalog(Catalog catalog)
         {
-            if (!dataContext.Books.ContainsValue(catalog))
-                return 0;
-
             foreach(KeyValuePair<long, Catalog> pair in dataContext.Books)
             {
                 if (pair.Value.Code == catalog.Code)
                 {
                     dataContext.Books.Remove(pair.Key);
-                    return 1;
+                    return;
                 }
             }
 
-            return 0;
+            throw new ItemDoesNotExistException(catalog, dataContext.Books);
         }
 
-        public int DeleteTransaction(Event transaction)
+        public void DeleteTransaction(Event transaction)
         {
-            if (dataContext.Transactions.Contains(transaction))
-            {
-                dataContext.Transactions.Remove(transaction);
-                return 1;
-            }
-            return 0;
+            if(!dataContext.Transactions.Remove(transaction))
+                throw new ItemDoesNotExistException(transaction, dataContext.Transactions);
         }
 
-        public int DeleteStateDescription(StateDescription stateDescription)
+        public void DeleteStateDescription(StateDescription stateDescription)
         {
-            if (dataContext.Descriptions.Contains(stateDescription))
-            {
-                dataContext.Descriptions.Remove(stateDescription);
-                return 1;
-            }
-            return 0;
+            dataContext.Descriptions.Remove(stateDescription);
         }
 
-        public int DeletePersonByIndex(int index)
+        public void DeletePersonByIndex(int index)
         {
-            if (dataContext.Clients.Count > index)
-            {
-                dataContext.Clients.RemoveAt(index);
-                return 1;
-            }
-            return 0;
+            dataContext.Clients.RemoveAt(index);
         }
 
-        public int DeleteCatalogByKey(long key)
+        public void DeleteCatalogByKey(long key)
         {
-            if (dataContext.Books.ContainsKey(key))
-            {
-                dataContext.Books.Remove(key);
-                return 1;
-            }
-            return 0;
+            dataContext.Books.Remove(key);
         }
 
-        public int DeleteTransactionByIndex(int index)
+        public void DeleteTransactionByIndex(int index)
         {
-            if (dataContext.Transactions.Count > index)
-            {
-                dataContext.Transactions.RemoveAt(index);
-                return 1;
-            }
-            return 0;
+            dataContext.Transactions.RemoveAt(index);
+
         }
 
-        public int DeleteStateDescriptionByIndex(int index)
+        public void DeleteStateDescriptionByIndex(int index)
         {
-            if (dataContext.Descriptions.Count > index)
-            {
-                dataContext.Descriptions.RemoveAt(index);
-                return 1;
-            }
-            return 0;
+            dataContext.Descriptions.RemoveAt(index);
         }
         
 
