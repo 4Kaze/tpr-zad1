@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using Zad1;
 
@@ -92,7 +93,7 @@ namespace UnitTests
             enumerator = repository.GetAllCatalogs().GetEnumerator();
             while (enumerator.MoveNext()) count++;
             Assert.AreEqual(2, count);
-            int test = repository.DeleteCatalog(catalog);
+            repository.DeleteCatalog(catalog);
 
             count = 0;
             enumerator = repository.GetAllCatalogs().GetEnumerator();
@@ -237,7 +238,7 @@ namespace UnitTests
             {
                 count1 += 1;
                 persons.Remove(p);
-                Assert.AreEqual(1, dr.DeletePerson(p));
+                dr.DeletePerson(p);
             }
 
             foreach(Person p in persons)
@@ -262,7 +263,7 @@ namespace UnitTests
             {
                 count1 += 1;
                 persons.RemoveAt(index - count3);
-                Assert.AreEqual(1, dr.DeletePersonByIndex(index - count3));
+                dr.DeletePersonByIndex(index - count3);
                 count3 += 1;
             }
 
@@ -309,7 +310,7 @@ namespace UnitTests
             foreach (int index in indexesToRemove)
             {
                 catalogs.RemoveAt(index - count1);
-                Assert.AreEqual(1, dr.DeleteCatalogByKey(index));
+                dr.DeleteCatalogByKey(index);
                 count1 += 1;
             }
 
@@ -333,7 +334,7 @@ namespace UnitTests
             {
                 count1 += 1;
                 catalogs.Remove(p);
-                Assert.AreEqual(1, dr.DeleteCatalog(p));
+                dr.DeleteCatalog(p);
             }
 
             foreach (Catalog p in catalogs)
@@ -379,7 +380,7 @@ namespace UnitTests
             {
                 count1 += 1;
                 stateDescriptions.Remove(p);
-                Assert.AreEqual(1, dr.DeleteStateDescription(p));
+                dr.DeleteStateDescription(p);
             }
 
             foreach (StateDescription p in stateDescriptions)
@@ -404,7 +405,7 @@ namespace UnitTests
             {
                 count1 += 1;
                 stateDescriptions.RemoveAt(index - count3);
-                Assert.AreEqual(1, dr.DeleteStateDescriptionByIndex(index - count3));
+                dr.DeleteStateDescriptionByIndex(index - count3);
                 count3 += 1;
             }
 
@@ -451,7 +452,7 @@ namespace UnitTests
             {
                 count1 += 1;
                 transactions.Remove(p);
-                Assert.AreEqual(1, dr.DeleteTransaction(p));
+                dr.DeleteTransaction(p);
             }
 
             foreach (Event p in transactions)
@@ -476,7 +477,7 @@ namespace UnitTests
             {
                 count1 += 1;
                 transactions.RemoveAt(index - count3);
-                Assert.AreEqual(1, dr.DeleteTransactionByIndex(index - count3));
+                dr.DeleteTransactionByIndex(index - count3);
                 count3 += 1;
             }
 
@@ -505,11 +506,11 @@ namespace UnitTests
            DataRepository repository = new DataRepository();
 
             //Person Collection
-            Assert.AreEqual(null, repository.GetPerson(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPerson(0));
             repository.AddPerson(person);
             Assert.AreEqual(person, repository.GetPerson(0));
             repository.DeletePersonByIndex(0);
-            Assert.AreEqual(null, repository.GetPerson(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPerson(0));
             repository.AddPerson(person);
             Assert.AreEqual(person, repository.GetPerson(0));
             Assert.AreEqual(persons, null);
@@ -523,15 +524,15 @@ namespace UnitTests
 
             repository.DeletePerson(person);
 
-            Assert.AreEqual(null, repository.GetPerson(0));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPerson(0));
 
             //Catalog Collection
-            Assert.AreEqual(null, repository.GetCatalog(0));
+            Assert.ThrowsException<KeyNotFoundException>(() => repository.GetCatalog(0));
             repository.AddCatalog(catalog);
             Assert.AreEqual(1, repository.CatalogKey);
             Assert.AreEqual(catalog, repository.GetCatalog(0));
             repository.DeleteCatalogByKey(0);
-            Assert.AreEqual(null, repository.GetCatalog(0));
+            Assert.ThrowsException<KeyNotFoundException>(() => repository.GetCatalog(0));
         }
     }
 }

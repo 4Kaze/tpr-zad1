@@ -130,84 +130,84 @@ namespace App
 
         // Update
 
-        public int UpdatePersonAtIndex(int index, Person person)
+        public void UpdatePersonAtIndex(int index, Person person)
         {
-            return repository.UpdatePerson(index, person);
+            repository.UpdatePerson(index, person);
         }
 
-        public int UpdateCatalogAtKey(long key, Catalog catalog)
+        public void UpdateCatalogAtKey(long key, Catalog catalog)
         {
-            return repository.UpdateCatalog(key, catalog);
+            repository.UpdateCatalog(key, catalog);
         }
 
-        public int UpdateTransactionAtIndex(int index, Event transaction)
+        public void UpdateTransactionAtIndex(int index, Event transaction)
         {
-            return repository.UpdateTransaction(index, transaction);
+            repository.UpdateTransaction(index, transaction);
         }
 
-        public int UpdateStateDescriptionAtIndex(int index, StateDescription description)
+        public void UpdateStateDescriptionAtIndex(int index, StateDescription description)
         {
-            return repository.UpdateStateDescription(index, description);
+            repository.UpdateStateDescription(index, description);
         }
 
-        public int UpdatePerson(Person person)
+        public void UpdatePerson(Person person)
         {
-            return repository.UpdatePerson(person);
+            repository.UpdatePerson(person);
         }
 
-        public int UpdateCatalog(Catalog catalog)
+        public void UpdateCatalog(Catalog catalog)
         {
-            return repository.UpdateCatalog(catalog);
+            repository.UpdateCatalog(catalog);
         }
 
-        public int UpdateTransaction(Event transaction)
+        public void UpdateTransaction(Event transaction)
         {
-            return repository.UpdateTransaction(transaction);
+            repository.UpdateTransaction(transaction);
         }
 
-        public int UpdateStateDescription(StateDescription description)
+        public void UpdateStateDescription(StateDescription description)
         {
-            return repository.UpdateStateDescription(description);
+            repository.UpdateStateDescription(description);
         }
 
-        public int DeletePerson(Person person)
+        public void DeletePerson(Person person)
         {
-            return repository.DeletePerson(person);
+            repository.DeletePerson(person);
         }
 
-        public int DeleteCatalog(Catalog catalog)
+        public void DeleteCatalog(Catalog catalog)
         {
-            return repository.DeleteCatalog(catalog);
+            repository.DeleteCatalog(catalog);
         }
 
-        public int DeleteTransaction(Event transaction)
+        public void DeleteTransaction(Event transaction)
         {
-            return repository.DeleteTransaction(transaction);
+            repository.DeleteTransaction(transaction);
         }
 
-        public int DeleteStateDescription(StateDescription stateDescription)
+        public void DeleteStateDescription(StateDescription stateDescription)
         {
-            return repository.DeleteStateDescription(stateDescription);
+            repository.DeleteStateDescription(stateDescription);
         }
 
-        public int DeletePersonByIndex(int index)
+        public void DeletePersonByIndex(int index)
         {
-            return repository.DeletePersonByIndex(index);
+            repository.DeletePersonByIndex(index);
         }
 
-        public int DeleteCatalogByKey(long key)
+        public void DeleteCatalogByKey(long key)
         {
-            return repository.DeleteCatalogByKey(key);
+            repository.DeleteCatalogByKey(key);
         }
 
-        public int DeleteTransactionByIndex(int index)
+        public void DeleteTransactionByIndex(int index)
         {
-            return repository.DeleteTransactionByIndex(index);
+            repository.DeleteTransactionByIndex(index);
         }
 
-        public int DeleteStateDescriptionByIndex(int index)
+        public void DeleteStateDescriptionByIndex(int index)
         {
-            return repository.DeleteStateDescriptionByIndex(index);
+            repository.DeleteStateDescriptionByIndex(index);
         }
 
 
