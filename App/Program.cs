@@ -8,6 +8,10 @@ namespace App
         static void Main(string[] args)
         {
 
+            IFillInterface fillInterface = new FillFileData();
+            DataContext dataContext = new DataContext();
+            fillInterface.FillData(dataContext);
+            int userInput = Console.Read();
         }
     }
 }

@@ -44,5 +44,16 @@ namespace UnitTests
             Assert.AreEqual(amount, dataContext.Descriptions.Count);
             Assert.AreEqual(amount, dataContext.Transactions.Count);
         }
+
+
+        [TestMethod]
+        public void EqualsEventMethodTest()
+        {
+            IFillInterface fillInterface = new FillFileData();
+            DataContext dataContext = new DataContext();
+            fillInterface.FillData(dataContext);
+            Assert.AreEqual(3, dataContext.Clients.Count);
+
+        }
     }
 }
