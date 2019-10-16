@@ -25,8 +25,6 @@ namespace UnitTests
             IFillInterface fillInterface = new FillRandom();
             DataContext dataContext = new DataContext();
             fillInterface.FillData(dataContext);
-            string a = dataService.ViewList(dataContext.Transactions);
-            string b = "";
         }
 
 
@@ -38,8 +36,6 @@ namespace UnitTests
             IFillInterface fillInterface = new FillRandom();
             DataContext dataContext = new DataContext();
             fillInterface.FillData(dataContext);
-            string a = dataService.FullView();
-            string b = "";
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using Zad1;
 
 namespace App
@@ -13,27 +14,27 @@ namespace App
             this.repository = repositoryInterface;
         }
 
-        public string ViewList(IEnumerable<Object> items)
+        public void ViewList(IEnumerable<Object> items)
         {
             string answer = "";
             foreach (Object exampleObject in items)
             {
                 answer += exampleObject.ToString() + "\n";
             }
-            return answer;
+            Console.WriteLine(answer);
         }
 
-        public string ViewList(Dictionary<long, Catalog> items)
+        public void ViewList(IEnumerable<KeyValuePair<long, Catalog>> items)
         {
             string answer = "";
             foreach (Object exampleObject in items)
             {
                 answer += exampleObject.ToString() + "\n";
             }
-            return answer;
+            Console.WriteLine(answer);
         }
 
-        public string FullView()
+        public void FullView()
         {
             string answer = "";
             foreach (Person person in repository.GetAllPersons())
@@ -48,7 +49,7 @@ namespace App
                     }
                 }
             }
-            return answer;
+            Console.WriteLine(answer);
         }
 
         public int BorrowBook(Person person, long bookStateCode)
@@ -213,6 +214,90 @@ namespace App
             repository.DeleteStateDescriptionByIndex(index);
         }
 
+
+
+        //Object Creation
+        public Person CreatePerson()
+        {
+            Person person = null; 
+            bool runningFlag = true;
+            bool decisionFlag = true;
+            do
+            {
+                Console.WriteLine("Podaj imie osoby: ");
+                string name = Console.ReadLine();
+                Console.WriteLine("Podaj nazwisko: ");
+                string surname = Console.ReadLine();
+                Console.WriteLine("Podaj adres: ");
+                string adress = Console.ReadLine();
+                do
+                {
+                    Console.WriteLine("Czy jestes pewny, swoich wyborów: Imie - " + name + ", Nazwisko - " + surname + ", Adres - " + adress + ". Tak/tak, by zakonczyc. By zmienić Nie/nie.");
+                    string flag = Console.ReadLine();
+                    if (flag == "Tak" || flag == "tak")
+                    {
+                        decisionFlag = false;
+                        runningFlag = false;
+                        person = new Person(name, surname, adress);
+                    }
+                    if (flag == "Nie" || flag == "nie")
+                    {
+                        decisionFlag = false;
+                    }
+                } while (decisionFlag);
+                
+
+            }while (runningFlag);
+            return person;
+        }
+
+
+        public Author CreateAuthor()
+        {
+            Author author = null;
+            bool runningFlag = true;
+            bool decisionFlag = true;
+            do
+            {
+                Console.WriteLine("Podaj imie osoby: ");
+                string name = Console.ReadLine();
+                Console.WriteLine("Podaj nazwisko: ");
+                string surname = Console.ReadLine();
+
+                DateTimeOffset date = new DateTimeOffset();
+                bool dateFlag = true;
+                do
+                {
+                    Console.WriteLine("Podaj date urodzenia: ");
+                    string stringDate = Console.ReadLine();
+                    if (System.DateTimeOffset.TryParse(stringDate, null as IFormatProvider, DateTimeStyles.AssumeLocal, out date))
+                    {
+                        dateFlag = false;
+                    }
+                } while (dateFlag);
+
+
+
+                do
+                {
+                    Console.WriteLine("Czy jestes pewny, swoich wyborów: Imie - " + name + ", Nazwisko - " + surname + ", Data - " + date + ". Tak/tak, by zakonczyc. By zmienić Nie/nie.");
+                    string flag = Console.ReadLine();
+                    if (flag == "Tak" || flag == "tak")
+                    {
+                        decisionFlag = false;
+                        runningFlag = false;
+                        author = new Author(name, surname, date);
+                    }
+                    if (flag == "Nie" || flag == "nie")
+                    {
+                        decisionFlag = false;
+                    }
+                } while (decisionFlag);
+
+
+            } while (runningFlag);
+            return author;
+        }
 
     }
 }
