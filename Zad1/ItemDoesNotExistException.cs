@@ -23,5 +23,13 @@ namespace Zad1
         {
 
         }
+
+        public ItemDoesNotExistException(long key, Type type) : base(string.Format("Item with key {0} of type {1} does not exist.", key, type.FullName))
+        {
+
+        }
+
+        public ItemDoesNotExistException(string message) : base(message)
+        { }
     }
 }
