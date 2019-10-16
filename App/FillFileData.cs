@@ -51,8 +51,8 @@ namespace App
                 answer3 = eventsData[k].Split(separator, count, StringSplitOptions.RemoveEmptyEntries);
                 answer4 = personData[k].Split(separator, count, StringSplitOptions.RemoveEmptyEntries);
                 answer5 = statesData[k].Split(separator, count, StringSplitOptions.RemoveEmptyEntries);
+                
 
-                Console.WriteLine(answer1[2]);
                 authors.Add(new Author(answer1[0], answer1[1], System.DateTimeOffset.ParseExact(answer1[2], "dd/MM/yyyy", null)));
                 dataContext.Books.Add(k, new Catalog(answer1[0], answer1[1], authors[k]));
                 dataContext.Clients.Add(new Person(answer4[0], answer4[1], answer4[2]));

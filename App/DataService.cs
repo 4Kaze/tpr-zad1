@@ -170,6 +170,9 @@ namespace App
             repository.UpdateStateDescription(description);
         }
 
+
+        // Delete
+
         public void DeletePerson(Person person)
         {
             repository.DeletePerson(person);
