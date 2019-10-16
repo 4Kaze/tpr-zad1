@@ -52,16 +52,25 @@ namespace App
             Console.WriteLine(answer);
         }
 
-        public int BorrowBook(Person person, long bookStateCode)
+        public void BorrowBook(Person person, long bookStateCode)
         {
             StateDescription state = repository.GetStateDescriptionByCode(bookStateCode);
-            if (state == null) return 0;
-            if (!state.Availabile) return 0;
+            if (state == null) throw new ItemDoesNotExistException(bookStateCode, typeof(StateDescription));
+            if (!state.Availabile) throw new BookUnavailableException(state);
 
             state.Availabile = false;
             repository.AddTransaction(new Event(person, state, DateTimeOffset.Now));
+        }
 
-            return 1;
+        public void ReturnBook(long bookStateCode)
+        {
+            StateDescription state = repository.GetStateDescriptionByCode(bookStateCode);
+            if (state == null) throw new ItemDoesNotExistException(bookStateCode, typeof(StateDescription));
+            if (!state.Availabile) throw new BookNotUnavailableException(state);
+
+            Person person = GetPersonByBorrowedBook(state);
+            state.Availabile = true;
+            repository.AddTransaction(new Event(person, state, DateTimeOffset.Now));
         }
 
         // Add
@@ -107,6 +116,20 @@ namespace App
             return repository.GetStateDescriptionByCode(code);
         }
 
+
+        public Person GetPersonByBorrowedBook(StateDescription book)
+        {
+            if (book.Availabile) throw new BookNotUnavailableException(book);
+
+            foreach(Event transaction in GetAllTransactions())
+            {
+                if (transaction.BookState.Code == book.Code)
+                    return transaction.Causer;
+            }
+
+            throw new ItemDoesNotExistException(string.Format("Could not find person who borrowed {0}", book));
+        }
+
         // GetAll
 
         public IEnumerable<Person> GetAllPersons()
@@ -127,6 +150,45 @@ namespace App
         public IEnumerable<StateDescription> GetAllStateDescriptions()
         {
             return repository.GetAllStateDescriptions();
+        }
+
+        public List<Event> GetAllTransactionsByPerson(Person person)
+        {
+            List<Event> eventList = new List<Event>();
+
+            foreach(Event transaction in GetAllTransactions())
+            {
+                if (transaction.Causer.Equals(person))
+                    eventList.Add(transaction);
+            }
+
+            return eventList;
+        }
+
+        public List<Event> GetAllTransactionsByBook(Catalog book)
+        {
+            List<Event> eventList = new List<Event>();
+
+            foreach (Event transaction in GetAllTransactions())
+            {
+                if (transaction.BookState.Book.Equals(book))
+                    eventList.Add(transaction);
+            }
+
+            return eventList;
+        }
+
+        public List<Event> GetAllTransactionsByBookState(StateDescription bookState)
+        {
+            List<Event> eventList = new List<Event>();
+
+            foreach (Event transaction in GetAllTransactions())
+            {
+                if (transaction.BookState.Equals(bookState))
+                    eventList.Add(transaction);
+            }
+
+            return eventList;
         }
 
         // Update

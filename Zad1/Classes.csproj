@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Author.cs" />
+    <Compile Include="BookNotUnavailableException.cs" />
+    <Compile Include="BookUnavailableException.cs" />
     <Compile Include="Catalog.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />

@@ -1,27 +1,45 @@
 ﻿using System;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Zad1;
 
 namespace App
 {
     class Program
     {
+        private DataService dataService;
+        
+
         static void Main(string[] args)
         {
-            DataService dataService = new DataService(new DataRepository(new FillFileData()));
-            dataService.ViewList(dataService.GetAllPersons());
-            //dataService.ViewList(dataService.GetAllStateDescriptions());
-            //dataService.ViewList(dataService.GetAllTransactions());
-            //dataService.ViewList(dataService.GetAllCatalogs());
+            new Program();
+        }
 
-            //dataService.FullView();
+        public Program()
+        {
+            dataService = new DataService(new DataRepository());
+            ((ObservableCollection<Event>)dataService.GetAllTransactions()).CollectionChanged += new NotifyCollectionChangedEventHandler(TransactionsChange);
+        }
+        private void write(string message)
+        {
+            System.Console.WriteLine(message);
+        }
 
-            //dataService.(dataService.CreatePerson());
-            //dataService.ViewList(dataService.GetAllPersons());
-
-            //Author author = dataService.CreateAuthor();
-            //Console.WriteLine(author.ToString());
-
-            int userInput = Console.Read();
+        public void TransactionsChange(object sender, NotifyCollectionChangedEventArgs data)
+        {
+            if(data.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach(Event transaction in data.NewItems)
+                {
+                    write("Added new transaction: " + transaction);
+                }
+            } else if(data.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Event transaction in data.OldItems)
+                {
+                    write("Removed the transaction: " + transaction);
+                }
+            }
         }
     }
 }
