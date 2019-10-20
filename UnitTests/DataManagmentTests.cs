@@ -14,7 +14,6 @@ namespace UnitTests
             DataRepository repository = new DataRepository();
             Person person = new Person("Stan", "Peacock", "Michelles 42");
             repository.AddPerson(person);
-            Assert.AreEqual(person, repository.GetPerson(0));
             Assert.AreEqual(person, repository.GetPersonByCode(person.Code));
 
             IEnumerator<object> enumerator = repository.GetAllPersons().GetEnumerator();
@@ -28,11 +27,11 @@ namespace UnitTests
 
             Person person2 = new Person("Stan", "Peacock", "Michelles 42");
             repository.UpdatePerson(0, person2);
-            Assert.AreEqual(person2, repository.GetPerson(0));
+            Assert.AreEqual(person2, repository.GetPersonByCode(person2.Code));
 
             person2.Name = "test";
             repository.UpdatePerson(person2);
-            Assert.AreEqual("test", repository.GetPerson(0).Name);
+            Assert.AreEqual("test", repository.GetPersonByCode(person2.Code).Name);
 
             count = 0;
             enumerator = repository.GetAllPersons().GetEnumerator();
@@ -63,7 +62,6 @@ namespace UnitTests
             DataRepository repository = new DataRepository();
             Catalog catalog = new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null)));
             repository.AddCatalog(catalog);
-            Assert.AreEqual(catalog, repository.GetCatalog(0));
             Assert.AreEqual(catalog, repository.GetCatalogByCode(catalog.Code));
 
             IEnumerator<KeyValuePair<long, Catalog>> enumerator = repository.GetAllCatalogs().GetEnumerator();
@@ -77,11 +75,11 @@ namespace UnitTests
 
             Catalog catalog2 = new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null)));
             repository.UpdateCatalog(0, catalog2);
-            Assert.AreEqual(catalog2, repository.GetCatalog(0));
+            Assert.AreEqual(catalog2, repository.GetCatalogByCode(catalog2.Code));
 
             catalog2.Title = "test";
             repository.UpdateCatalog(catalog2);
-            Assert.AreEqual("test", repository.GetCatalog(0).Title);
+            Assert.AreEqual("test", repository.GetCatalogByCode(catalog2.Code).Title);
 
             count = 0;
             enumerator = repository.GetAllCatalogs().GetEnumerator();
@@ -112,7 +110,6 @@ namespace UnitTests
             DataRepository repository = new DataRepository();
             StateDescription stateDescription = new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here");
             repository.AddStateDescription(stateDescription);
-            Assert.AreEqual(stateDescription, repository.GetStateDescription(0));
             Assert.AreEqual(stateDescription, repository.GetStateDescriptionByCode(stateDescription.Code));
 
             IEnumerator<object> enumerator = repository.GetAllStateDescriptions().GetEnumerator();
@@ -126,11 +123,11 @@ namespace UnitTests
 
             StateDescription stateDescription2 = new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here");
             repository.UpdateStateDescription(0, stateDescription2);
-            Assert.AreEqual(stateDescription2, repository.GetStateDescription(0));
+            Assert.AreEqual(stateDescription2, repository.GetStateDescriptionByCode(stateDescription2.Code));
 
             stateDescription2.Availabile = false;
             repository.UpdateStateDescription(stateDescription2);
-            Assert.AreEqual(false, repository.GetStateDescription(0).Availabile);
+            Assert.AreEqual(false, repository.GetStateDescriptionByCode(stateDescription2.Code).Availabile);
 
             count = 0;
             enumerator = repository.GetAllStateDescriptions().GetEnumerator();
@@ -161,7 +158,6 @@ namespace UnitTests
             DataRepository repository = new DataRepository();
             Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             repository.AddTransaction(transaction);
-            Assert.AreEqual(transaction, repository.GetTransaction(0));
             Assert.AreEqual(transaction, repository.GetTransactionByCode(transaction.Code));
 
             IEnumerator<object> enumerator = repository.GetAllTransactions().GetEnumerator();
@@ -175,12 +171,12 @@ namespace UnitTests
 
             Event transaction2 = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null))), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             repository.UpdateTransaction(0, transaction2);
-            Assert.AreEqual(transaction2, repository.GetTransaction(0));
+            Assert.AreEqual(transaction2, repository.GetTransactionByCode(transaction2.Code));
 
             System.DateTimeOffset date = System.DateTimeOffset.ParseExact("31/01/2019 21:37", "dd/MM/yyyy HH:mm", null);
             transaction2.ReturnDate = date;
             repository.UpdateTransaction(transaction2);
-            Assert.AreEqual(date, repository.GetTransaction(0).ReturnDate);
+            Assert.AreEqual(date, repository.GetTransactionByCode(transaction2.Code).ReturnDate);
 
             count = 0;
             enumerator = repository.GetAllTransactions().GetEnumerator();
@@ -219,7 +215,7 @@ namespace UnitTests
             }
             for(int i = 0; i < 100; i++)
             {
-                Assert.AreEqual(persons[i], dr.GetPerson(i));
+                Assert.AreEqual(persons[i], dr.GetPersonByCode(persons[i].Code));
             }
 
             for (int i = 0; i < 100; i++)
@@ -291,7 +287,7 @@ namespace UnitTests
             }
             for (int i = 0; i < 100; i++)
             {
-                Assert.AreEqual(catalogs[i], dr.GetCatalog(i));
+                Assert.AreEqual(catalogs[i], dr.GetCatalogByCode(catalogs[i].Code));
             }
 
             for (int i = 0; i < 100; i++)
@@ -361,7 +357,7 @@ namespace UnitTests
             }
             for (int i = 0; i < 100; i++)
             {
-                Assert.AreEqual(stateDescriptions[i], dr.GetStateDescription(i));
+                Assert.AreEqual(stateDescriptions[i], dr.GetStateDescriptionByCode(stateDescriptions[i].Code));
             }
 
             for (int i = 0; i < 100; i++)
@@ -433,7 +429,7 @@ namespace UnitTests
             }
             for (int i = 0; i < 100; i++)
             {
-                Assert.AreEqual(transactions[i], dr.GetTransaction(i));
+                Assert.AreEqual(transactions[i], dr.GetTransactionByCode(transactions[i].Code));
             }
 
             for (int i = 0; i < 100; i++)
@@ -506,33 +502,33 @@ namespace UnitTests
            DataRepository repository = new DataRepository();
 
             //Person Collection
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPerson(0));
-            repository.AddPerson(person);
-            Assert.AreEqual(person, repository.GetPerson(0));
-            repository.DeletePersonByIndex(0);
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPerson(0));
-            repository.AddPerson(person);
-            Assert.AreEqual(person, repository.GetPerson(0));
-            Assert.AreEqual(persons, null);
-            Assert.AreEqual(catalogs, null);
+            //Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPersonByCode(person.Code));
+            //repository.AddPerson(person);
+            //Assert.AreEqual(person, repository.GetPersonByCode(person.Code));
+            //repository.DeletePersonByIndex(0);
+            //Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPersonByCode(person.Code));
+            //repository.AddPerson(person);
+            //Assert.AreEqual(person, repository.GetPersonByCode(person.Code));
+            //Assert.AreEqual(persons, null);
+            //Assert.AreEqual(catalogs, null);
 
-            persons = repository.GetAllPersons();
-            catalogs = repository.GetAllCatalogs();
+            //persons = repository.GetAllPersons();
+            //catalogs = repository.GetAllCatalogs();
 
-            Assert.AreNotEqual(persons, null);
-            Assert.AreNotEqual(catalogs, null);
+            //Assert.AreNotEqual(persons, null);
+            //Assert.AreNotEqual(catalogs, null);
 
-            repository.DeletePerson(person);
+            //repository.DeletePerson(person);
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPerson(0));
+            //Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPersonByCode(person.Code));
 
-            //Catalog Collection
-            Assert.ThrowsException<KeyNotFoundException>(() => repository.GetCatalog(0));
-            repository.AddCatalog(catalog);
-            Assert.AreEqual(1, repository.CatalogKey);
-            Assert.AreEqual(catalog, repository.GetCatalog(0));
-            repository.DeleteCatalogByKey(0);
-            Assert.ThrowsException<KeyNotFoundException>(() => repository.GetCatalog(0));
+            ////Catalog Collection
+            //Assert.ThrowsException<KeyNotFoundException>(() => repository.GetCatalogByCode(catalog.Code));
+            //repository.AddCatalog(catalog);
+            //Assert.AreEqual(1, repository.CatalogKey);
+            //Assert.AreEqual(catalog, repository.GetCatalogByCode(catalog.Code));
+            //repository.DeleteCatalogByKey(0);
+            //Assert.ThrowsException<KeyNotFoundException>(() => repository.GetCatalogByCode(catalog.Code));
         }
     }
 }

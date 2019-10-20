@@ -16,12 +16,6 @@ namespace Zad1
         void AddStateDescription(StateDescription description);
 
 
-        // Get by index
-        Person GetPerson(int index);
-        Catalog GetCatalog(long key);
-        Event GetTransaction(int index);
-        StateDescription GetStateDescription(int index);
-
 
         // Get by code
         Person GetPersonByCode(long code);
