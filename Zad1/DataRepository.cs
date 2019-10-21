@@ -5,18 +5,11 @@ namespace Zad1
 {
     public class DataRepository : IRepositoryInterface
     {
-        private long catalogKey;
         private DataContext dataContext;
         private IFillInterface IfillInterface;
 
-        public long CatalogKey
-        {
-            get { return this.catalogKey; }
-        }
-
         public DataRepository(IFillInterface fillInterface)
         {
-            this.catalogKey = 0;
             this.IfillInterface = fillInterface;
             this.dataContext = new DataContext();
             this.IfillInterface.FillData(dataContext);
@@ -25,7 +18,6 @@ namespace Zad1
 
         public DataRepository()
         {
-            this.catalogKey = 0;
             this.dataContext = new DataContext();
         }
 
@@ -40,8 +32,8 @@ namespace Zad1
 
         public void AddCatalog(Catalog catalog)
         {
-            if (!dataContext.Books.ContainsValue(catalog))
-                dataContext.Books.Add(this.catalogKey++, catalog);
+            if (!dataContext.Books.ContainsKey(catalog.Code))
+                dataContext.Books.Add(catalog.Code, catalog);
             else
                 throw new ItemAlreadyExistsException(catalog, dataContext.Books);
         }
@@ -60,28 +52,6 @@ namespace Zad1
                 dataContext.Descriptions.Add(description);
             else
                 throw new ItemAlreadyExistsException(description, dataContext.Descriptions);
-        }
-
-        // Get by index
-
-        public Person GetPerson(int index)
-        {
-            return dataContext.Clients[index];
-        }
-
-        public Catalog GetCatalog(long key)
-        {
-            return dataContext.Books[key];
-        }
-
-        public Event GetTransaction(int index)
-        {
-            return dataContext.Transactions[index];
-        }
-
-        public StateDescription GetStateDescription(int index)
-        {
-             return dataContext.Descriptions[index];
         }
 
         // Get by code
@@ -138,24 +108,6 @@ namespace Zad1
            return dataContext.Descriptions;
         }
 
-        // Update
-
-        public void UpdatePerson(int index, Person person) {
-            dataContext.Clients[index] = person;
-        }
-
-        public void UpdateCatalog(long key, Catalog catalog) {
-            dataContext.Books[key] = catalog;
-        }
-
-        public void UpdateTransaction(int index, Event transaction) {
-            dataContext.Transactions[index] = transaction;
-        }
-
-        public void UpdateStateDescription(int index, StateDescription description) {
-            dataContext.Descriptions[index] = description;
-        }
-
         public void UpdatePerson(Person person) {
             int index = dataContext.Clients.IndexOf(person);
 
@@ -166,15 +118,12 @@ namespace Zad1
         }
 
         public void UpdateCatalog(Catalog catalog) {
-           foreach(KeyValuePair<long, Catalog> pair in dataContext.Books)
-           {
-                if (pair.Value.Code == catalog.Code)
-                {
-                    dataContext.Books[pair.Key] = catalog;
-                    return;
-                }
-           }
-           throw new ItemDoesNotExistException(catalog, dataContext.Books);
+            if(dataContext.Books.ContainsKey(catalog.Code))
+            {
+                dataContext.Books[catalog.Code] = catalog;
+                return;
+            }
+            throw new ItemDoesNotExistException(catalog, dataContext.Books);
         }
 
         public void UpdateTransaction(Event transaction) {
@@ -205,15 +154,11 @@ namespace Zad1
 
         public void DeleteCatalog(Catalog catalog)
         {
-            foreach(KeyValuePair<long, Catalog> pair in dataContext.Books)
+            if(dataContext.Books.ContainsKey(catalog.Code))
             {
-                if (pair.Value.Code == catalog.Code)
-                {
-                    dataContext.Books.Remove(pair.Key);
-                    return;
-                }
+                dataContext.Books.Remove(catalog.Code);
+                return;
             }
-
             throw new ItemDoesNotExistException(catalog, dataContext.Books);
         }
 
@@ -227,30 +172,7 @@ namespace Zad1
         {
             if(!dataContext.Descriptions.Remove(stateDescription))
                 throw new ItemDoesNotExistException(stateDescription, dataContext.Descriptions);
-        }
-
-        public void DeletePersonByIndex(int index)
-        {
-            dataContext.Clients.RemoveAt(index);
-        }
-
-        public void DeleteCatalogByKey(long key)
-        {
-            if(!dataContext.Books.Remove(key))
-                throw new ItemDoesNotExistException(key, dataContext.Books);
-        }
-
-        public void DeleteTransactionByIndex(int index)
-        {
-            dataContext.Transactions.RemoveAt(index);
-
-        }
-
-        public void DeleteStateDescriptionByIndex(int index)
-        {
-            dataContext.Descriptions.RemoveAt(index);
-        }
-        
+        }        
 
     }
 }

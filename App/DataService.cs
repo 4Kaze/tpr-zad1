@@ -193,26 +193,6 @@ namespace App
 
         // Update
 
-        public void UpdatePersonAtIndex(int index, Person person)
-        {
-            repository.UpdatePerson(index, person);
-        }
-
-        public void UpdateCatalogAtKey(long key, Catalog catalog)
-        {
-            repository.UpdateCatalog(key, catalog);
-        }
-
-        public void UpdateTransactionAtIndex(int index, Event transaction)
-        {
-            repository.UpdateTransaction(index, transaction);
-        }
-
-        public void UpdateStateDescriptionAtIndex(int index, StateDescription description)
-        {
-            repository.UpdateStateDescription(index, description);
-        }
-
         public void UpdatePerson(Person person)
         {
             repository.UpdatePerson(person);
@@ -255,28 +235,6 @@ namespace App
         {
             repository.DeleteStateDescription(stateDescription);
         }
-
-        public void DeletePersonByIndex(int index)
-        {
-            repository.DeletePersonByIndex(index);
-        }
-
-        public void DeleteCatalogByKey(long key)
-        {
-            repository.DeleteCatalogByKey(key);
-        }
-
-        public void DeleteTransactionByIndex(int index)
-        {
-            repository.DeleteTransactionByIndex(index);
-        }
-
-        public void DeleteStateDescriptionByIndex(int index)
-        {
-            repository.DeleteStateDescriptionByIndex(index);
-        }
-
-
 
         //Object Creation
         public Person CreatePerson( string name, string surname, string adress)
