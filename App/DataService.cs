@@ -14,27 +14,27 @@ namespace App
             this.repository = repositoryInterface;
         }
 
-        public void ViewList(IEnumerable<Object> items)
+        public string ViewList(IEnumerable<Object> items)
         {
             string answer = "";
             foreach (Object exampleObject in items)
             {
                 answer += exampleObject.ToString() + "\n";
             }
-            Console.WriteLine(answer);
+            return answer;
         }
 
-        public void ViewList(IEnumerable<KeyValuePair<long, Catalog>> items)
+        public string ViewList(IEnumerable<KeyValuePair<long, Catalog>> items)
         {
             string answer = "";
             foreach (Object exampleObject in items)
             {
                 answer += exampleObject.ToString() + "\n";
             }
-            Console.WriteLine(answer);
+            return answer;
         }
 
-        public void FullView()
+        public string FullView()
         {
             string answer = "";
             foreach (Person person in repository.GetAllPersons())
@@ -49,7 +49,7 @@ namespace App
                     }
                 }
             }
-            Console.WriteLine(answer);
+            return answer;
         }
 
         public void BorrowBook(Person person, long bookStateCode)
@@ -279,85 +279,16 @@ namespace App
 
 
         //Object Creation
-        public Person CreatePerson()
+        public Person CreatePerson( string name, string surname, string adress)
         {
-            Person person = null; 
-            bool runningFlag = true;
-            bool decisionFlag = true;
-            do
-            {
-                Console.WriteLine("Podaj imie osoby: ");
-                string name = Console.ReadLine();
-                Console.WriteLine("Podaj nazwisko: ");
-                string surname = Console.ReadLine();
-                Console.WriteLine("Podaj adres: ");
-                string adress = Console.ReadLine();
-                do
-                {
-                    Console.WriteLine("Czy jestes pewny, swoich wyborów: Imie - " + name + ", Nazwisko - " + surname + ", Adres - " + adress + ". Tak/tak, by zakonczyc. By zmienić Nie/nie.");
-                    string flag = Console.ReadLine();
-                    if (flag == "Tak" || flag == "tak")
-                    {
-                        decisionFlag = false;
-                        runningFlag = false;
-                        person = new Person(name, surname, adress);
-                    }
-                    if (flag == "Nie" || flag == "nie")
-                    {
-                        decisionFlag = false;
-                    }
-                } while (decisionFlag);
-                
-
-            }while (runningFlag);
+            Person person = new Person(name, surname, adress);
             return person;
         }
 
 
-        public Author CreateAuthor()
+        public Author CreateAuthor(string name, string surname, DateTimeOffset date)
         {
-            Author author = null;
-            bool runningFlag = true;
-            bool decisionFlag = true;
-            do
-            {
-                Console.WriteLine("Podaj imie osoby: ");
-                string name = Console.ReadLine();
-                Console.WriteLine("Podaj nazwisko: ");
-                string surname = Console.ReadLine();
-
-                DateTimeOffset date = new DateTimeOffset();
-                bool dateFlag = true;
-                do
-                {
-                    Console.WriteLine("Podaj date urodzenia: ");
-                    string stringDate = Console.ReadLine();
-                    if (System.DateTimeOffset.TryParse(stringDate, null as IFormatProvider, DateTimeStyles.AssumeLocal, out date))
-                    {
-                        dateFlag = false;
-                    }
-                } while (dateFlag);
-
-
-
-                do
-                {
-                    Console.WriteLine("Czy jestes pewny, swoich wyborów: Imie - " + name + ", Nazwisko - " + surname + ", Data - " + date + ". Tak/tak, by zakonczyc. By zmienić Nie/nie.");
-                    string flag = Console.ReadLine();
-                    if (flag == "Tak" || flag == "tak")
-                    {
-                        decisionFlag = false;
-                        runningFlag = false;
-                        author = new Author(name, surname, date);
-                    }
-                    if (flag == "Nie" || flag == "nie")
-                    {
-                        decisionFlag = false;
-                    }
-                } while (decisionFlag);
-
-
-            } while (runningFlag);
+            Author author = new Author(name, surname, date);
             return author;
         }
 
