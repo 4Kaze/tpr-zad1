@@ -19,12 +19,13 @@ namespace Zad1
             BorrowDate = borrowDate;
         }
 
-        public Event(Event evente)
+        public Event(Event hapenning)
         {
-            Code = evente.Code;
-            Causer = evente.Causer;
-            BookState = evente.BookState;
-            BorrowDate = evente.BorrowDate;
+            Code = hapenning.Code;
+            Causer = hapenning.Causer;
+            BookState = hapenning.BookState;
+            BorrowDate = hapenning.BorrowDate;
+            ReturnDate = hapenning.ReturnDate;
         }
 
         public override string ToString()
