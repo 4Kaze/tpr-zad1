@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.IO;
 using Zad1;
 
 namespace App
@@ -17,12 +18,12 @@ namespace App
             List<string> personData = new List<string>();
             List<string> statesData = new List<string>();
 
-
-            string fileName1 = @"C:\Users\btmik\Desktop\kopier i pieroły\Semestr 5\Technoligie programowanie\Authors.xml";
-            string fileName2 = @"C:\Users\btmik\Desktop\kopier i pieroły\Semestr 5\Technoligie programowanie\Books.xml";
-            string fileName3 = @"C:\Users\btmik\Desktop\kopier i pieroły\Semestr 5\Technoligie programowanie\Events.xml";
-            string fileName4 = @"C:\Users\btmik\Desktop\kopier i pieroły\Semestr 5\Technoligie programowanie\Persons.xml";
-            string fileName5 = @"C:\Users\btmik\Desktop\kopier i pieroły\Semestr 5\Technoligie programowanie\StateDescription.xml";
+            string enviromentFolder = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+            string fileName1 = enviromentFolder + @"\Files\Authors.xml";
+            string fileName2 = enviromentFolder + @"\Files\Books.xml";
+            string fileName3 = enviromentFolder + @"\Files\Events.xml";
+            string fileName4 = enviromentFolder + @"\Files\Persons.xml";
+            string fileName5 = enviromentFolder + @"\Files\StateDescription.xml";
 
             this.ReadXmlData(authorsData, fileName1);
             this.ReadXmlData(booksData, fileName2);
