@@ -2,7 +2,7 @@
 
 namespace Zad1
 {
-    public class Catalog
+    public class Catalog : ICloneable
     {
         private static long nextID = 0;
         public long Code { get; set; }
@@ -18,6 +18,13 @@ namespace Zad1
             Author = author;
         }
 
+        public Catalog(Catalog catalog)
+        {
+            Code = catalog.Code;
+            Title = catalog.Title;
+            Description = catalog.Description;
+            Author = catalog.Author;
+        }
 
         public override string ToString()
         {
@@ -43,5 +50,9 @@ namespace Zad1
             return nextID++;
         }
 
+        public object Clone()
+        {
+            return new Catalog(this);
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Zad1
 {
-    public class Person
+    public class Person : ICloneable
     {
 
         private static long nextID = 0;
@@ -18,6 +18,16 @@ namespace Zad1
             this.Surname = surname;
             this.Adress = adress;
         }
+
+
+        public Person(Person person)
+        {
+            this.Code = person.Code;
+            this.Name = person.Name;
+            this.Surname = person.Surname;
+            this.Adress = person.Adress;
+        }
+        
 
 
         public override string ToString()
@@ -44,5 +54,9 @@ namespace Zad1
             return nextID++;
         }
 
+        public object Clone()
+        {
+            return new Person(this);
+        }
     }
 }

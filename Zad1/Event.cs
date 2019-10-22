@@ -2,7 +2,7 @@
 
 namespace Zad1
 {
-    public class Event
+    public class Event : ICloneable
     {
         private static long nextID = 0;
         public long Code { get; set; }
@@ -17,6 +17,14 @@ namespace Zad1
             Causer = causer;
             BookState = bookState;
             BorrowDate = borrowDate;
+        }
+
+        public Event(Event evente)
+        {
+            Code = evente.Code;
+            Causer = evente.Causer;
+            BookState = evente.BookState;
+            BorrowDate = evente.BorrowDate;
         }
 
         public override string ToString()
@@ -41,6 +49,11 @@ namespace Zad1
         public static long getNextID()
         {
             return nextID++;
+        }
+
+        public object Clone()
+        {
+            return new Event(this);
         }
     }
 }

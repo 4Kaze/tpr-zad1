@@ -2,7 +2,7 @@
 
 namespace Zad1
 {
-    public class StateDescription
+    public class StateDescription : ICloneable
     {
         private static long nextID = 0;
         public long Code { get; set; }
@@ -18,6 +18,15 @@ namespace Zad1
             Availabile = true;
             PurchaseDate = purchaseDate;
             Location = location;
+        }
+
+        public StateDescription(StateDescription description)
+        {
+            Code = description.Code;
+            Book = description.Book;
+            Availabile = description.Availabile;
+            PurchaseDate = description.PurchaseDate;
+            Location = description.Location;
         }
 
         public override string ToString()
@@ -42,6 +51,11 @@ namespace Zad1
         public static long getNextID()
         {
             return nextID++;
+        }
+
+        public object Clone()
+        {
+            return new StateDescription(this);
         }
     }
 }

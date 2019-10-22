@@ -17,6 +17,9 @@ namespace UnitTests
             Assert.AreEqual(author.Surname, "Austen");
             Assert.AreEqual(author.DateOfBirth, date);
         }
+        
+
+
 
         [TestMethod]
         public void CatalogConstructorTest()
@@ -118,5 +121,64 @@ namespace UnitTests
             transaction3.Code = transaction.Code;
             Assert.AreEqual(transaction, transaction3);
         }
+
+
+        [TestMethod]
+        public void AuthorClonableTest()
+        {
+            System.DateTimeOffset date = System.DateTimeOffset.Now;
+            Author author = new Author("Jane", "Austen", date);
+            Author author2 = (Author)author.Clone();
+            Assert.AreEqual(author, author2);
+            Assert.AreNotSame(author, author2);
+        }
+
+
+        [TestMethod]
+        public void CatalogClonableTest()
+        {
+            Author author = new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null));
+            Catalog catalog = new Catalog("Pride and Prejudice", "This is description", author);
+            Catalog catalog2 = (Catalog)catalog.Clone();
+            Assert.AreEqual(catalog, catalog2);
+            Assert.AreNotSame(catalog, catalog2);
+        }
+
+        [TestMethod]
+        public void PersonClonableTest()
+        {
+            Person person = new Person("Stan", "Peacock", "Michelles 42");
+            Person person2 = (Person)person.Clone();
+            Assert.AreEqual(person, person2);
+            Assert.AreNotSame(person, person2);
+        }
+
+        [TestMethod]
+        public void StatedescriptionClonableTest()
+        {
+            Author author = new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null));
+            Catalog book = new Catalog("Pride and Prejudice", "This is description", author);
+            System.DateTimeOffset date = System.DateTimeOffset.Now;
+            StateDescription stateDescription = new StateDescription(book, date, "here");
+            StateDescription stateDescription2 = (StateDescription)stateDescription.Clone();
+            Assert.AreEqual(stateDescription, stateDescription2);
+            Assert.AreNotSame(stateDescription, stateDescription2);
+        }
+
+        [TestMethod]
+        public void EventClonableTest()
+        {
+            Person person = new Person("Mike", "Podolsky");
+            Author author = new Author("Jane", "Austen", System.DateTimeOffset.ParseExact("28/01/1813", "dd/MM/yyyy", null));
+            Catalog catalog = new Catalog("Pride and Prejudice", "This is description", author);
+            StateDescription stateDescription = new StateDescription(catalog, System.DateTimeOffset.Now, "Here");
+            System.DateTimeOffset date = System.DateTimeOffset.Now;
+            Event happening = new Event(person, stateDescription, date);
+            Event happening2 = (Event)happening.Clone();
+            Assert.AreEqual(happening, happening2);
+            Assert.AreNotSame(happening, happening2);
+        }
+
+
     }
 }

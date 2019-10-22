@@ -2,7 +2,7 @@
 
 namespace Zad1
 {
-    public class Author
+    public class Author : ICloneable
     {
         private static long nextID = 0;
         public long Code { get; set; }
@@ -17,6 +17,17 @@ namespace Zad1
             Surname = surname;
             DateOfBirth = dateOfBirth;
         }
+
+
+
+        public Author(Author author)
+        {
+            Code = author.Code;
+            Name = author.Name;
+            Surname = author.Surname;
+            DateOfBirth = author.DateOfBirth;
+        }
+
 
         public override string ToString()
         {
@@ -41,6 +52,11 @@ namespace Zad1
         public static long getNextID()
         {
             return nextID++;
+        }
+
+        public object Clone()
+        {
+            return new Author(this);
         }
     }
 }
