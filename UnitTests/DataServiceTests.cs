@@ -21,10 +21,13 @@ namespace UnitTests
         public void DataServiceGenerateViewOfList()
         {
             // nie wiem jak to stestowac
+            // PRÓBOWAŁEM
             DataService dataService = new DataService(new DataRepository(new FillConstant()));
-            IFillInterface fillInterface = new FillRandom();
-            DataContext dataContext = new DataContext();
-            fillInterface.FillData(dataContext);
+            Assert.IsNotNull(dataService.ViewList(dataService.GetAllCatalogs()));
+            Assert.IsNotNull(dataService.ViewList(dataService.GetAllPersons()));
+            Assert.IsNotNull(dataService.ViewList(dataService.GetAllStateDescriptions()));
+            Assert.IsNotNull(dataService.ViewList(dataService.GetAllTransactions()));
+
         }
 
 
@@ -32,10 +35,9 @@ namespace UnitTests
         public void DataServiceAllView()
         {
             // nie wiem jak to stestowac
+            // PRÓBOWAŁEM
             DataService dataService = new DataService(new DataRepository(new FillConstant()));
-            IFillInterface fillInterface = new FillRandom();
-            DataContext dataContext = new DataContext();
-            fillInterface.FillData(dataContext);
+            Assert.IsNotNull(dataService.FullView());
         }
 
     }
