@@ -32,10 +32,6 @@ namespace Zad1
 
 
         // Update
-        void UpdatePerson(int index, Person person);
-        void UpdateCatalog(long key, Catalog catalog);
-        void UpdateTransaction(int index, Event transaction);
-        void UpdateStateDescription(int index, StateDescription description);
         void UpdatePerson(Person person);
         void UpdateCatalog(Catalog catalog);
         void UpdateTransaction(Event transaction);
@@ -47,9 +43,5 @@ namespace Zad1
         void DeleteCatalog(Catalog catalog);
         void DeleteTransaction(Event transaction);
         void DeleteStateDescription(StateDescription stateDescription);
-        void DeletePersonByIndex(int index);
-        void DeleteCatalogByKey(long key);
-        void DeleteTransactionByIndex(int index);
-        void DeleteStateDescriptionByIndex(int index);
     }
 }
