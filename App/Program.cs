@@ -13,6 +13,8 @@ namespace App
         static void Main(string[] args)
         {
             new Program();
+            Console.WriteLine();
+            Console.ReadLine();
         }
 
         public Program()
