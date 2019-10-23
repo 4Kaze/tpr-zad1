@@ -5,3 +5,4 @@ UnitTests/obj
 .vs/
 App/bin
 App/obj
+generator.py
