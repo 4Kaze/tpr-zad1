@@ -58,7 +58,7 @@ namespace Zad1
         public void AddPerson(Person person)
         {
             if (!dataContext.Clients.Contains(person))
-                dataContext.Clients.Add((Person)person.Clone());
+                dataContext.Clients.Add((Person)person);
             else
                 throw new ItemAlreadyExistsException(person, dataContext.Clients);
         }
@@ -66,7 +66,7 @@ namespace Zad1
         public void AddCatalog(Catalog catalog)
         {
             if (!dataContext.Books.ContainsKey(catalog.Code))
-                dataContext.Books.Add(catalog.Code, (Catalog)catalog.Clone());
+                dataContext.Books.Add(catalog.Code, (Catalog)catalog);
             else
                 throw new ItemAlreadyExistsException(catalog, dataContext.Books);
         }
@@ -74,7 +74,7 @@ namespace Zad1
         public void AddTransaction(Event transaction)
         {
             if (!dataContext.Transactions.Contains(transaction))
-                dataContext.Transactions.Add((Event)transaction.Clone());
+                dataContext.Transactions.Add((Event)transaction);
             else
                 throw new ItemAlreadyExistsException(transaction, dataContext.Transactions);
         }
@@ -82,7 +82,7 @@ namespace Zad1
         public void AddStateDescription(StateDescription description)
         {
             if (!dataContext.Descriptions.Contains(description))
-                dataContext.Descriptions.Add((StateDescription)description.Clone());
+                dataContext.Descriptions.Add((StateDescription)description);
             else
                 throw new ItemAlreadyExistsException(description, dataContext.Descriptions);
         }
@@ -95,7 +95,7 @@ namespace Zad1
             {
                 return null;
             }
-            return (Person)dataContext.Clients.Find(p => p.Code == code).Clone();
+            return (Person)dataContext.Clients.Find(p => p.Code == code);
         }
 
         public Catalog GetCatalogByCode(long code)
@@ -103,7 +103,7 @@ namespace Zad1
            foreach(KeyValuePair<long, Catalog> pair in dataContext.Books)
            {
                 if(pair.Value.Code == code)
-                    return (Catalog)pair.Value.Clone();
+                    return (Catalog)pair.Value;
            }
            return null;
         }
@@ -113,7 +113,7 @@ namespace Zad1
             foreach(Event transaction in dataContext.Transactions)
             {
                 if (transaction.Code == code)
-                    return (Event)transaction.Clone();
+                    return (Event)transaction;
             }
             return null;
         }
@@ -124,7 +124,7 @@ namespace Zad1
             {
                 return null;
             }
-            return (StateDescription)dataContext.Descriptions.Find(d => d.Code == code).Clone();
+            return (StateDescription)dataContext.Descriptions.Find(d => d.Code == code);
         }
 
         // GetAll
@@ -158,13 +158,13 @@ namespace Zad1
             if(index == -1)
                 throw new ItemDoesNotExistException(person, dataContext.Clients);
 
-            dataContext.Clients[index] = (Person)person.Clone();
+            dataContext.Clients[index] = (Person)person;
         }
 
         public void UpdateCatalog(Catalog catalog) {
             if(dataContext.Books.ContainsKey(catalog.Code))
             {
-                dataContext.Books[catalog.Code] = (Catalog)catalog.Clone();
+                dataContext.Books[catalog.Code] = (Catalog)catalog;
                 return;
             }
             throw new ItemDoesNotExistException(catalog, dataContext.Books);
@@ -176,7 +176,7 @@ namespace Zad1
             if (index == -1)
                 throw new ItemDoesNotExistException(transaction, dataContext.Transactions);
 
-            dataContext.Transactions[index] = (Event)transaction.Clone();
+            dataContext.Transactions[index] = (Event)transaction;
         }
 
         public void UpdateStateDescription(StateDescription description) {
@@ -185,7 +185,7 @@ namespace Zad1
             if(index == -1)
                 throw new ItemDoesNotExistException(description, dataContext.Descriptions);
 
-            dataContext.Descriptions[index] = (StateDescription)description.Clone();
+            dataContext.Descriptions[index] = (StateDescription)description;
         }
 
         // Delete

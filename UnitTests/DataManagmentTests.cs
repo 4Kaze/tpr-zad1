@@ -647,45 +647,5 @@ namespace UnitTests
             Assert.AreEqual(100, count);
         }
 
-        [TestMethod]
-        public void DataRepositoryOperations()
-        {
-            Person person = new Person("Stan", "Peacock", "Michelles 42");
-            Catalog catalog = new Catalog("Pride and Prejudice", "This is description", "Jane Austen");
-
-            IEnumerable<KeyValuePair<long, Catalog>> catalogs = null;
-            IEnumerable<Person> persons = null;
-
-           DataRepository repository = new DataRepository();
-
-            //Person Collection
-            //Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPersonByCode(person.Code));
-            //repository.AddPerson(person);
-            //Assert.AreEqual(person, repository.GetPersonByCode(person.Code));
-            //repository.DeletePersonByIndex(0);
-            //Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPersonByCode(person.Code));
-            //repository.AddPerson(person);
-            //Assert.AreEqual(person, repository.GetPersonByCode(person.Code));
-            //Assert.AreEqual(persons, null);
-            //Assert.AreEqual(catalogs, null);
-
-            //persons = repository.GetAllPersons();
-            //catalogs = repository.GetAllCatalogs();
-
-            //Assert.AreNotEqual(persons, null);
-            //Assert.AreNotEqual(catalogs, null);
-
-            //repository.DeletePerson(person);
-
-            //Assert.ThrowsException<ArgumentOutOfRangeException>(() => repository.GetPersonByCode(person.Code));
-
-            ////Catalog Collection
-            //Assert.ThrowsException<KeyNotFoundException>(() => repository.GetCatalogByCode(catalog.Code));
-            //repository.AddCatalog(catalog);
-            //Assert.AreEqual(1, repository.CatalogKey);
-            //Assert.AreEqual(catalog, repository.GetCatalogByCode(catalog.Code));
-            //repository.DeleteCatalogByKey(0);
-            //Assert.ThrowsException<KeyNotFoundException>(() => repository.GetCatalogByCode(catalog.Code));
-        }
     }
 }

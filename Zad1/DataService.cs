@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using Zad1;
 
-namespace App
+namespace Zad1
 {
     public class DataService
     {
@@ -12,44 +12,6 @@ namespace App
         public DataService(IRepositoryInterface repositoryInterface)
         {
             this.repository = repositoryInterface;
-        }
-
-        public string ViewList(IEnumerable<Object> items)
-        {
-            string answer = "";
-            foreach (Object exampleObject in items)
-            {
-                answer += exampleObject.ToString() + "\n";
-            }
-            return answer;
-        }
-
-        public string ViewList(IEnumerable<KeyValuePair<long, Catalog>> items)
-        {
-            string answer = "";
-            foreach (Object exampleObject in items)
-            {
-                answer += exampleObject.ToString() + "\n";
-            }
-            return answer;
-        }
-
-        public string FullView()
-        {
-            string answer = "";
-            foreach (Person person in repository.GetAllPersons())
-            {
-                answer += person.ToString() + "\n";
-                foreach(Event happening in repository.GetAllTransactions())
-                {
-                    if(happening.Causer.Equals(person))
-                    {
-                        answer += "\t" + happening.ToString() + "\n";
-                        answer += "\t\t" + happening.BookState.Book.ToString() + "\n";
-                    }
-                }
-            }
-            return answer;
         }
 
         public void BorrowBook(Person person, long bookStateCode)
@@ -150,6 +112,33 @@ namespace App
         public IEnumerable<StateDescription> GetAllStateDescriptions()
         {
             return repository.GetAllStateDescriptions();
+        }
+
+        public List<Catalog> GetBooksByPerson(Person person)
+        {
+            List<Catalog> books = new List<Catalog>();
+
+            foreach(Event transaction in GetAllTransactionsByPerson(person))
+            {
+                if (!books.Contains(transaction.BookState.Book))
+                    books.Add(transaction.BookState.Book);
+            }
+
+            return books;
+        }
+
+        public List<Event> GetTransactionsByPersonWithBook(Person person, Catalog catalog)
+        {
+            List<Event> eventList = new List<Event>();
+            foreach (Event transaction in GetAllTransactions())
+            {
+                if(transaction.BookState.Book.Equals(catalog) && transaction.Causer.Equals(person))
+                {
+                    eventList.Add(transaction);
+                }
+            }
+
+            return eventList;
         }
 
         public List<Event> GetAllTransactionsByPerson(Person person)
