@@ -5,7 +5,17 @@ namespace Zad1
     public class Event : ICloneable
     {
         private static long nextID = 0;
-        public long Code { get; set; }
+        private long code;
+        public long Code
+        {
+            get { return code; }
+            set
+            {
+                if (value > nextID)
+                    nextID = value + 1;
+                code = value;
+            }
+        }
         public Person Causer { get; }
         public StateDescription BookState { get; }
         public DateTimeOffset BorrowDate { get; }

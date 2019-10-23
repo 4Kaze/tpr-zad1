@@ -6,7 +6,17 @@ namespace Zad1
     {
 
         private static long nextID = 0;
-        public long Code { get; set; }
+        private long code;
+        public long Code
+        {
+            get { return code; }
+            set
+            {
+                if (value > nextID)
+                    nextID = value + 1;
+                code = value;
+            }
+        }
         public string Name { set; get; }
         public string Surname { set; get; }
         public string Adress { set; get; }

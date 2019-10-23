@@ -5,7 +5,17 @@ namespace Zad1
     public class StateDescription : ICloneable
     {
         private static long nextID = 0;
-        public long Code { get; set; }
+        private long code;
+        public long Code
+        {
+            get { return code; }
+            set
+            {
+                if (value > nextID)
+                    nextID = value + 1;
+                code = value;
+            }
+        }
         public Catalog Book { set; get; }
         public bool Availabile { set; get; }
         public DateTimeOffset PurchaseDate { get; }
