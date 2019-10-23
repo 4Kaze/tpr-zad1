@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace Zad1
 {
@@ -8,7 +9,14 @@ namespace Zad1
         private DataContext dataContext;
         private IFillInterface IfillInterface;
 
-        public DataRepository(IFillInterface fillInterface)
+
+        public delegate void TransactionEventHandler(Event transaction);
+
+        public event TransactionEventHandler TransactionAddedEvent;
+        public event TransactionEventHandler TransactionUpdatedEvent;
+        public event TransactionEventHandler TransactionRemovedEvent;
+
+        public DataRepository(IFillInterface fillInterface): this()
         {
             this.IfillInterface = fillInterface;
             this.dataContext = new DataContext();
@@ -19,8 +27,33 @@ namespace Zad1
         public DataRepository()
         {
             this.dataContext = new DataContext();
+            dataContext.Transactions.CollectionChanged += new NotifyCollectionChangedEventHandler(transactionsChangeHandler);
         }
 
+        private void transactionsChangeHandler(object sender, NotifyCollectionChangedEventArgs data)
+        {
+            if (data.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Event transaction in data.NewItems)
+                {
+                    TransactionAddedEvent?.Invoke(transaction);
+                }
+            }
+            else if (data.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Event transaction in data.OldItems)
+                {
+                    TransactionRemovedEvent?.Invoke(transaction);
+                }
+            }
+            else if (data.Action == NotifyCollectionChangedAction.Replace)
+            {
+                foreach (Event transaction in data.OldItems)
+                {
+                    TransactionUpdatedEvent?.Invoke(transaction);
+                }
+            }
+        }
         // Add
         public void AddPerson(Person person)
         {
