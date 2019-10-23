@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Author.cs" />
     <Compile Include="BookNotUnavailableException.cs" />
     <Compile Include="BookUnavailableException.cs" />
     <Compile Include="Catalog.cs" />

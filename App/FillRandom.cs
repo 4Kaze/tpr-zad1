@@ -40,9 +40,9 @@ namespace App
         }
 
 
-        public Author CreateAuthor()
+        public string CreateAuthor()
         {
-            return new Author(this.getRandomString(firstNames), this.getRandomString(secondNames), getRandomDate());
+            return this.getRandomString(firstNames) + " " + this.getRandomString(secondNames);
         }
 
 

@@ -236,19 +236,5 @@ namespace App
             repository.DeleteStateDescription(stateDescription);
         }
 
-        //Object Creation
-        public Person CreatePerson( string name, string surname, string adress)
-        {
-            Person person = new Person(name, surname, adress);
-            return person;
-        }
-
-
-        public Author CreateAuthor(string name, string surname, DateTimeOffset date)
-        {
-            Author author = new Author(name, surname, date);
-            return author;
-        }
-
     }
 }

@@ -16,14 +16,10 @@ namespace App
             dataContext.Clients.Add(person3);
 
             // Catalog Data Fill
-            System.DateTimeOffset date = System.DateTimeOffset.Now;
-            Author author1 = new Author("Jane", "Austen", date);
-            Author author2 = new Author("Lew", "Tolstoj", date);
-            Author author3 = new Author("Dmitry ", "Glukhovsky", date);
 
-            Catalog catalog1 = new Catalog("Pride and Prejudice", "This is description1", author1);
-            Catalog catalog2 = new Catalog("War and Peace", "This is description2", author2);
-            Catalog catalog3 = new Catalog("Metro 2033", "This is description3", author3);
+            Catalog catalog1 = new Catalog("Pride and Prejudice", "This is description1", "Jane Austen");
+            Catalog catalog2 = new Catalog("War and Peace", "This is description2", "Lew Tolstoj");
+            Catalog catalog3 = new Catalog("Metro 2033", "This is description3", "Dimitry Glukhovsky");
 
             dataContext.Books.Add(1, catalog1);
             dataContext.Books.Add(2, catalog2);

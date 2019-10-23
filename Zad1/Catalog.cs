@@ -18,9 +18,9 @@ namespace Zad1
         }
         public string Title { get; set; }
         public string Description { get; set; }
-        public Author Author { get; set; }
+        public string Author { get; set; }
 
-        public Catalog(string title, string description, Author author)
+        public Catalog(string title, string description, string author)
         {
             Code = getNextID();
             Title = title;
