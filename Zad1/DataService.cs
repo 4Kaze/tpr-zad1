@@ -21,7 +21,7 @@ namespace Zad1
             if (!state.Availabile) throw new BookUnavailableException(state);
 
             state.Availabile = false;
-            repository.AddTransaction(new Event(person, state, DateTimeOffset.Now));
+            repository.AddTransaction(new Event(person, state, Event.EventType.Borrow, DateTimeOffset.Now));
         }
 
         public void ReturnBook(long bookStateCode)
@@ -32,7 +32,7 @@ namespace Zad1
 
             Person person = GetPersonByBorrowedBook(state);
             state.Availabile = true;
-            repository.AddTransaction(new Event(person, state, DateTimeOffset.Now));
+            repository.AddTransaction(new Event(person, state, Event.EventType.Return, DateTimeOffset.Now));
         }
 
         // Add

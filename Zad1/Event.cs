@@ -19,14 +19,24 @@ namespace Zad1
         public Person Causer { get; }
         public StateDescription BookState { get; }
         public DateTimeOffset BorrowDate { get; }
-        public DateTimeOffset ReturnDate { get; set; }
-        
-        public Event(Person causer, StateDescription bookState, DateTimeOffset borrowDate)
+        public DateTimeOffset ReturnDate { get; }
+        public EventType Type { get; } 
+        public enum EventType { Borrow, Return };
+
+        public Event(Person causer, StateDescription bookState, EventType type, DateTimeOffset date)
         {
             Code = getNextID();
             Causer = causer;
+            Type = type;
             BookState = bookState;
-            BorrowDate = borrowDate;
+
+            if(type == EventType.Borrow)
+            {
+                BorrowDate = date;
+            } else
+            {
+                BookState = bookState;
+            }
         }
 
         public Event(Event hapenning)

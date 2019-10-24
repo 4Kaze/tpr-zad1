@@ -36,9 +36,9 @@ namespace App
 
             //Event Data Fill
             System.DateTimeOffset date1 = System.DateTimeOffset.Now;
-            Event happening1 = new Event(person1, stateDescription1, date1);
-            Event happening2 = new Event(person2, stateDescription1, date1);
-            Event happening3 = new Event(person3, stateDescription1, date1);
+            Event happening1 = new Event(person1, stateDescription1, Event.EventType.Borrow, date1);
+            Event happening2 = new Event(person2, stateDescription1, Event.EventType.Return, date1);
+            Event happening3 = new Event(person3, stateDescription1, Event.EventType.Borrow, date1);
 
             dataContext.Transactions.Add(happening1);
             dataContext.Transactions.Add(happening2);

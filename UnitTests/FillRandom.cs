@@ -60,7 +60,9 @@ namespace App
 
         public Event CreateEvent()
         {
-            return new Event(CreatePerson(), CreateStateDescription(), getRandomDate());
+            Array values = Enum.GetValues(typeof(Event.EventType));
+            Event.EventType randomType = (Event.EventType)values.GetValue(random.Next(values.Length));
+            return new Event(CreatePerson(), CreateStateDescription(), randomType, getRandomDate());
         }
 
 
