@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Zad1;
 using App;
+using System.Collections.ObjectModel;
 
 namespace UnitTests
 {
@@ -43,6 +44,23 @@ namespace UnitTests
             Assert.AreEqual(amount, dataContext.Clients.Count);
             Assert.AreEqual(amount, dataContext.Descriptions.Count);
             Assert.AreEqual(amount, dataContext.Transactions.Count);
+        }
+
+        [TestMethod]
+        public void DataServiceDataContextFill()
+        {
+            DataService dataService = new DataService(new DataRepository(new FillConstant()));
+
+
+            Dictionary<long, Catalog> catalogs = (Dictionary<long, Catalog>)dataService.GetAllCatalogs();
+            ObservableCollection<Event> transactions = (ObservableCollection<Event>)dataService.GetAllTransactions();
+            List<StateDescription> descriptions = (List<StateDescription>)dataService.GetAllStateDescriptions();
+            List<Person> persons = (List<Person>)dataService.GetAllPersons();
+            Assert.AreEqual(3, catalogs.Count);
+            Assert.AreEqual(3, transactions.Count);
+            Assert.AreEqual(3, descriptions.Count);
+            Assert.AreEqual(3, persons.Count);
+
         }
     }
 }

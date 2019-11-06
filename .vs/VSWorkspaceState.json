@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\App",
-    "\\UnitTests",
-    "\\Zad1"
+    "\\Zad1",
+    "\\Zad1\\UnitTests"
   ],
-  "SelectedNode": "\\Zad1\\DataRepository.cs",
+  "SelectedNode": "\\Zad1\\UnitTests\\DataContextTests.cs",
   "PreviewInSolutionExplorer": false
 }
