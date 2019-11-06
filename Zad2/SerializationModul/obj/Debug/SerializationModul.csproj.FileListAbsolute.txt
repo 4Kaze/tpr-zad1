@@ -1,0 +1,6 @@
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\SerializationModul.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\SerializationModul.pdb
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul.csprojAssemblyReference.cache
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul.csproj.CoreCompileInputs.cache
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul.pdb

@@ -1,0 +1,8 @@
+Zad1/bin
+Zad1/obj
+UnitTests/bin
+UnitTests/obj
+.vs/
+App/bin
+App/obj
+generator.py
