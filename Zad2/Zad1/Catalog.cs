@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
-namespace Zad1
+namespace Classes
 {
     [Serializable]
-    public class Catalog : ICloneable, ISerializable
+    public class Catalog : ICloneable
     {
         private static long nextID = 0;
         private long code;
@@ -65,16 +64,6 @@ namespace Zad1
         public object Clone()
         {
             return new Catalog(this);
-        }
-
-        protected Catalog(SerializationInfo info, StreamingContext context)
-        {
-
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            throw new NotImplementedException();
         }
     }
 }

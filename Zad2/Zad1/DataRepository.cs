@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 
-namespace Zad1
+namespace Classes
 {
     public class DataRepository : IRepositoryInterface
     {

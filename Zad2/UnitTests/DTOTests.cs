@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Zad1;
+using Classes;
 
 namespace UnitTests
 {

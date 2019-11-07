@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using Zad1;
 
-namespace Zad1
+namespace Classes
 {
     public class DataService
     {

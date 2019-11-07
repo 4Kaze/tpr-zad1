@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Zad1
+namespace Classes
 {
+    [Serializable]
     public class DataContext
     {
         public List<Person> Clients;

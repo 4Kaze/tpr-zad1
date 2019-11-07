@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using Zad1;
-using App;
+using Classes;
 using System.Collections.ObjectModel;
 
 namespace UnitTests

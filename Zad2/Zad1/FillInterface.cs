@@ -1,4 +1,4 @@
-﻿namespace Zad1
+﻿namespace Classes
 {
     public interface IFillInterface
     {

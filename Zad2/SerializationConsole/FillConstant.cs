@@ -1,6 +1,6 @@
 ﻿using Classes;
 
-namespace UnitTests
+namespace SerializationConsole
 {
     public class FillConstant : IFillInterface
     {

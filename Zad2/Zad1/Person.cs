@@ -1,7 +1,8 @@
 ﻿using System;
 
-namespace Zad1
+namespace Classes
 {
+    [Serializable]
     public class Person : ICloneable
     {
 

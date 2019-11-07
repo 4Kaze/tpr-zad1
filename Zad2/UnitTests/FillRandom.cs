@@ -1,7 +1,7 @@
 ﻿using System;
-using Zad1;
+using Classes;
 
-namespace App
+namespace UnitTests
 {
     public class FillRandom : IFillInterface
     {

@@ -1,0 +1,12 @@
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\SerializationConsole.exe.config
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\SerializationConsole.exe
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\SerializationConsole.pdb
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.csprojAssemblyReference.cache
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.csproj.CoreCompileInputs.cache
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.exe
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.pdb
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\SerializationModul.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\Zad1.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\SerializationModul.pdb
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\Zad1.pdb
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.csproj.CopyComplete
