@@ -10,3 +10,6 @@ C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\Zad
 C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\SerializationModul.pdb
 C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\Zad1.pdb
 C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.csproj.CopyComplete
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\Newtonsoft.Json.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\Newtonsoft.Json.xml
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.exe.config

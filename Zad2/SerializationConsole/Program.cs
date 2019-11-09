@@ -79,6 +79,36 @@ namespace SerializationConsole
                     c = Console.ReadLine();
                 } while (c != "b");
             }
+
+            if(flag == "c")
+            {
+                do
+                {
+                    Console.WriteLine("insert file name.");
+                    string path = Console.ReadLine();
+                    JsonSerialization jsonSerialization = new JsonSerialization();
+                    jsonSerialization.Path = path;
+                    jsonSerialization.Serialize(dataContext);
+
+                    Console.WriteLine("[1] by wyczytac liste osob");
+                    Console.Read();
+                    DataContext dataContext1 = (DataContext)jsonSerialization.Deserialize();
+
+                    if (dataContext.Books.Count == dataContext1.Books.Count)
+                    {
+                        Console.WriteLine(dataContext.Clients[0].ToString());
+                        Console.WriteLine(dataContext1.Clients[0].ToString());
+                    }
+                    else
+                    {
+                        Console.WriteLine("jeblo");
+                    }
+
+
+                    Console.Read();
+                    c = Console.ReadLine();
+                } while (c != "b");
+            }
         }
     }
 }

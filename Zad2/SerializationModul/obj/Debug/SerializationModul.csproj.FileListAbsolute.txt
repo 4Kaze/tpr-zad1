@@ -7,3 +7,5 @@ C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\Seria
 C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\Zad1.dll
 C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\Zad1.pdb
 C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul.csproj.CopyComplete
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\Newtonsoft.Json.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\Newtonsoft.Json.xml
