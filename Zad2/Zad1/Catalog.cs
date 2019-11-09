@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace Classes
 {
     [Serializable]
+    [XmlRoot("CatalogRoot")]
     public class Catalog : ICloneable
     {
+        [XmlElement]
         private static long nextID = 0;
+        [XmlElement]
         private long code;
+        [XmlElement]
         public long Code
         {
             get { return code; }
@@ -17,8 +22,11 @@ namespace Classes
                 code = value;
             }
         }
+        [XmlElement]
         public string Title { get; set; }
+        [XmlElement]
         public string Description { get; set; }
+        [XmlElement]
         public string Author { get; set; }
 
         public Catalog(string title, string description, string author)

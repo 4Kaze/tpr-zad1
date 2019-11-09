@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace Classes
 {
     [Serializable]
+    [XmlRoot("EventRoot")]
     public class Event : ICloneable
     {
+        [XmlElement]
         private static long nextID = 0;
+        [XmlElement]
         private long code;
+        [XmlElement]
         public long Code
         {
             get { return code; }
@@ -17,11 +22,16 @@ namespace Classes
                 code = value;
             }
         }
+        [XmlElement]
         public Person Causer { get; }
+        [XmlElement]
         public StateDescription BookState { get; }
+        [XmlElement]
         public DateTimeOffset BorrowDate { get; }
+        [XmlElement]
         public DateTimeOffset ReturnDate { get; }
-        public EventType Type { get; } 
+        [XmlElement]
+        public EventType Type { get; }
         public enum EventType { Borrow, Return };
 
         public Event(Person causer, StateDescription bookState, EventType type, DateTimeOffset date)

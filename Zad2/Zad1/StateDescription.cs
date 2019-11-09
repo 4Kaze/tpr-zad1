@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace Classes
 {
     [Serializable]
+    [XmlRoot("DescriptionRoot")]
     public class StateDescription : ICloneable
     {
+        [XmlElement]
         private static long nextID = 0;
+        [XmlElement]
         private long code;
+        [XmlElement]
         public long Code
         {
             get { return code; }
@@ -17,9 +22,13 @@ namespace Classes
                 code = value;
             }
         }
+        [XmlElement]
         public Catalog Book { set; get; }
+        [XmlElement]
         public bool Availabile { set; get; }
+        [XmlElement]
         public DateTimeOffset PurchaseDate { get; }
+        [XmlElement]
         public string Location { set; get; }
 
         public StateDescription(Catalog book, DateTimeOffset purchaseDate, string location)

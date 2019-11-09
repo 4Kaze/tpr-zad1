@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace Classes
 {
     [Serializable]
+    [XmlRoot("PersonRoot")]
     public class Person : ICloneable
     {
-
+        [XmlElement]
         private static long nextID = 0;
+        [XmlElement]
         private long code;
+        [XmlElement]
         public long Code
         {
             get { return code; }
@@ -18,8 +22,11 @@ namespace Classes
                 code = value;
             }
         }
+        [XmlElement]
         public string Name { set; get; }
+        [XmlElement]
         public string Surname { set; get; }
+        [XmlElement]
         public string Adress { set; get; }
 
         public Person(string name, string surname, string adress = null)
@@ -39,6 +46,10 @@ namespace Classes
             this.Adress = person.Adress;
         }
         
+        public Person()
+        {
+
+        }
 
 
         public override string ToString()

@@ -18,6 +18,11 @@ namespace SerializationModul
 
         }
 
+        public BinarySerialization(string path)
+        {
+            Path = path;
+        }
+
 
         public void Serialize(DataContext dataContext, string path)
         {
