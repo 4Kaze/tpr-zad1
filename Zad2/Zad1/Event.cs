@@ -4,10 +4,11 @@ using System.Xml.Serialization;
 namespace Classes
 {
     [Serializable]
+    [XmlInclude(typeof(BorrowEvent))]
+    [XmlInclude(typeof(ReturnEvent))]
     [XmlRoot("EventRoot")]
     public abstract class Event : ICloneable
     {
-        [XmlElement("nextId")]
         private static long nextID = 0;
         [XmlIgnore]
         private long code;

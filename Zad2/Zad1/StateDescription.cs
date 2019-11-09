@@ -7,11 +7,10 @@ namespace Classes
     [XmlRoot("DescriptionRoot")]
     public class StateDescription : ICloneable
     {
-        [XmlElement]
         private static long nextID = 0;
-        [XmlElement]
+        [XmlIgnore]
         private long code;
-        [XmlElement]
+        [XmlElement("code")]
         public long Code
         {
             get { return code; }
@@ -22,13 +21,13 @@ namespace Classes
                 code = value;
             }
         }
-        [XmlElement]
+        [XmlElement("book")]
         public Catalog Book { set; get; }
-        [XmlElement]
+        [XmlElement("avaliable")]
         public bool Availabile { set; get; }
-        [XmlElement]
+        [XmlElement("purchaseDate")]
         public DateTimeOffset PurchaseDate { get; }
-        [XmlElement]
+        [XmlElement("location")]
         public string Location { set; get; }
 
         public StateDescription(Catalog book, DateTimeOffset purchaseDate, string location)
@@ -48,6 +47,8 @@ namespace Classes
             PurchaseDate = description.PurchaseDate;
             Location = description.Location;
         }
+
+        public StateDescription() { }
 
         public override string ToString()
         {

@@ -7,11 +7,10 @@ namespace Classes
     [XmlRoot("CatalogRoot")]
     public class Catalog : ICloneable
     {
-        [XmlElement]
         private static long nextID = 0;
-        [XmlElement]
+        [XmlIgnore]
         private long code;
-        [XmlElement]
+        [XmlElement("code")]
         public long Code
         {
             get { return code; }
@@ -22,11 +21,11 @@ namespace Classes
                 code = value;
             }
         }
-        [XmlElement]
+        [XmlElement("title")]
         public string Title { get; set; }
-        [XmlElement]
+        [XmlElement("description")]
         public string Description { get; set; }
-        [XmlElement]
+        [XmlElement("author")]
         public string Author { get; set; }
 
         public Catalog(string title, string description, string author)
@@ -44,6 +43,8 @@ namespace Classes
             Description = catalog.Description;
             Author = catalog.Author;
         }
+
+        public Catalog() { }
 
         public override string ToString()
         {

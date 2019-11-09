@@ -20,6 +20,8 @@ namespace Classes
             Date = happening.Date;
         }
 
+        public ReturnEvent() { }
+
         public override string ToString()
         {
             return "[Return] " + base.ToString();

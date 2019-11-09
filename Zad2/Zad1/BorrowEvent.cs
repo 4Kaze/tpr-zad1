@@ -20,6 +20,8 @@ namespace Classes
             Date = happening.Date;
         }
 
+        public BorrowEvent() { }
+
         public override string ToString()
         {
             return "[Borrow] " + base.ToString();

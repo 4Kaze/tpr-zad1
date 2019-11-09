@@ -20,6 +20,7 @@ namespace SerializationConsole
 
             IFillInterface fillInterface = new FillConstant();
             DataContext dataContext = new DataContext();
+            fillInterface.FillData(dataContext);
 
             if(flag == "a")
             {
