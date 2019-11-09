@@ -52,12 +52,12 @@ namespace UnitTests
             Catalog catalog = new Catalog("Pride and Prejudice", "This is description", author);
             StateDescription stateDescription = new StateDescription(catalog, System.DateTimeOffset.Now, "Here");
             System.DateTimeOffset date = System.DateTimeOffset.Now;
-            Event happening = new Event(person, stateDescription, Event.EventType.Borrow, date);
-            Event happening2 = new Event(person, stateDescription, Event.EventType.Borrow, date);
+            Event happening = new BorrowEvent(person, stateDescription, date);
+            Event happening2 = new BorrowEvent(person, stateDescription, date);
             Assert.AreNotEqual(happening2.Code, happening.Code);
             Assert.AreEqual(person, happening.Causer);
             Assert.AreEqual(stateDescription, happening.BookState);
-            Assert.AreEqual(date, happening.BorrowDate);
+            Assert.AreEqual(date, happening.Date);
         }
 
         [TestMethod]
@@ -99,11 +99,11 @@ namespace UnitTests
         [TestMethod]
         public void EqualsEventMethodTest()
         {
-            Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
-            Event transaction2 = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction2 = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             Assert.AreNotEqual(transaction, transaction2);
 
-            Event transaction3 = new Event(new Person("Stanny", "Peachcock", "Sennelle 24"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction3 = new BorrowEvent(new Person("Stanny", "Peachcock", "Sennelle 24"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             transaction3.Code = transaction.Code;
             Assert.AreEqual(transaction, transaction3);
         }
@@ -147,8 +147,8 @@ namespace UnitTests
             Catalog catalog = new Catalog("Pride and Prejudice", "This is description", author);
             StateDescription stateDescription = new StateDescription(catalog, System.DateTimeOffset.Now, "Here");
             System.DateTimeOffset date = System.DateTimeOffset.Now;
-            Event happening = new Event(person, stateDescription, Event.EventType.Borrow, date);
-            Event happening2 = (Event)happening.Clone();
+            BorrowEvent happening = new BorrowEvent(person, stateDescription, date);
+            BorrowEvent happening2 = (BorrowEvent)happening.Clone();
             Assert.AreEqual(happening, happening2);
             Assert.AreNotSame(happening, happening2);
         }

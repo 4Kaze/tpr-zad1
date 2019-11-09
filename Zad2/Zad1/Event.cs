@@ -5,13 +5,13 @@ namespace Classes
 {
     [Serializable]
     [XmlRoot("EventRoot")]
-    public class Event : ICloneable
+    public abstract class Event : ICloneable
     {
-        [XmlElement]
+        [XmlElement("nextId")]
         private static long nextID = 0;
-        [XmlElement]
+        [XmlIgnore]
         private long code;
-        [XmlElement]
+        [XmlElement("code")]
         public long Code
         {
             get { return code; }
@@ -22,46 +22,29 @@ namespace Classes
                 code = value;
             }
         }
-        [XmlElement]
-        public Person Causer { get; }
-        [XmlElement]
-        public StateDescription BookState { get; }
-        [XmlElement]
-        public DateTimeOffset BorrowDate { get; }
-        [XmlElement]
-        public DateTimeOffset ReturnDate { get; }
-        [XmlElement]
-        public EventType Type { get; }
-        public enum EventType { Borrow, Return };
+        [XmlElement("causer")]
+        public Person Causer { get; set; }
+        [XmlElement("book")]
+        public StateDescription BookState { get; set; }
+        [XmlElement("date")]
+        public DateTimeOffset Date { get; set; }
 
-        public Event(Person causer, StateDescription bookState, EventType type, DateTimeOffset date)
+        public Event(Person causer, StateDescription bookState, DateTimeOffset date)
         {
             Code = getNextID();
             Causer = causer;
-            Type = type;
             BookState = bookState;
-
-            if(type == EventType.Borrow)
-            {
-                BorrowDate = date;
-            } else
-            {
-                BookState = bookState;
-            }
+            Date = date;
         }
 
-        public Event(Event hapenning)
+        public Event()
         {
-            Code = hapenning.Code;
-            Causer = hapenning.Causer;
-            BookState = hapenning.BookState;
-            BorrowDate = hapenning.BorrowDate;
-            ReturnDate = hapenning.ReturnDate;
+
         }
 
         public override string ToString()
         {
-            return "Event id " + this.Code + " causer: " + this.Causer + ", book state" + this.BookState + ", borrow date: " + this.BorrowDate + ".";
+            return "Event id " + this.Code + " causer: " + this.Causer + ", book state" + this.BookState + ", date: " + this.Date + ".";
         }
 
         public override bool Equals(Object obj)
@@ -85,7 +68,7 @@ namespace Classes
 
         public object Clone()
         {
-            return new Event(this);
+            throw new NotImplementedException();
         }
     }
 }

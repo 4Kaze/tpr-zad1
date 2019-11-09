@@ -60,9 +60,14 @@ namespace UnitTests
 
         public Event CreateEvent()
         {
-            Array values = Enum.GetValues(typeof(Event.EventType));
-            Event.EventType randomType = (Event.EventType)values.GetValue(random.Next(values.Length));
-            return new Event(CreatePerson(), CreateStateDescription(), randomType, getRandomDate());
+            if(random.Next(2) == 1)
+            {
+                return new BorrowEvent(CreatePerson(), CreateStateDescription(), getRandomDate());
+            } else
+            {
+                return new ReturnEvent(CreatePerson(), CreateStateDescription(), getRandomDate());
+            }
+            
         }
 
 
@@ -73,9 +78,9 @@ namespace UnitTests
 
         private DateTimeOffset getRandomDate()
         {
-            DateTimeOffset start = DateTimeOffset.ParseExact("01/01/1900", "dd/MM/yyyy", null);
-            DateTimeOffset end = DateTimeOffset.Now;
-            start.AddMinutes(random.Next(0, end.Subtract(start).Minutes - 1));
+            DateTime start = DateTime.ParseExact("01/01/1900", "dd/MM/yyyy", null);
+            DateTime end = DateTime.Now;
+            start.AddMinutes(random.Next((end - start).Minutes));
             return start;
         }
 

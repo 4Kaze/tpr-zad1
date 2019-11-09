@@ -20,7 +20,7 @@ namespace Classes
             if (!state.Availabile) throw new BookUnavailableException(state);
 
             state.Availabile = false;
-            repository.AddTransaction(new Event(person, state, Event.EventType.Borrow, DateTimeOffset.Now));
+            repository.AddTransaction(new BorrowEvent(person, state, DateTimeOffset.Now));
         }
 
         public void ReturnBook(long bookStateCode)
@@ -31,7 +31,7 @@ namespace Classes
 
             Person person = GetPersonByBorrowedBook(state);
             state.Availabile = true;
-            repository.AddTransaction(new Event(person, state, Event.EventType.Return, DateTimeOffset.Now));
+            repository.AddTransaction(new ReturnEvent(person, state, DateTimeOffset.Now));
         }
 
         // Add

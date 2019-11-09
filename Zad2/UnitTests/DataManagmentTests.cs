@@ -231,7 +231,7 @@ namespace UnitTests
         public void RepositoryTransactionEnumeratorTest()
         {
             DataRepository repository = new DataRepository();
-            Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"),  System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             repository.AddTransaction(transaction);
 
             int count = 0;
@@ -239,7 +239,7 @@ namespace UnitTests
             while (enumerator.MoveNext()) count++;
             Assert.AreEqual(1, count);
 
-            Event transaction2 = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction2 = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"),  System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             repository.AddTransaction(transaction2);
 
             count = 0;
@@ -252,7 +252,7 @@ namespace UnitTests
         public void RespositoryTransactionADDTest()
         {
             DataRepository repository = new DataRepository();
-            Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"),  System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             repository.AddTransaction(transaction);
             Assert.AreEqual(transaction, repository.GetTransactionByCode(transaction.Code));
 
@@ -270,10 +270,10 @@ namespace UnitTests
         public void RepositoryTransactionUPDATETest()
         {
             DataRepository repository = new DataRepository();
-            Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"),  System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             repository.AddTransaction(transaction);
 
-            Event transaction2 = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction2 = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"),  System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             transaction2.Code = transaction.Code;
             repository.UpdateTransaction(transaction2);
 
@@ -284,7 +284,7 @@ namespace UnitTests
         public void RepositoryTransactionDELTETest()
         {
             DataRepository repository = new DataRepository();
-            Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
+            Event transaction = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"),  System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null));
             repository.AddTransaction(transaction);
             repository.DeleteTransaction(transaction);
 
@@ -561,7 +561,7 @@ namespace UnitTests
 
             for (int i = 0; i < 100; i++)
             {
-                Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null).AddHours(i));
+                Event transaction = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"),  System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null).AddHours(i));
                 transactions.Add(transaction);
                 dr.AddTransaction(transaction);
             }
@@ -585,7 +585,7 @@ namespace UnitTests
 
             for (int i = 0; i < 100; i++)
             {
-                Event transaction = new Event(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"), Event.EventType.Borrow, System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null).AddHours(i));
+                Event transaction = new BorrowEvent(new Person("Stan", "Peacock", "Michelles 42"), new StateDescription(new Catalog("Pride and Prejudice", "This is description", "Jane Austen"), System.DateTimeOffset.ParseExact("28/01/2019", "dd/MM/yyyy", null), "here"),  System.DateTimeOffset.ParseExact("28/01/2019 21:37", "dd/MM/yyyy HH:mm", null).AddHours(i));
                 if (i % 9 == 0) transactionsToRemove.Add(transaction);
                 dr.AddTransaction(transaction);
             }

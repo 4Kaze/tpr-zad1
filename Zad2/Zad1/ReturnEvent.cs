@@ -1,0 +1,33 @@
+﻿using System;
+using System.Xml.Serialization;
+
+namespace Classes
+{
+    [Serializable]
+    [XmlRoot("Return")]
+    public class ReturnEvent : Event
+    {
+        public ReturnEvent(Person causer, StateDescription bookState, DateTimeOffset date) : base(causer, bookState, date)
+        {
+
+        }
+
+        public ReturnEvent(ReturnEvent happening)
+        {
+            Code = happening.Code;
+            Causer = happening.Causer;
+            BookState = happening.BookState;
+            Date = happening.Date;
+        }
+
+        public override string ToString()
+        {
+            return "[Return] " + base.ToString();
+        }
+
+        public object Clone()
+        {
+            return new ReturnEvent(this);
+        }
+    }
+}
