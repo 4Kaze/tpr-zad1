@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -10,12 +11,16 @@ namespace Classes
     public class DataContext
     {
         [XmlArray("Clients")]
+//       [JsonProperty(PropertyName = "Clients")]
         public List<Person> Clients;
         [XmlElement("Books")]
+//        [JsonProperty(PropertyName = "Books")]
         public SerializableCatalogDictionary Books;
         [XmlArray("Transactions")]
+  //      [JsonProperty(PropertyName = "Transactions")]
         public ObservableCollection<Event> Transactions;
         [XmlArray("Descriptions")]
+    //    [JsonProperty(PropertyName = "Descriptions")]
         public List<StateDescription> Descriptions;
 
         public DataContext()

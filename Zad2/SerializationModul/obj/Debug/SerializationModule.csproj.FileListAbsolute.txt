@@ -7,3 +7,14 @@ D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul
 D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModule.csproj.CopyComplete
 D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul.dll
 D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul.pdb
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\SerializationModul.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\SerializationModul.pdb
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\Newtonsoft.Json.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\Zad1.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\Zad1.pdb
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\bin\Debug\Newtonsoft.Json.xml
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModule.csprojAssemblyReference.cache
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModule.csproj.CoreCompileInputs.cache
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModule.csproj.CopyComplete
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul.dll
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationModul\obj\Debug\SerializationModul.pdb

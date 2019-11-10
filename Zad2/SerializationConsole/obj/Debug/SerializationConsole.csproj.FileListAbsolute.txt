@@ -12,7 +12,6 @@ C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\Zad
 C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.csproj.CopyComplete
 C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\Newtonsoft.Json.dll
 C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\bin\Debug\Newtonsoft.Json.xml
-C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.exe.config
 D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationConsole\bin\Debug\SerializationConsole.exe.config
 D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationConsole\bin\Debug\SerializationConsole.exe
 D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationConsole\bin\Debug\SerializationConsole.pdb
@@ -27,3 +26,4 @@ D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationCon
 D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.csproj.CopyComplete
 D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.exe
 D:\Users\jacek\TPR\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.pdb
+C:\Users\btmik\Documents\GitHub\tpr-zad1\Zad2\SerializationConsole\obj\Debug\SerializationConsole.exe.config

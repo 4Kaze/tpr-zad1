@@ -26,7 +26,7 @@ namespace SerializationModul
         public void Serialize(DataContext dataContext)
         {
             XmlSerializer ser = new XmlSerializer(typeof(DataContext));
-            using (Stream writer = File.Open(Path, FileMode.Create))
+            using (Stream writer = File.Open(Path + ".xml", FileMode.Create))
             {
                 ser.Serialize(writer, dataContext);
             }
@@ -37,7 +37,7 @@ namespace SerializationModul
         {
             DataContext obj;
             XmlSerializer ser = new XmlSerializer(typeof(DataContext));
-            using(Stream reader = File.Open(Path, FileMode.Open))
+            using(Stream reader = File.Open(Path + ".xml", FileMode.Open))
             {
                 obj = (DataContext)ser.Deserialize(reader);
             }
