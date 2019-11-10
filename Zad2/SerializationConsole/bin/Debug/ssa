@@ -21,35 +21,33 @@
     </Person>
   </Clients>
   <Books>
-    <ArrayOfKeyValuePairOfInt64Catalog>
-      <KeyValuePairOfInt64Catalog>
-        <Key>1</Key>
-        <Value>
-          <code>0</code>
-          <title>Pride and Prejudice</title>
-          <description>This is description1</description>
-          <author>Jane Austen</author>
-        </Value>
-      </KeyValuePairOfInt64Catalog>
-      <KeyValuePairOfInt64Catalog>
-        <Key>2</Key>
-        <Value>
-          <code>1</code>
-          <title>War and Peace</title>
-          <description>This is description2</description>
-          <author>Lew Tolstoj</author>
-        </Value>
-      </KeyValuePairOfInt64Catalog>
-      <KeyValuePairOfInt64Catalog>
-        <Key>3</Key>
-        <Value>
-          <code>2</code>
-          <title>Metro 2033</title>
-          <description>This is description3</description>
-          <author>Dimitry Glukhovsky</author>
-        </Value>
-      </KeyValuePairOfInt64Catalog>
-    </ArrayOfKeyValuePairOfInt64Catalog>
+    <KeyValuePair>
+      <Key>1</Key>
+      <Value>
+        <code>0</code>
+        <title>Pride and Prejudice</title>
+        <description>This is description1</description>
+        <author>Jane Austen</author>
+      </Value>
+    </KeyValuePair>
+    <KeyValuePair>
+      <Key>2</Key>
+      <Value>
+        <code>1</code>
+        <title>War and Peace</title>
+        <description>This is description2</description>
+        <author>Lew Tolstoj</author>
+      </Value>
+    </KeyValuePair>
+    <KeyValuePair>
+      <Key>3</Key>
+      <Value>
+        <code>2</code>
+        <title>Metro 2033</title>
+        <description>This is description3</description>
+        <author>Dimitry Glukhovsky</author>
+      </Value>
+    </KeyValuePair>
   </Books>
   <Transactions>
     <Event xsi:type="BorrowEvent">
