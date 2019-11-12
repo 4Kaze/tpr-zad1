@@ -31,7 +31,6 @@ namespace Classes
             serializer.Serialize(writer, this.Select(pair => new KeyValuePair(pair.Key, pair.Value)).ToList());
         }
 
-        [Serializable]
         [XmlType("CatalogKeyValuePair")]
         public struct KeyValuePair
         {

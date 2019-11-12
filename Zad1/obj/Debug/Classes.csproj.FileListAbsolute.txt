@@ -1,5 +1,0 @@
-D:\Users\jacek\TPR\tpr-zad1\Zad1\bin\Debug\Zad1.dll
-D:\Users\jacek\TPR\tpr-zad1\Zad1\bin\Debug\Zad1.pdb
-D:\Users\jacek\TPR\tpr-zad1\Zad1\obj\Debug\Classes.csprojAssemblyReference.cache
-D:\Users\jacek\TPR\tpr-zad1\Zad1\obj\Debug\Zad1.dll
-D:\Users\jacek\TPR\tpr-zad1\Zad1\obj\Debug\Zad1.pdb
