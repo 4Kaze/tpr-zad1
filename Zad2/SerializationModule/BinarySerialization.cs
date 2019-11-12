@@ -23,6 +23,7 @@ namespace SerializationModule
         {
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(Path, FileMode.Create, FileAccess.Write, FileShare.None);
+            
             formatter.Serialize(stream, dataContext);
             stream.Close();
         }

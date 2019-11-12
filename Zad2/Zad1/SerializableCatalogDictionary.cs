@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Classes
 {
+    [Serializable]
     public class SerializableCatalogDictionary : Dictionary<long, Catalog>, IXmlSerializable
     {
+        public SerializableCatalogDictionary() { }
+
+        protected SerializableCatalogDictionary(SerializationInfo info, StreamingContext context): base(info, context) { }
+
         public XmlSchema GetSchema()
         {
             return null;
