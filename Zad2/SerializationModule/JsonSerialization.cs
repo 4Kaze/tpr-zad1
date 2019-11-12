@@ -1,18 +1,10 @@
 ﻿using Classes;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-
-
-
-namespace SerializationModul
+namespace SerializationModule
 {
-    public class JsonSerialization
+    public class JsonSerialization: Serializator
     {
         public string Path { get; set; }
         public JsonSerialization()
@@ -26,7 +18,7 @@ namespace SerializationModul
         }
 
 
-        public void Serialize(object obj)
+        public void Serialize(DataContext dataContext)
         {
             var serializer = new JsonSerializer();
 
@@ -34,7 +26,7 @@ namespace SerializationModul
             using (var sw = new StreamWriter(file))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                serializer.Serialize(writer, obj, typeof(DataContext));
+                serializer.Serialize(writer, dataContext, typeof(DataContext));
             }
 
         }

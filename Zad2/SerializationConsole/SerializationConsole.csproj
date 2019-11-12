@@ -55,7 +55,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SerializationModul\SerializationModule.csproj">
+    <ProjectReference Include="..\SerializationModule\SerializationModule.csproj">
       <Project>{afa6e5b8-88f3-44c5-9623-657b9fbb16e2}</Project>
       <Name>SerializationModule</Name>
     </ProjectReference>

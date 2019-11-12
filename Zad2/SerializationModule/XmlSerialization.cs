@@ -1,16 +1,10 @@
 ﻿using Classes;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Serialization;
 
-namespace SerializationModul
+namespace SerializationModule
 {
-    public class XmlSerialization
+    public class XmlSerialization: Serializator
     {
         public string Path { get; set; }
         public XmlSerialization()
@@ -26,7 +20,7 @@ namespace SerializationModul
         public void Serialize(DataContext dataContext)
         {
             XmlSerializer ser = new XmlSerializer(typeof(DataContext));
-            using (Stream writer = File.Open(Path + ".xml", FileMode.Create))
+            using (Stream writer = File.Open(Path, FileMode.Create))
             {
                 ser.Serialize(writer, dataContext);
             }
@@ -37,7 +31,7 @@ namespace SerializationModul
         {
             DataContext obj;
             XmlSerializer ser = new XmlSerializer(typeof(DataContext));
-            using(Stream reader = File.Open(Path + ".xml", FileMode.Open))
+            using(Stream reader = File.Open(Path, FileMode.Open))
             {
                 obj = (DataContext)ser.Deserialize(reader);
             }

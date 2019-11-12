@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classes", "Zad1\Classes.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{65E65592-69F7-4F8E-812B-876A2F747C4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationModule", "SerializationModul\SerializationModule.csproj", "{AFA6E5B8-88F3-44C5-9623-657B9FBB16E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationModule", "SerializationModule\SerializationModule.csproj", "{AFA6E5B8-88F3-44C5-9623-657B9FBB16E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationConsole", "SerializationConsole\SerializationConsole.csproj", "{46E6D621-1E2D-4423-9D41-18138234F862}"
 EndProject

@@ -1,115 +1,152 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SerializationModul;
 using Classes;
+using SerializationModule;
 
 namespace SerializationConsole
 {
     class Program
     {
+        private DataContext dataContext;
+
         static void Main(string[] args)
         {
-            string c = "a";
-            string flag;
+            new Program();
+        }
 
-            Console.WriteLine("insert [a] xml , [b] binary.");
-            flag = Console.ReadLine();
-
+        Program()
+        {
             IFillInterface fillInterface = new FillConstant();
-            DataContext dataContext = new DataContext();
+            dataContext = new DataContext();
             fillInterface.FillData(dataContext);
 
-            if(flag == "a")
+            while(true)
             {
-                do
-                {
-                    Console.WriteLine("insert file name.");
-                    string path = Console.ReadLine();
-                    XmlSerialization xmlSerialization = new XmlSerialization();
-                    xmlSerialization.Path = path;
-                    xmlSerialization.Serialize(dataContext);
-                    Console.WriteLine("[1] by wyczytac liste osob");
-                    Console.Read();
-                    DataContext dataContext1 = xmlSerialization.Deserialize();
-                    if (dataContext.Books.Count == dataContext1.Books.Count)
-                    {
-                        Console.WriteLine(dataContext.Clients[0].ToString());
-                        Console.WriteLine(dataContext1.Clients[0].ToString());
-                    }
-                    else
-                    {
-                        Console.WriteLine("jeblo");
-                    }
+                doMainMenu();
+                Console.WriteLine();
+            }
+        }
 
-                    Console.Read();
-                    c = Console.ReadLine();
-                } while (c != "b");
+        private void doSerializationMenu(Format format)
+        {
+            Serializator serializator;
+            switch (format)
+            {
+                case Format.XML:
+                    serializator = new XmlSerialization();
+                    break;
+                case Format.JSON:
+                    serializator = new JsonSerialization();
+                    break;
+                case Format.BINARY:
+                    serializator = new BinarySerialization();
+                    break;
+                default:
+                    throw new ArgumentException("Unknown serialization format.");
             }
 
-            if(flag == "b")
+            Console.WriteLine();
+            Console.Write("Enter filename: ");
+            serializator.Path = Console.ReadLine();
+
+            Console.WriteLine("Choose mode:");
+            Console.WriteLine("[1] - Serialization\n[2] - Deserialization");
+
+            int mode = -1;
+            while (mode == -1)
             {
-                do
+                char choice = Console.ReadKey().KeyChar;
+                switch(choice)
                 {
-                    fillInterface.FillData(dataContext);
-
-                    Console.WriteLine("insert file name.");
-                    string path = Console.ReadLine();
-                    BinarySerialization binarySerialization = new BinarySerialization();
-                    binarySerialization.Path = path;
-                    binarySerialization.Serialize(dataContext);
-
-                    Console.WriteLine("[1] by wyczytac liste osob");
-                    Console.Read();
-                    DataContext dataContext1 = binarySerialization.Deserialize();
-
-                    if (dataContext.Books.Count == dataContext1.Books.Count)
-                    {
-                        Console.WriteLine(dataContext.Clients[0].ToString());
-                        Console.WriteLine(dataContext1.Clients[0].ToString());
-                    }
-                    else
-                    {
-                        Console.WriteLine("jeblo");
-                    }
-
-
-                    Console.Read();
-                    c = Console.ReadLine();
-                } while (c != "b");
+                    case '1':
+                        mode = 1;
+                        break;
+                    case '2':
+                        mode = 2;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        break;
+                }
             }
 
-            if(flag == "c")
+            DataContext deserializedContext = null;
+
+            if(mode == 1)
             {
-                do
-                {
-                    Console.WriteLine("insert file name.");
-                    string path = Console.ReadLine();
-                    JsonSerialization jsonSerialization = new JsonSerialization();
-                    jsonSerialization.Path = path;
-                    jsonSerialization.Serialize(dataContext);
-
-                    Console.WriteLine("[1] by wyczytac liste osob");
-                    Console.Read();
-                    DataContext dataContext1 = (DataContext)jsonSerialization.Deserialize();
-
-                    if (dataContext.Books.Count == dataContext1.Books.Count)
-                    {
-                        Console.WriteLine(dataContext.Clients[0].ToString());
-                        Console.WriteLine(dataContext1.Clients[0].ToString());
-                    }
-                    else
-                    {
-                        Console.WriteLine("jeblo");
-                    }
-
-
-                    Console.Read();
-                    c = Console.ReadLine();
-                } while (c != "b");
+                serializator.Serialize(dataContext);
+            } else
+            {
+                deserializedContext = serializator.Deserialize();
             }
+
+            Console.WriteLine();
+/*            Console.WriteLine("Would you like to test? [y/n]");
+
+            bool run = true;
+            while (run)
+            {
+                char choice = Console.ReadKey().KeyChar;
+                switch (choice)
+                {
+                    case 'y':
+                        run = false;
+                        break;
+                    case 'n':
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        break;
+                }
+            }*/
+
+            if(mode == 1)
+            {
+                deserializedContext = serializator.Deserialize();
+            }
+
+            foreach (Event e in deserializedContext.Transactions)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private void doMainMenu()
+        {
+            Console.WriteLine("SERIALIZATION");
+            Console.WriteLine("Choose a format you'd like to use:");
+            Console.WriteLine("[1] - XML\n[2] - JSON\n[3] - binary");
+            Console.Write("Choice: ");
+
+            bool run = true;
+
+            while (run)
+            {
+                char choice = Console.ReadKey().KeyChar;
+                switch (choice)
+                {
+                    case '1':
+                        run = false;
+                        doSerializationMenu(Format.XML);
+                        break;
+                    case '2':
+                        run = false;
+                        doSerializationMenu(Format.JSON);
+                        break;
+                    case '3':
+                        run = false;
+                        doSerializationMenu(Format.BINARY);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice.");
+                        break;
+
+                }
+            }
+        }
+
+        enum Format
+        {
+            XML, JSON, BINARY
         }
     }
 }
