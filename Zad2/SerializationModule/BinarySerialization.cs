@@ -37,5 +37,23 @@ namespace SerializationModule
             return obj;
         }
 
+        public void CommonSerialize(Object obj)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(Path, FileMode.Create, FileAccess.Write, FileShare.None);
+
+            formatter.Serialize(stream, obj);
+            stream.Close();
+        }
+
+        public Object CommonDeserialize()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(Path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            Object obj = formatter.Deserialize(stream);
+            stream.Close();
+            return obj;
+        }
+
     }
 }

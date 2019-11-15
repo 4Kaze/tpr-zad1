@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29409.12
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classes", "Zad1\Classes.csproj", "{BBF3FDE2-87A3-4392-8FB3-8CA91EB7F056}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationModule", "SerializationModule\SerializationModule.csproj", "{AFA6E5B8-88F3-44C5-9623-657B9FBB16E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationConsole", "SerializationConsole\SerializationConsole.csproj", "{46E6D621-1E2D-4423-9D41-18138234F862}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsOfSerializations", "TestsOfSerializations\TestsOfSerializations.csproj", "{3C332270-0F36-4FC9-BB30-8BBC8B0AEAC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{46E6D621-1E2D-4423-9D41-18138234F862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46E6D621-1E2D-4423-9D41-18138234F862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46E6D621-1E2D-4423-9D41-18138234F862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C332270-0F36-4FC9-BB30-8BBC8B0AEAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C332270-0F36-4FC9-BB30-8BBC8B0AEAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C332270-0F36-4FC9-BB30-8BBC8B0AEAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C332270-0F36-4FC9-BB30-8BBC8B0AEAC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
