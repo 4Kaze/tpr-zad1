@@ -40,6 +40,9 @@ namespace SerializationConsole
                 case Format.BINARY:
                     serializator = new BinarySerialization();
                     break;
+                case Format.OWN:
+                    serializator = new OwnSerialization();
+                    break;
                 default:
                     throw new ArgumentException("Unknown serialization format.");
             }
@@ -80,26 +83,26 @@ namespace SerializationConsole
             }
 
             Console.WriteLine();
-/*            Console.WriteLine("Would you like to test? [y/n]");
+            /*            Console.WriteLine("Would you like to test? [y/n]");
 
-            bool run = true;
-            while (run)
-            {
-                char choice = Console.ReadKey().KeyChar;
-                switch (choice)
-                {
-                    case 'y':
-                        run = false;
-                        break;
-                    case 'n':
-                        return;
-                    default:
-                        Console.WriteLine("Invalid choice.");
-                        break;
-                }
-            }*/
+                        bool run = true;
+                        while (run)
+                        {
+                            char choice = Console.ReadKey().KeyChar;
+                            switch (choice)
+                            {
+                                case 'y':
+                                    run = false;
+                                    break;
+                                case 'n':
+                                    return;
+                                default:
+                                    Console.WriteLine("Invalid choice.");
+                                    break;
+                            }
+                        }*/
 
-            if(mode == 1)
+            if (mode == 1)
             {
                 deserializedContext = serializator.Deserialize();
             }
@@ -114,7 +117,7 @@ namespace SerializationConsole
         {
             Console.WriteLine("SERIALIZATION");
             Console.WriteLine("Choose a format you'd like to use:");
-            Console.WriteLine("[1] - XML\n[2] - JSON\n[3] - binary");
+            Console.WriteLine("[1] - XML\n[2] - JSON\n[3] - binary\n[4] - own");
             Console.Write("Choice: ");
 
             bool run = true;
@@ -136,6 +139,10 @@ namespace SerializationConsole
                         run = false;
                         doSerializationMenu(Format.BINARY);
                         break;
+                    case '4':
+                        run = false;
+                        doSerializationMenu(Format.OWN);
+                        break;
                     default:
                         Console.WriteLine("Invalid choice.");
                         break;
@@ -146,7 +153,7 @@ namespace SerializationConsole
 
         enum Format
         {
-            XML, JSON, BINARY
+            XML, JSON, BINARY, OWN
         }
     }
 }

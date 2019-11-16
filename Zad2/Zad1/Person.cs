@@ -1,12 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace Classes
 {
     [Serializable]
     [XmlRoot("PersonRoot")]
-    public class Person : ICloneable
+    public class Person : ICloneable, IOwnSerialization
     {
         private static long nextID = 0;
         [XmlIgnore]
@@ -76,6 +78,26 @@ namespace Classes
         public object Clone()
         {
             return new Person(this);
+        }
+
+        public string Serialization(ObjectIDGenerator idGenerator)
+        {
+            string serializedData = "";
+            serializedData += this.GetType().FullName + ";";
+            serializedData += idGenerator.GetId(this, out bool firstTime).ToString() + ";";
+            serializedData += this.Code.ToString() + ";";
+            serializedData += this.Name.ToString() + ";";
+            serializedData += this.Surname.ToString() + ";";
+            serializedData += this.Adress + ";";
+            return serializedData;
+        }
+
+        public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects)
+        {
+            this.Code = long.Parse(data[2]);
+            this.Name = data[3];
+            this.Surname = data[4];
+            this.Adress = data[5];
         }
     }
 }

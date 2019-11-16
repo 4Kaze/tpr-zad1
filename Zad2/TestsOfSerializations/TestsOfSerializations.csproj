@@ -49,6 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FillConstant.cs" />
+    <Compile Include="OwnSerializationTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,6 +61,10 @@
     <ProjectReference Include="..\SerializationModule\SerializationModule.csproj">
       <Project>{afa6e5b8-88f3-44c5-9623-657b9fbb16e2}</Project>
       <Name>SerializationModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zad1\Classes.csproj">
+      <Project>{bbf3fde2-87a3-4392-8fb3-8ca91eb7f056}</Project>
+      <Name>Classes</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

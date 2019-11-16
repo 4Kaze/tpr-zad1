@@ -54,6 +54,7 @@
     <Compile Include="DataService.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="FillInterface.cs" />
+    <Compile Include="IOwnSerialization.cs" />
     <Compile Include="ItemAlreadyExistsException.cs" />
     <Compile Include="ItemDoesNotExistException.cs" />
     <Compile Include="Person.cs" />

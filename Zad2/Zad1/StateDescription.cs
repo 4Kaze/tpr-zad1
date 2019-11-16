@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace Classes
 {
     [Serializable]
     [XmlRoot("DescriptionRoot")]
-    public class StateDescription : ICloneable
+    public class StateDescription : ICloneable, IOwnSerialization
     {
         private static long nextID = 0;
         [XmlIgnore]
@@ -26,7 +28,7 @@ namespace Classes
         [XmlElement("avaliable")]
         public bool Availabile { set; get; }
         [XmlElement("purchaseDate")]
-        public DateTimeOffset PurchaseDate { get; }
+        public DateTimeOffset PurchaseDate { get; set; }
         [XmlElement("location")]
         public string Location { set; get; }
 
@@ -77,6 +79,28 @@ namespace Classes
         public object Clone()
         {
             return new StateDescription(this);
+        }
+        
+        public string Serialization(ObjectIDGenerator idGenerator)
+        {
+            string serializedData = "";
+            serializedData += this.GetType().FullName + ";";
+            serializedData += idGenerator.GetId(this, out bool firstTime).ToString() + ";";
+            serializedData += this.Code.ToString() + ";";
+            serializedData += idGenerator.GetId(this.Book, out firstTime).ToString() + ";";
+            serializedData += this.Availabile.ToString() + ";";
+            serializedData += this.PurchaseDate.ToString() + ";";
+            serializedData += this.Location + ";";
+            return serializedData;
+        }
+
+        public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects)
+        {
+            this.Code = long.Parse(data[2]);
+            this.Book = (Catalog)deserializedObjects[long.Parse(data[3])]; 
+            this.Availabile = bool.Parse(data[4]);
+            this.PurchaseDate = DateTimeOffset.Parse(data[5]);
+            this.Location = data[6];
         }
     }
 }

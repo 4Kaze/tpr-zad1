@@ -5,7 +5,7 @@ using SerializationModule;
 namespace TestsOfSerializations
 {
     [TestClass]
-    public class UnitTest1
+    public class RecurrentSerializationDeserializationBinaryTest
     {
         [TestMethod]
         public void TestMethod1()

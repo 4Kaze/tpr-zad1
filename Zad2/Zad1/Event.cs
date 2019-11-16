@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace Classes
@@ -7,7 +9,7 @@ namespace Classes
     [XmlInclude(typeof(BorrowEvent))]
     [XmlInclude(typeof(ReturnEvent))]
     [XmlRoot("EventRoot")]
-    public abstract class Event : ICloneable
+    public abstract class Event : ICloneable, IOwnSerialization
     {
         private static long nextID = 0;
         [XmlIgnore]
@@ -70,6 +72,26 @@ namespace Classes
         public object Clone()
         {
             throw new NotImplementedException();
+        }
+
+        public string Serialization(ObjectIDGenerator idGenerator)
+        {
+            string serializedData = "";
+            serializedData += this.GetType().FullName + ";";
+            serializedData += idGenerator.GetId(this, out bool firstTime).ToString() + ";";
+            serializedData += this.Code.ToString() + ";";
+            serializedData += idGenerator.GetId(this.Causer, out firstTime).ToString() + ";";
+            serializedData += idGenerator.GetId(this.BookState, out firstTime).ToString() + ";";
+            serializedData += this.Date + ";";
+            return serializedData;
+        }
+
+        public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects)
+        {
+            this.Code = long.Parse(data[2]);
+            this.Causer = (Person)deserializedObjects[long.Parse(data[3])];
+            this.BookState = (StateDescription)deserializedObjects[long.Parse(data[4])];
+            this.Date = DateTimeOffset.Parse(data[5]);
         }
     }
 }
