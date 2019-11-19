@@ -74,7 +74,7 @@ namespace Classes
             throw new NotImplementedException();
         }
 
-        public virtual string Serialization(ObjectIDGenerator idGenerator)
+        public string Serialization(ObjectIDGenerator idGenerator)
         {
             string serializedData = "";
             serializedData += this.GetType().FullName + ";";

@@ -5,14 +5,19 @@ using System.Runtime.Serialization;
 
 namespace Classes.Serialization
 {
-    public class OwnSerialization : ISerializator
+    public class OwnSerialization : Serializator
     {
         private Dictionary<long, Object> DeserializedObjects { get; set; }
         public List<string[]> DeserializedData { get; set; }
         private string SerializedData { get; set; }
+<<<<<<< HEAD:Zad2/Zad1/Serialization/OwnSerialization.cs
         public string DeserializedString { get; set; }
 
         private Char separatorChar = ';';
+=======
+        public string Path { get; set; }
+        
+>>>>>>> parent of 19039b5... serialization tests:Zad2/SerializationModule/OwnSerialization.cs
 
         public OwnSerialization()
         {
@@ -21,13 +26,12 @@ namespace Classes.Serialization
         }
 
 
-        public DataContext Deserialize(Stream stream)
+        public DataContext Deserialize()
         {
             DataContext answerContext = new DataContext();
-            StreamReader sr = new StreamReader(stream);
-            string line;
-            while ((line = sr.ReadLine()) != null)
+            using (StreamReader sr = new StreamReader(Path + ".txt"))
             {
+<<<<<<< HEAD:Zad2/Zad1/Serialization/OwnSerialization.cs
                 DeserializedString = "";
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -37,18 +41,56 @@ namespace Classes.Serialization
                     DeserializedData.Add(line.Split(spearator));
                 }
             }
+=======
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    String[] spearator = { ";" };
+                    Int32 count = 7;
+                    DeserializedData.Add(line.Split(spearator, count, StringSplitOptions.RemoveEmptyEntries));
+                }
+>>>>>>> parent of 19039b5... serialization tests:Zad2/SerializationModule/OwnSerialization.cs
 
+            }
             DeserializationDecision(answerContext);
             return answerContext;
         }
 
-        public void Serialize(DataContext dataContext, Stream stream)
+        public void Serialize(DataContext dataContext)
         {
             ObjectIDGenerator idGenerator = new ObjectIDGenerator();
+<<<<<<< HEAD:Zad2/Zad1/Serialization/OwnSerialization.cs
             SerializedData = PrepareSerialization(dataContext, idGenerator);
             StreamWriter outputFile = new StreamWriter(stream);
             outputFile.WriteLine(SerializedData);
             outputFile.Flush();
+=======
+            SerializedData = "";
+            foreach(Person person in dataContext.Clients)
+            {
+                SerializedData += person.Serialization(idGenerator) + "\n";
+            }
+
+            foreach(KeyValuePair<long, Catalog> book in dataContext.Books)
+            {
+                SerializedData += book.Value.Serialization(idGenerator) + "\n";
+            }
+
+            foreach (StateDescription description in dataContext.Descriptions)
+            {
+                SerializedData += description.Serialization(idGenerator) + "\n";
+            }
+
+            foreach (Event transaction in dataContext.Transactions)
+            {
+                SerializedData += transaction.Serialization(idGenerator) + "\n";
+            }
+
+            using (StreamWriter outputFile = new StreamWriter(Path + ".txt"))
+            {
+                    outputFile.WriteLine(SerializedData);
+            }
+>>>>>>> parent of 19039b5... serialization tests:Zad2/SerializationModule/OwnSerialization.cs
         }
 
 
@@ -76,7 +118,7 @@ namespace Classes.Serialization
                     case "Classes.Catalog":
                         Catalog catalog = new Catalog();
                         catalog.Deserialization(data, this.DeserializedObjects);
-                        dataContext.Books.Add(long.Parse(data[data.Length-2]), catalog);
+                        dataContext.Books.Add(catalog.Code, catalog);
                         this.DeserializedObjects.Add(long.Parse(data[1]), catalog);
                         break;
                     case "Classes.BorrowEvent":

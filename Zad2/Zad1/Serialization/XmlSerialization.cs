@@ -3,25 +3,37 @@ using System.Xml.Serialization;
 
 namespace Classes.Serialization
 {
-    public class XmlSerialization: ISerializator
+    public class XmlSerialization: Serializator
     {
+        public string Path { get; set; }
         public XmlSerialization()
         {
 
         }
         
-        public void Serialize(DataContext dataContext, Stream stream)
+        public XmlSerialization(string path)
+        {
+            Path = path;
+        }
+
+        public void Serialize(DataContext dataContext)
         {
             XmlSerializer ser = new XmlSerializer(typeof(DataContext));
-            ser.Serialize(stream, dataContext);
+            using (Stream writer = File.Open(Path, FileMode.Create))
+            {
+                ser.Serialize(writer, dataContext);
+            }
         }
 
 
-        public DataContext Deserialize(Stream stream)
+        public DataContext Deserialize()
         {
             DataContext obj;
             XmlSerializer ser = new XmlSerializer(typeof(DataContext));
-            obj = (DataContext)ser.Deserialize(stream);
+            using(Stream reader = File.Open(Path, FileMode.Open))
+            {
+                obj = (DataContext)ser.Deserialize(reader);
+            }
             return obj;
         }
     }
