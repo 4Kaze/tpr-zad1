@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using Classes;
 
-namespace SerializationModule
+namespace Classes.Serialization
 {
     public class OwnSerialization : Serializator
     {
         private Dictionary<long, Object> DeserializedObjects { get; set; }
         public List<string[]> DeserializedData { get; set; }
         private string SerializedData { get; set; }
+        public string DeserializedString { get; set; }
         public string Path { get; set; }
         
 
@@ -29,9 +26,11 @@ namespace SerializationModule
             DataContext answerContext = new DataContext();
             using (StreamReader sr = new StreamReader(Path + ".txt"))
             {
+                DeserializedString = "";
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
+                    DeserializedString += line;
                     String[] spearator = { ";" };
                     Int32 count = 7;
                     DeserializedData.Add(line.Split(spearator, count, StringSplitOptions.RemoveEmptyEntries));
@@ -45,30 +44,11 @@ namespace SerializationModule
         public void Serialize(DataContext dataContext)
         {
             ObjectIDGenerator idGenerator = new ObjectIDGenerator();
-            SerializedData = "";
-            foreach(Person person in dataContext.Clients)
-            {
-                SerializedData += person.Serialization(idGenerator) + "\n";
-            }
-
-            foreach(KeyValuePair<long, Catalog> book in dataContext.Books)
-            {
-                SerializedData += book.Value.Serialization(idGenerator) + "\n";
-            }
-
-            foreach (StateDescription description in dataContext.Descriptions)
-            {
-                SerializedData += description.Serialization(idGenerator) + "\n";
-            }
-
-            foreach (Event transaction in dataContext.Transactions)
-            {
-                SerializedData += transaction.Serialization(idGenerator) + "\n";
-            }
+            SerializedData = PrepareSerialization(dataContext, idGenerator);
 
             using (StreamWriter outputFile = new StreamWriter(Path + ".txt"))
             {
-                    outputFile.WriteLine(SerializedData);
+                outputFile.WriteLine(SerializedData);
             }
         }
 
@@ -82,10 +62,9 @@ namespace SerializationModule
                 {
                     dataType = data[0];
                 }
-                catch (System.IndexOutOfRangeException e)  // CS0168
+                catch (System.IndexOutOfRangeException exception)
                 {
                     dataType = "";
-                    Console.WriteLine("oststni element");
                 }
                 switch (dataType)
                 {
@@ -123,6 +102,32 @@ namespace SerializationModule
                         break;
                 }
             }
+        }
+
+
+        public string PrepareSerialization(DataContext dataContext, ObjectIDGenerator idGenerator)
+        {
+            String stringStream = "";
+            foreach (Person person in dataContext.Clients)
+            {
+                stringStream += person.Serialization(idGenerator) + "\n";
+            }
+
+            foreach (KeyValuePair<long, Catalog> book in dataContext.Books)
+            {
+                stringStream += book.Value.Serialization(idGenerator) + "\n";
+            }
+
+            foreach (StateDescription description in dataContext.Descriptions)
+            {
+                stringStream += description.Serialization(idGenerator) + "\n";
+            }
+
+            foreach (Event transaction in dataContext.Transactions)
+            {
+                stringStream += transaction.Serialization(idGenerator) + "\n";
+            }
+            return stringStream;
         }
     }
 }

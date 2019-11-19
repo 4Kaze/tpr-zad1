@@ -1,6 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SerializationModule;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Classes.Serialization;
 
 namespace TestsOfSerializations
 {
@@ -8,7 +7,7 @@ namespace TestsOfSerializations
     public class RecurrentSerializationDeserializationBinaryTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ReccurentSerializationBinary()
         {
             TestA testA = new TestA();
             TestB testB = new TestB();
@@ -23,6 +22,7 @@ namespace TestsOfSerializations
             TestA testAtest = (TestA)binarySerialization.CommonDeserialize();
 
 
+            Assert.AreEqual(testA, testAtest);
             Assert.AreEqual(testA.TestB, testAtest.TestB);
             Assert.AreEqual(testAtest.TestB.TestC.TestA.TestB.TestC.TestA.TestB.TestC.Id, testA.TestB.TestC.TestA.TestB.TestC.TestA.TestB.TestC.Id);
 

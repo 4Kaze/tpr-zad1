@@ -1,6 +1,6 @@
 ﻿using System;
 using Classes;
-using SerializationModule;
+using Classes.Serialization;
 
 namespace SerializationConsole
 {
@@ -15,7 +15,7 @@ namespace SerializationConsole
 
         Program()
         {
-            IFillInterface fillInterface = new FillConstant();
+            IFillInterface fillInterface = new FillConsole();
             dataContext = new DataContext();
             fillInterface.FillData(dataContext);
 

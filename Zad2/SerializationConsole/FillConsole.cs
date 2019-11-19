@@ -1,8 +1,8 @@
 ﻿using Classes;
 
-namespace TestsOfSerializations
+namespace SerializationConsole
 {
-    public class FillConstant : IFillInterface
+    public class FillConsole : IFillInterface
     {
         public void FillData(DataContext dataContext)
         {
@@ -37,8 +37,8 @@ namespace TestsOfSerializations
             //Event Data Fill
             System.DateTimeOffset date1 = System.DateTimeOffset.Now;
             Event happening1 = new BorrowEvent(person1, stateDescription1, date1);
-            Event happening2 = new BorrowEvent(person2, stateDescription1, date1);
-            Event happening3 = new ReturnEvent(person1, stateDescription1, System.DateTimeOffset.Now);
+            Event happening2 = new ReturnEvent(person2, stateDescription1, date1);
+            Event happening3 = new BorrowEvent(person3, stateDescription1, date1);
 
             dataContext.Transactions.Add(happening1);
             dataContext.Transactions.Add(happening2);

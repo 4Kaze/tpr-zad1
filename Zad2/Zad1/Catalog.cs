@@ -93,7 +93,7 @@ namespace Classes
         {
             this.Code = long.Parse(data[2]);
             this.Title = data[3];
-            this.Description = data[4];
+            this.Description = data[4]; 
             this.Author = data[5];
         }
     }

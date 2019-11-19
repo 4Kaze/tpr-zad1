@@ -5,37 +5,34 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SerializationModule
+namespace TestsOfSerializations
 {
     [Serializable]
-    [DataContract(IsReference = true)]
-    public class TestB
+    public class TestA
     {
         private static int nextId = 0;
-
-
-        [DataMember]
-        public TestC TestC { get; set; }
-
-        [DataMember]
+        
+        public TestB TestB { get; set; }
+        
         public int Id { get; set; }
 
-        public TestB()
+        public TestA()
         {
-            TestC = null;
+            Id = GetNextId();
+            TestB = null;
         }
 
 
-        public TestB(TestC test)
+        public TestA(TestB test)
         {
-            TestC = test;
+            TestB = test;
         }
 
 
         public override bool Equals(Object obj)
         {
-            if (!(obj is TestB)) return false;
-            return ((TestB)obj).Id == Id && ((TestB)obj).TestC.Id == TestC.Id && ((TestB)obj).TestC.TestA.Id == TestC.TestA.Id;
+            if (!(obj is TestA)) return false;
+            return ((TestA)obj).Id == Id && ((TestA)obj).TestB.Id == TestB.Id && ((TestA)obj).TestB.TestC.Id == TestB.TestC.Id;
         }
 
 

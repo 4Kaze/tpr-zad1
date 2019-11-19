@@ -2,9 +2,8 @@
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using Classes;
 
-namespace SerializationModule
+namespace Classes.Serialization
 {
     public class BinarySerialization: Serializator
     {

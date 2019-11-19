@@ -1,8 +1,7 @@
-﻿using Classes;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.IO;
 
-namespace SerializationModule
+namespace Classes.Serialization
 {
     public class JsonSerialization: Serializator
     {

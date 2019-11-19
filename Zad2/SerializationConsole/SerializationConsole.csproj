@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FillConstant.cs" />
+    <Compile Include="FillConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,10 +55,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SerializationModule\SerializationModule.csproj">
-      <Project>{afa6e5b8-88f3-44c5-9623-657b9fbb16e2}</Project>
-      <Name>SerializationModule</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zad1\Classes.csproj">
       <Project>{bbf3fde2-87a3-4392-8fb3-8ca91eb7f056}</Project>
       <Name>Classes</Name>

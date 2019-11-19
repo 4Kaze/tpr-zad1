@@ -1,6 +1,5 @@
-﻿using Classes;
-
-namespace SerializationModule
+﻿
+namespace Classes.Serialization
 {
     public interface Serializator
     {
