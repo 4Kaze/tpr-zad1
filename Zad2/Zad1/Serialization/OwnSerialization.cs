@@ -5,14 +5,14 @@ using System.Runtime.Serialization;
 
 namespace Classes.Serialization
 {
-    public class OwnSerialization : Serializator
+    public class OwnSerialization : ISerializator
     {
         private Dictionary<long, Object> DeserializedObjects { get; set; }
         public List<string[]> DeserializedData { get; set; }
         private string SerializedData { get; set; }
         public string DeserializedString { get; set; }
-        public string Path { get; set; }
-        
+
+        private Char separatorChar = ';';
 
         public OwnSerialization()
         {
@@ -21,35 +21,34 @@ namespace Classes.Serialization
         }
 
 
-        public DataContext Deserialize()
+        public DataContext Deserialize(Stream stream)
         {
             DataContext answerContext = new DataContext();
-            using (StreamReader sr = new StreamReader(Path + ".txt"))
+            StreamReader sr = new StreamReader(stream);
+            string line;
+            while ((line = sr.ReadLine()) != null)
             {
                 DeserializedString = "";
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     DeserializedString += line;
-                    String[] spearator = { ";" };
-                    Int32 count = 7;
-                    DeserializedData.Add(line.Split(spearator, count, StringSplitOptions.RemoveEmptyEntries));
+                    Char[] spearator = { separatorChar };
+                    DeserializedData.Add(line.Split(spearator));
                 }
-
             }
+
             DeserializationDecision(answerContext);
             return answerContext;
         }
 
-        public void Serialize(DataContext dataContext)
+        public void Serialize(DataContext dataContext, Stream stream)
         {
             ObjectIDGenerator idGenerator = new ObjectIDGenerator();
             SerializedData = PrepareSerialization(dataContext, idGenerator);
-
-            using (StreamWriter outputFile = new StreamWriter(Path + ".txt"))
-            {
-                outputFile.WriteLine(SerializedData);
-            }
+            StreamWriter outputFile = new StreamWriter(stream);
+            outputFile.WriteLine(SerializedData);
+            outputFile.Flush();
         }
 
 
@@ -77,7 +76,7 @@ namespace Classes.Serialization
                     case "Classes.Catalog":
                         Catalog catalog = new Catalog();
                         catalog.Deserialization(data, this.DeserializedObjects);
-                        dataContext.Books.Add(catalog.Code, catalog);
+                        dataContext.Books.Add(long.Parse(data[data.Length-2]), catalog);
                         this.DeserializedObjects.Add(long.Parse(data[1]), catalog);
                         break;
                     case "Classes.BorrowEvent":
