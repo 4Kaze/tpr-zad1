@@ -11,9 +11,14 @@ namespace Classes.Serialization
         public List<string[]> DeserializedData { get; set; }
         private string SerializedData { get; set; }
 <<<<<<< HEAD:Zad2/Zad1/Serialization/OwnSerialization.cs
+<<<<<<< HEAD:Zad2/Zad1/Serialization/OwnSerialization.cs
         public string DeserializedString { get; set; }
 
         private Char separatorChar = ';';
+=======
+        public string Path { get; set; }
+        
+>>>>>>> parent of 19039b5... serialization tests:Zad2/SerializationModule/OwnSerialization.cs
 =======
         public string Path { get; set; }
         
@@ -32,6 +37,7 @@ namespace Classes.Serialization
             using (StreamReader sr = new StreamReader(Path + ".txt"))
             {
 <<<<<<< HEAD:Zad2/Zad1/Serialization/OwnSerialization.cs
+<<<<<<< HEAD:Zad2/Zad1/Serialization/OwnSerialization.cs
                 DeserializedString = "";
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -42,6 +48,8 @@ namespace Classes.Serialization
                 }
             }
 =======
+=======
+>>>>>>> parent of 19039b5... serialization tests:Zad2/SerializationModule/OwnSerialization.cs
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
@@ -49,6 +57,9 @@ namespace Classes.Serialization
                     Int32 count = 7;
                     DeserializedData.Add(line.Split(spearator, count, StringSplitOptions.RemoveEmptyEntries));
                 }
+<<<<<<< HEAD:Zad2/Zad1/Serialization/OwnSerialization.cs
+>>>>>>> parent of 19039b5... serialization tests:Zad2/SerializationModule/OwnSerialization.cs
+=======
 >>>>>>> parent of 19039b5... serialization tests:Zad2/SerializationModule/OwnSerialization.cs
 
             }
@@ -90,6 +101,9 @@ namespace Classes.Serialization
             {
                     outputFile.WriteLine(SerializedData);
             }
+<<<<<<< HEAD:Zad2/Zad1/Serialization/OwnSerialization.cs
+>>>>>>> parent of 19039b5... serialization tests:Zad2/SerializationModule/OwnSerialization.cs
+=======
 >>>>>>> parent of 19039b5... serialization tests:Zad2/SerializationModule/OwnSerialization.cs
         }
 

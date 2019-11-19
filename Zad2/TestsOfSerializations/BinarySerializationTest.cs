@@ -8,9 +8,14 @@ namespace TestsOfSerializations
     {
         [TestMethod]
 <<<<<<< HEAD:Zad2/TestsOfSerializations/BinarySerializationTest.cs
+<<<<<<< HEAD:Zad2/TestsOfSerializations/BinarySerializationTest.cs
         public void ReccurentSerializationBinary()
         {/*
 
+=======
+        public void TestMethod1()
+        {
+>>>>>>> parent of 19039b5... serialization tests:Zad2/TestsOfSerializations/UnitTest1.cs
 =======
         public void TestMethod1()
         {

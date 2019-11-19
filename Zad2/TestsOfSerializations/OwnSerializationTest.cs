@@ -21,6 +21,7 @@ namespace TestsOfSerializations
             own.Serialize(dataContext);
             deserializedContext = own.Deserialize();
             Assert.AreEqual(dataContext.Clients[0].ToString(), deserializedContext.Clients[0].ToString());
+<<<<<<< HEAD
         }
 
 
@@ -125,6 +126,8 @@ namespace TestsOfSerializations
         public void Example()
         {
 
+=======
+>>>>>>> parent of 19039b5... serialization tests
         }
     }
 }
