@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Classes;
 using SerializationModule;
 
@@ -28,7 +29,7 @@ namespace SerializationConsole
 
         private void doSerializationMenu(Format format)
         {
-            Serializator serializator;
+            ISerializator serializator;
             switch (format)
             {
                 case Format.XML:
@@ -49,7 +50,7 @@ namespace SerializationConsole
 
             Console.WriteLine();
             Console.Write("Enter filename: ");
-            serializator.Path = Console.ReadLine();
+            string path = Console.ReadLine();
 
             Console.WriteLine("Choose mode:");
             Console.WriteLine("[1] - Serialization\n[2] - Deserialization");
@@ -76,10 +77,14 @@ namespace SerializationConsole
 
             if(mode == 1)
             {
-                serializator.Serialize(dataContext);
+                Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
+                serializator.Serialize(dataContext, stream);
+                stream.Close();
             } else
             {
-                deserializedContext = serializator.Deserialize();
+                Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                deserializedContext = serializator.Deserialize(stream);
+                stream.Close();
             }
 
             Console.WriteLine();
@@ -104,7 +109,9 @@ namespace SerializationConsole
 
             if (mode == 1)
             {
-                deserializedContext = serializator.Deserialize();
+                Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                deserializedContext = serializator.Deserialize(stream);
+                stream.Close();
             }
 
             foreach (Event e in deserializedContext.Transactions)

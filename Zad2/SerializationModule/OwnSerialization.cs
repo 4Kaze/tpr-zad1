@@ -9,13 +9,13 @@ using Classes;
 
 namespace SerializationModule
 {
-    public class OwnSerialization : Serializator
+    public class OwnSerialization : ISerializator
     {
         private Dictionary<long, Object> DeserializedObjects { get; set; }
         public List<string[]> DeserializedData { get; set; }
         private string SerializedData { get; set; }
-        public string Path { get; set; }
-        
+
+        private Char separatorChar = ';';
 
         public OwnSerialization()
         {
@@ -24,25 +24,22 @@ namespace SerializationModule
         }
 
 
-        public DataContext Deserialize()
+        public DataContext Deserialize(Stream stream)
         {
             DataContext answerContext = new DataContext();
-            using (StreamReader sr = new StreamReader(Path + ".txt"))
+            StreamReader sr = new StreamReader(stream);
+            string line;
+            while ((line = sr.ReadLine()) != null)
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    String[] spearator = { ";" };
-                    Int32 count = 7;
-                    DeserializedData.Add(line.Split(spearator, count, StringSplitOptions.RemoveEmptyEntries));
-                }
-
+                Char[] spearator = { separatorChar };
+                DeserializedData.Add(line.Split(spearator));
             }
+
             DeserializationDecision(answerContext);
             return answerContext;
         }
 
-        public void Serialize(DataContext dataContext)
+        public void Serialize(DataContext dataContext, Stream stream)
         {
             ObjectIDGenerator idGenerator = new ObjectIDGenerator();
             SerializedData = "";
@@ -53,7 +50,7 @@ namespace SerializationModule
 
             foreach(KeyValuePair<long, Catalog> book in dataContext.Books)
             {
-                SerializedData += book.Value.Serialization(idGenerator) + "\n";
+                SerializedData += book.Value.Serialization(idGenerator) + book.Key + separatorChar + "\n";
             }
 
             foreach (StateDescription description in dataContext.Descriptions)
@@ -66,10 +63,9 @@ namespace SerializationModule
                 SerializedData += transaction.Serialization(idGenerator) + "\n";
             }
 
-            using (StreamWriter outputFile = new StreamWriter(Path + ".txt"))
-            {
-                    outputFile.WriteLine(SerializedData);
-            }
+            StreamWriter outputFile = new StreamWriter(stream);
+            outputFile.WriteLine(SerializedData);
+            outputFile.Flush();
         }
 
 
@@ -98,7 +94,7 @@ namespace SerializationModule
                     case "Classes.Catalog":
                         Catalog catalog = new Catalog();
                         catalog.Deserialization(data, this.DeserializedObjects);
-                        dataContext.Books.Add(catalog.Code, catalog);
+                        dataContext.Books.Add(long.Parse(data[data.Length-2]), catalog);
                         this.DeserializedObjects.Add(long.Parse(data[1]), catalog);
                         break;
                     case "Classes.BorrowEvent":

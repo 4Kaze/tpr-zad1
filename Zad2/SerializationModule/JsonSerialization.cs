@@ -4,37 +4,25 @@ using System.IO;
 
 namespace SerializationModule
 {
-    public class JsonSerialization: Serializator
+    public class JsonSerialization: ISerializator
     {
-        public string Path { get; set; }
         public JsonSerialization()
         {
 
         }
 
-        public JsonSerialization(string path)
-        {
-            Path = path;
-        }
-
-
-        public void Serialize(DataContext dataContext)
+        public void Serialize(DataContext dataContext, Stream stream)
         {
             var serializer = new JsonSerializer();
-
-            using (FileStream file = File.Open(this.Path, FileMode.Create))
-            using (var sw = new StreamWriter(file))
-            using (JsonWriter writer = new JsonTextWriter(sw))
-            {
-                serializer.Serialize(writer, dataContext, typeof(DataContext));
-            }
-
+            var sw = new StreamWriter(stream);
+            JsonWriter writer = new JsonTextWriter(sw);
+            serializer.Serialize(writer, dataContext, typeof(DataContext));
         }
 
-        public DataContext Deserialize()
+        public DataContext Deserialize(Stream stream)
         {
-
-            DataContext obj2 = Newtonsoft.Json.JsonConvert.DeserializeObject<DataContext>(File.ReadAllText(this.Path), new Newtonsoft.Json.JsonSerializerSettings
+            TextReader tr = new StreamReader(stream);
+            DataContext obj2 = Newtonsoft.Json.JsonConvert.DeserializeObject<DataContext>(tr.ReadToEnd(), new Newtonsoft.Json.JsonSerializerSettings
             {
                 TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
                 NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
