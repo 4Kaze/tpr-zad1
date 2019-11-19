@@ -5,37 +5,30 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Classes.Serialization
 {
-    public class BinarySerialization: Serializator
+    public class BinarySerialization: ISerializator
     {
-        public string Path { get; set; }
         public BinarySerialization()
         {
 
         }
 
-        public BinarySerialization(string path)
-        {
-            Path = path;
-        }
-
-        public void Serialize(DataContext dataContext)
+        public void Serialize(DataContext dataContext, Stream stream)
         {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(Path, FileMode.Create, FileAccess.Write, FileShare.None);
             
             formatter.Serialize(stream, dataContext);
-            stream.Close();
+            stream.Flush();
         }
 
-        public DataContext Deserialize()
+        public DataContext Deserialize(Stream stream)
         {
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(Path, FileMode.Open, FileAccess.Read, FileShare.Read);
             DataContext obj = (DataContext)formatter.Deserialize(stream);
             stream.Close();
             return obj;
         }
 
+        /*
         public void CommonSerialize(Object obj)
         {
             IFormatter formatter = new BinaryFormatter();
@@ -53,6 +46,6 @@ namespace Classes.Serialization
             stream.Close();
             return obj;
         }
-
+        */
     }
 }

@@ -1,10 +1,11 @@
 ﻿
+using System.IO;
+
 namespace Classes.Serialization
 {
-    public interface Serializator
+    public interface ISerializator
     {
-        string Path { get; set; }
-        void Serialize(DataContext dataContext);
-        DataContext Deserialize();
+        void Serialize(DataContext dataContext, Stream stream);
+        DataContext Deserialize(Stream stream);
     }
 }

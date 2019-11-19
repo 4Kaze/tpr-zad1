@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace Classes
@@ -31,5 +32,6 @@ namespace Classes
         {
             return new ReturnEvent(this);
         }
+
     }
 }

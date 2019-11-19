@@ -23,7 +23,7 @@ namespace UnitTests
 
         public void FillData(DataContext dataContext)
         {
-            for(int i = 0; i < 25; i++)
+            for (int i = 0; i < 25; i++)
             {
                 Event e = CreateEvent();
                 dataContext.Transactions.Add(e);
@@ -60,14 +60,15 @@ namespace UnitTests
 
         public Event CreateEvent()
         {
-            if(random.Next(2) == 1)
+            if (random.Next(2) == 1)
             {
                 return new BorrowEvent(CreatePerson(), CreateStateDescription(), getRandomDate());
-            } else
+            }
+            else
             {
                 return new ReturnEvent(CreatePerson(), CreateStateDescription(), getRandomDate());
             }
-            
+
         }
 
 

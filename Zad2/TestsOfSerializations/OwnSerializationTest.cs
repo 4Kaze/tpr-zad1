@@ -11,6 +11,7 @@ namespace TestsOfSerializations
         [TestMethod]
         public void SerilizeDeserializeCheck()
         {
+            /*
             OwnSerialization own = new OwnSerialization();
 
             DataContext dataContext = new DataContext();
@@ -21,7 +22,7 @@ namespace TestsOfSerializations
             own.Serialize(dataContext);
             deserializedContext = own.Deserialize();
             Assert.AreEqual(dataContext.Clients[0].ToString(), deserializedContext.Clients[0].ToString());
-<<<<<<< HEAD
+*/
         }
 
 
@@ -126,8 +127,6 @@ namespace TestsOfSerializations
         public void Example()
         {
 
-=======
->>>>>>> parent of 19039b5... serialization tests
         }
     }
 }
