@@ -83,7 +83,7 @@ namespace SerializationConsole
                 }
                 else
                 {
-                    Console.WriteLine("\nMusisz podać chociaz jedna literke w nazwie pliku.");
+                    Console.WriteLine("\nThe filename cannot be empty.");
                     return;
                 }
             }
@@ -92,12 +92,21 @@ namespace SerializationConsole
                 if (File.Exists(path))
                 {
                     Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-                    deserializedContext = serializator.Deserialize(stream);
-                    stream.Close();
+                    try
+                    {
+                        deserializedContext = serializator.Deserialize(stream);
+                    } catch
+                    {
+                        Console.WriteLine("\nAn error occured.");
+                        return;
+                    } finally {
+                        stream.Close();
+                    }
+                    
                 }
                 else
                 {
-                    Console.WriteLine("\nNie mozna zdeserializowac pliku, ktory nie istnieje.");
+                    Console.WriteLine("\nThe file doesn't exist.");
                     return;
                 }
             }
