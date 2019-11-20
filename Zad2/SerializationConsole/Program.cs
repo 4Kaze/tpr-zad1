@@ -45,6 +45,8 @@ namespace SerializationConsole
 
             Console.WriteLine();
             Console.Write("Enter filename: ");
+
+            
             string path = Console.ReadLine();
 
             Console.WriteLine("Choose mode:");
@@ -78,9 +80,16 @@ namespace SerializationConsole
             }
             else
             {
-                Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-                deserializedContext = serializator.Deserialize(stream);
-                stream.Close();
+                if (File.Exists(path))
+                {
+                    Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    deserializedContext = serializator.Deserialize(stream);
+                    stream.Close();
+                }
+                else
+                {
+                    Console.WriteLine("Nie mozna zdeserializowac pliku, ktory nie istnieje.");
+                }
             }
 
             Console.WriteLine();
@@ -110,7 +119,7 @@ namespace SerializationConsole
                 stream.Close();
             }
 
-            printDataContext(deserializedContext);
+            //printDataContext(deserializedContext);
         }
 
         private void doMainMenu()
@@ -142,6 +151,8 @@ namespace SerializationConsole
                 }
             }
         }
+
+
 
         public void printDataContext(DataContext dataContext)
         {
