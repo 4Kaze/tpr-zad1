@@ -15,7 +15,7 @@ namespace Classes
         public List<Person> Clients;
         [XmlElement("Books")]
 //        [JsonProperty(PropertyName = "Books")]
-        public SerializableCatalogDictionary Books;
+        public Dictionary<long, Catalog> Books;
         [XmlArray("Transactions")]
   //      [JsonProperty(PropertyName = "Transactions")]
         public ObservableCollection<Event> Transactions;
@@ -26,7 +26,7 @@ namespace Classes
         public DataContext()
         {
             Clients = new List<Person>();
-            Books = new SerializableCatalogDictionary();
+            Books = new Dictionary<long, Catalog>();
             Transactions = new ObservableCollection<Event>();
             Descriptions = new List<StateDescription>();
         }

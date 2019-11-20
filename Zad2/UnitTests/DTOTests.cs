@@ -16,9 +16,9 @@ namespace UnitTests
             Assert.AreNotEqual(catalog2.Code, catalog.Code);
             Assert.AreEqual("Pride and Prejudice", catalog.Title);
             Assert.AreEqual("This is description", catalog.Description);
-            Assert.AreEqual(author, catalog.Author);
+            Assert.AreEqual(author, catalog.Author);   
         }
-
+        
         [TestMethod]
         public void PersonConstructorTest()
         {
@@ -42,7 +42,7 @@ namespace UnitTests
             Assert.AreEqual(stateDescription.Book, book);
             Assert.AreEqual(stateDescription.PurchaseDate, date);
             Assert.AreEqual(stateDescription.Location, "here");
-        }
+       }
 
         [TestMethod]
         public void EventConstructorTest()

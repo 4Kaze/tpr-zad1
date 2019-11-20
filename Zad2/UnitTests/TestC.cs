@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace TestsOfSerializations
+namespace SerializationModule
 {
     [Serializable]
+    [DataContract(IsReference = true)]
     public class TestC
     {
         private static int nextId = 0;
-        
+
+        [DataMember]
         public TestA TestA { get; set; }
-        
+
+        [DataMember]
         public int Id { get; set; }
 
         public TestC()

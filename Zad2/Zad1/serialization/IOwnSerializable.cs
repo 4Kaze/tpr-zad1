@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace Classes
+namespace SerializationModule
 {
-    public interface IOwnSerialization
+    public interface IOwnSerializable
     {
         string Serialization(ObjectIDGenerator idGenerator);
         void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects);

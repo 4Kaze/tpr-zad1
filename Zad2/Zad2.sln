@@ -12,8 +12,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializationConsole", "SerializationConsole\SerializationConsole.csproj", "{46E6D621-1E2D-4423-9D41-18138234F862}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsOfSerializations", "TestsOfSerializations\TestsOfSerializations.csproj", "{3C332270-0F36-4FC9-BB30-8BBC8B0AEAC8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +26,10 @@ Global
 		{65E65592-69F7-4F8E-812B-876A2F747C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65E65592-69F7-4F8E-812B-876A2F747C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65E65592-69F7-4F8E-812B-876A2F747C4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFA6E5B8-88F3-44C5-9623-657B9FBB16E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA6E5B8-88F3-44C5-9623-657B9FBB16E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA6E5B8-88F3-44C5-9623-657B9FBB16E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA6E5B8-88F3-44C5-9623-657B9FBB16E2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{46E6D621-1E2D-4423-9D41-18138234F862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{46E6D621-1E2D-4423-9D41-18138234F862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46E6D621-1E2D-4423-9D41-18138234F862}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SerializationModule;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -7,7 +8,7 @@ namespace Classes
 {
     [Serializable]
     [XmlRoot("CatalogRoot")]
-    public class Catalog : ICloneable, IOwnSerialization
+    public class Catalog : ICloneable, IOwnSerializable
     {
         private static long nextID = 0;
         [XmlIgnore]
@@ -93,7 +94,7 @@ namespace Classes
         {
             this.Code = long.Parse(data[2]);
             this.Title = data[3];
-            this.Description = data[4]; 
+            this.Description = data[4];
             this.Author = data[5];
         }
     }

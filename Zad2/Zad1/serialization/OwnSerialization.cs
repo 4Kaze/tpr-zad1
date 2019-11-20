@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Threading.Tasks;
+using Classes;
 
-namespace Classes.Serialization
+namespace SerializationModule
 {
     public class OwnSerialization : ISerializator
     {
         private Dictionary<long, Object> DeserializedObjects { get; set; }
         public List<string[]> DeserializedData { get; set; }
         private string SerializedData { get; set; }
-        public string DeserializedString { get; set; }
 
         private Char separatorChar = ';';
 
@@ -25,16 +28,11 @@ namespace Classes.Serialization
         {
             DataContext answerContext = new DataContext();
             StreamReader sr = new StreamReader(stream);
-            string line = "";
+            string line;
             while ((line = sr.ReadLine()) != null)
             {
-                DeserializedString = "";
-                while ((line = sr.ReadLine()) != null)
-                {
-                    DeserializedString += line;
-                    Char[] spearator = { separatorChar };
-                    DeserializedData.Add(line.Split(spearator));
-                }
+                Char[] spearator = { separatorChar };
+                DeserializedData.Add(line.Split(spearator));
             }
 
             DeserializationDecision(answerContext);
@@ -44,7 +42,27 @@ namespace Classes.Serialization
         public void Serialize(DataContext dataContext, Stream stream)
         {
             ObjectIDGenerator idGenerator = new ObjectIDGenerator();
-            SerializedData = PrepareSerialization(dataContext, idGenerator);
+            SerializedData = "";
+            foreach(Person person in dataContext.Clients)
+            {
+                SerializedData += person.Serialization(idGenerator) + "\n";
+            }
+
+            foreach(KeyValuePair<long, Catalog> book in dataContext.Books)
+            {
+                SerializedData += book.Value.Serialization(idGenerator) + book.Key + separatorChar + "\n";
+            }
+
+            foreach (StateDescription description in dataContext.Descriptions)
+            {
+                SerializedData += description.Serialization(idGenerator) + "\n";
+            }
+
+            foreach (Event transaction in dataContext.Transactions)
+            {
+                SerializedData += transaction.Serialization(idGenerator) + "\n";
+            }
+
             StreamWriter outputFile = new StreamWriter(stream);
             outputFile.WriteLine(SerializedData);
             outputFile.Flush();
@@ -60,9 +78,10 @@ namespace Classes.Serialization
                 {
                     dataType = data[0];
                 }
-                catch (System.IndexOutOfRangeException exception)
+                catch (System.IndexOutOfRangeException e)  // CS0168
                 {
                     dataType = "";
+                    Console.WriteLine("oststni element");
                 }
                 switch (dataType)
                 {
@@ -100,32 +119,6 @@ namespace Classes.Serialization
                         break;
                 }
             }
-        }
-
-
-        public string PrepareSerialization(DataContext dataContext, ObjectIDGenerator idGenerator)
-        {
-            String stringStream = "";
-            foreach (Person person in dataContext.Clients)
-            {
-                stringStream += person.Serialization(idGenerator) + "\n";
-            }
-
-            foreach (KeyValuePair<long, Catalog> book in dataContext.Books)
-            {
-                stringStream += book.Value.Serialization(idGenerator) + "\n";
-            }
-
-            foreach (StateDescription description in dataContext.Descriptions)
-            {
-                stringStream += description.Serialization(idGenerator) + "\n";
-            }
-
-            foreach (Event transaction in dataContext.Transactions)
-            {
-                stringStream += transaction.Serialization(idGenerator) + "\n";
-            }
-            return stringStream;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using SerializationModule;
 
 namespace Classes
 {
@@ -9,7 +10,7 @@ namespace Classes
     [XmlInclude(typeof(BorrowEvent))]
     [XmlInclude(typeof(ReturnEvent))]
     [XmlRoot("EventRoot")]
-    public abstract class Event : ICloneable, IOwnSerialization
+    public abstract class Event : ICloneable, IOwnSerializable
     {
         private static long nextID = 0;
         [XmlIgnore]

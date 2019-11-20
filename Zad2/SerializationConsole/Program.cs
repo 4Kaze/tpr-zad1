@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using Classes;
-using Classes.Serialization;
+using SerializationModule;
 
 namespace SerializationConsole
 {
@@ -16,7 +16,7 @@ namespace SerializationConsole
 
         Program()
         {
-            IFillInterface fillInterface = new FillConsole();
+            IFillInterface fillInterface = new FillConstant();
             dataContext = new DataContext();
             fillInterface.FillData(dataContext);
 
@@ -32,12 +32,6 @@ namespace SerializationConsole
             ISerializator serializator;
             switch (format)
             {
-                case Format.XML:
-                    serializator = new XmlSerialization();
-                    break;
-                case Format.JSON:
-                    serializator = new JsonSerialization();
-                    break;
                 case Format.BINARY:
                     serializator = new BinarySerialization();
                     break;
@@ -68,7 +62,7 @@ namespace SerializationConsole
                         mode = 2;
                         break;
                     default:
-                        Console.WriteLine("Invalid choice.");
+                        Console.WriteLine("\nInvalid choice.");
                         break;
                 }
             }
@@ -124,7 +118,7 @@ namespace SerializationConsole
         {
             Console.WriteLine("SERIALIZATION");
             Console.WriteLine("Choose a format you'd like to use:");
-            Console.WriteLine("[1] - XML\n[2] - JSON\n[3] - binary\n[4] - own");
+            Console.WriteLine("[1] - binary\n[2] - own");
             Console.Write("Choice: ");
 
             bool run = true;
@@ -136,17 +130,9 @@ namespace SerializationConsole
                 {
                     case '1':
                         run = false;
-                        doSerializationMenu(Format.XML);
-                        break;
-                    case '2':
-                        run = false;
-                        doSerializationMenu(Format.JSON);
-                        break;
-                    case '3':
-                        run = false;
                         doSerializationMenu(Format.BINARY);
                         break;
-                    case '4':
+                    case '2':
                         run = false;
                         doSerializationMenu(Format.OWN);
                         break;
@@ -160,7 +146,7 @@ namespace SerializationConsole
 
         enum Format
         {
-            XML, JSON, BINARY, OWN
+            BINARY, OWN
         }
     }
 }

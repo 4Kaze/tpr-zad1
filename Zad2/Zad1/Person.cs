@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using SerializationModule;
 
 namespace Classes
 {
     [Serializable]
     [XmlRoot("PersonRoot")]
-    public class Person : ICloneable, IOwnSerialization
+    public class Person : ICloneable, IOwnSerializable
     {
         private static long nextID = 0;
         [XmlIgnore]

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using SerializationModule;
 
 namespace Classes
 {
     [Serializable]
     [XmlRoot("DescriptionRoot")]
-    public class StateDescription : ICloneable, IOwnSerialization
+    public class StateDescription : ICloneable, IOwnSerializable
     {
         private static long nextID = 0;
         [XmlIgnore]
