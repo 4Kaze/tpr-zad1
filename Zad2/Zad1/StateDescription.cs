@@ -25,7 +25,7 @@ namespace Classes
         public bool Availabile { set; get; }
         public DateTimeOffset PurchaseDate { get; set; }
         public string Location { set; get; }
-        public Person Owner { set; get; }
+        
 
         public StateDescription(Catalog book, DateTimeOffset purchaseDate, string location)
         {
@@ -43,14 +43,13 @@ namespace Classes
             Availabile = description.Availabile;
             PurchaseDate = description.PurchaseDate;
             Location = description.Location;
-            Owner = description.Owner;
         }
 
         public StateDescription() { }
 
         public override string ToString()
         {
-            return "StateDescription id: " + this.Code + " catalog: " + this.Book.Code + ", purchase date: " + this.PurchaseDate + ", location: " + this.Location + ", owner: " + Owner.Code + ".";
+            return "StateDescription id: " + this.Code + " catalog: " + this.Book.Code + ", purchase date: " + this.PurchaseDate + ", location: " + this.Location + ".";
         }
 
         public override bool Equals(Object obj)
@@ -87,36 +86,29 @@ namespace Classes
             serializedData += this.Availabile.ToString() + ";";
             serializedData += this.PurchaseDate.ToString() + ";";
             serializedData += this.Location + ";";
-            if (this.Owner != null)
-                serializedData += idGenerator.GetId(this.Owner, out firstTime) + ";";
-            else
-                serializedData += ";";
-            return serializedData;
+            return serializedData + ";";
         }
 
         public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects, Dictionary<object, List<long>> requiredObjects)
         {
             this.Code = long.Parse(data[2]);
-            this.Book = (Catalog)deserializedObjects[long.Parse(data[3])]; 
             this.Availabile = bool.Parse(data[4]);
             this.PurchaseDate = DateTimeOffset.Parse(data[5]);
             this.Location = data[6];
-            if (data[7].Length == 0)
-                return;
-            long personId = long.Parse(data[7]);
-            if (deserializedObjects.ContainsKey(personId))
+
+            long bookId = long.Parse(data[3]);
+            if (deserializedObjects.ContainsKey(bookId))
             {
-                this.Owner = (Person)deserializedObjects[personId];
+                this.Book = (Catalog)deserializedObjects[bookId];
             }
             else
             {
                 {
                     List<long> list = new List<long>();
-                    list.Add(personId);
+                    list.Add(bookId);
                     requiredObjects.Add(this, list);
                 }
             }
-            
         }
     }
 }

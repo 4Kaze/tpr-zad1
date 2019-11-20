@@ -31,13 +31,6 @@ namespace UnitTests
             StateDescription stateDescription2 = new StateDescription(catalog2, System.DateTimeOffset.Now, "There");
             StateDescription stateDescription3 = new StateDescription(catalog3, System.DateTimeOffset.Now, "Here");
 
-            stateDescription1.Owner = person1;
-            person1.Books.Add(stateDescription1);
-            stateDescription2.Owner = person1;
-            person1.Books.Add(stateDescription2);
-            stateDescription3.Owner = person2;
-            person2.Books.Add(stateDescription3);
-
             dataContext.Descriptions.Add(stateDescription1);
             dataContext.Descriptions.Add(stateDescription2);
             dataContext.Descriptions.Add(stateDescription3);
@@ -47,10 +40,19 @@ namespace UnitTests
             Event happening1 = new BorrowEvent(person1, stateDescription1, date1);
             Event happening2 = new BorrowEvent(person2, stateDescription1, date1);
             Event happening3 = new ReturnEvent(person1, stateDescription1, System.DateTimeOffset.Now);
+            Event happening4 = new BorrowEvent(person1, stateDescription2, System.DateTimeOffset.Now);
 
             dataContext.Transactions.Add(happening1);
             dataContext.Transactions.Add(happening2);
             dataContext.Transactions.Add(happening3);
+
+            catalog1.Events.Add(happening1);
+            catalog1.Events.Add(happening2);
+            catalog1.Events.Add(happening3);
+            catalog2.Events.Add(happening4);
+
+
+
         }
     }
 }

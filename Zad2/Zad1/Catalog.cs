@@ -25,6 +25,7 @@ namespace Classes
         public string Title { get; set; }
         public string Description { get; set; }
         public string Author { get; set; }
+        public List<Event> Events { set; get; }
 
         public Catalog(string title, string description, string author)
         {
@@ -32,6 +33,7 @@ namespace Classes
             Title = title;
             Description = description;
             Author = author;
+            Events = new List<Event>();
         }
 
         public Catalog(Catalog catalog)
@@ -40,13 +42,23 @@ namespace Classes
             Title = catalog.Title;
             Description = catalog.Description;
             Author = catalog.Author;
+            Events = new List<Event>();
+            foreach (Event e in catalog.Events)
+                Events.Add(e);
         }
 
-        public Catalog() { }
+        public Catalog() { Events = new List<Event>(); }
 
         public override string ToString()
         {
-            return "Book id: " + this.Code + ", title: " + this.Title + ", description: " + this.Description + ", author: " + this.Author;
+            string events = "{";
+            foreach (Event e in Events)
+            {
+                events += e.Code;
+                if (Events.IndexOf(e) != Events.Count - 1) events += ", ";
+            }
+            events += "}";
+            return "Book id: " + this.Code + ", title: " + this.Title + ", description: " + this.Description + ", author: " + this.Author + ", events: " + events;
         }
 
         public override bool Equals(Object obj)
@@ -82,15 +94,42 @@ namespace Classes
             serializedData += this.Title + ";";
             serializedData += this.Description + ";";
             serializedData += this.Author + ";";
-            return serializedData;
+            if (this.Events.Count == 0)
+                return serializedData + ";";
+
+            foreach (Event e in Events)
+            {
+                serializedData += idGenerator.GetId(e, out firstTime);
+                if (Events.IndexOf(e) != Events.Count - 1) serializedData += ",";
+            }
+            return serializedData + ";";
         }
 
-        public void Deserialization(string[] data, Dictionary<long, Object>  deserializedObjects, Dictionary<object, List<long>> r)
+        public void Deserialization(string[] data, Dictionary<long, Object>  deserializedObjects, Dictionary<object, List<long>> requiredObjects)
         {
             this.Code = long.Parse(data[2]);
             this.Title = data[3];
             this.Description = data[4];
             this.Author = data[5];
+
+            string[] ids = data[6].Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (ids.Length == 0)
+                return;
+            requiredObjects.Add(this, new List<long>());
+            foreach (string id in ids)
+            {
+                long sdId = long.Parse(id);
+                if (deserializedObjects.ContainsKey(sdId))
+                {
+                    this.Events.Add((Event)deserializedObjects[sdId]);
+                }
+                else
+                {
+                    requiredObjects[this].Add(sdId);
+                }
+
+            }
         }
     }
 }

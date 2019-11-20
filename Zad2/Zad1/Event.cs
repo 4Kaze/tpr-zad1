@@ -40,7 +40,7 @@ namespace Classes
 
         public override string ToString()
         {
-            return "Event id: " + this.Code + " causer: " + this.Causer.Code + ", book state" + this.BookState.Code + ", date: " + this.Date + ".";
+            return "Event id: " + this.Code + " causer: " + this.Causer.Code + ", book state: " + this.BookState.Code + ", date: " + this.Date + ".";
         }
 
         public override bool Equals(Object obj)
@@ -79,12 +79,25 @@ namespace Classes
             return serializedData;
         }
 
-        public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects, Dictionary<object, List<long>> r) 
+        public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects, Dictionary<object, List<long>> requiredObjects) 
         {
             this.Code = long.Parse(data[2]);
             this.Causer = (Person)deserializedObjects[long.Parse(data[3])];
-            this.BookState = (StateDescription)deserializedObjects[long.Parse(data[4])];
             this.Date = DateTimeOffset.Parse(data[5]);
+
+            long bookId = long.Parse(data[4]);
+            if (deserializedObjects.ContainsKey(bookId))
+            {
+                this.BookState = (StateDescription)deserializedObjects[bookId];
+            }
+            else
+            {
+                {
+                    List<long> list = new List<long>();
+                    list.Add(bookId);
+                    requiredObjects.Add(this, list);
+                }
+            }
         }
     }
 }

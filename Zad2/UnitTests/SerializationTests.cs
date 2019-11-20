@@ -267,13 +267,16 @@ namespace UnitTests
             StateDescription sd2 = new StateDescription(c2, System.DateTimeOffset.Now, "There");
             StateDescription sd3 = new StateDescription(c3, System.DateTimeOffset.Now, "Somewhere");
 
-            p.Books.Add(sd);
-            p.Books.Add(sd2);
-            p2.Books.Add(sd3);
+            System.DateTimeOffset date1 = System.DateTimeOffset.Now;
+            Event happening1 = new BorrowEvent(p, sd, date1);
+            Event happening2 = new BorrowEvent(p2, sd2, date1);
+            Event happening3 = new ReturnEvent(p, sd, System.DateTimeOffset.Now);
+            Event happening4 = new BorrowEvent(p, sd3, System.DateTimeOffset.Now);
 
-            sd.Owner = p;
-            sd2.Owner = p;
-            sd3.Owner = p2;
+            c.Events.Add(happening1);
+            c.Events.Add(happening3);
+            c2.Events.Add(happening2);
+            c3.Events.Add(happening4);
 
             dataContext.Clients.Add(p);
             dataContext.Clients.Add(p2);
@@ -283,6 +286,10 @@ namespace UnitTests
             dataContext.Descriptions.Add(sd);
             dataContext.Descriptions.Add(sd2);
             dataContext.Descriptions.Add(sd3);
+            dataContext.Transactions.Add(happening1);
+            dataContext.Transactions.Add(happening2);
+            dataContext.Transactions.Add(happening3);
+            dataContext.Transactions.Add(happening4);
 
             ISerializator serializer = new OwnSerialization();
 
@@ -302,13 +309,16 @@ namespace UnitTests
             Assert.AreEqual(deserializedContext.Descriptions[1], sd2);
             Assert.AreEqual(deserializedContext.Descriptions[2], sd3);
 
-            Assert.AreSame(deserializedContext.Clients[0], deserializedContext.Descriptions[0].Owner);
-            Assert.AreSame(deserializedContext.Clients[0], deserializedContext.Descriptions[1].Owner);
-            Assert.AreSame(deserializedContext.Clients[1], deserializedContext.Descriptions[2].Owner);
+            Assert.AreEqual(deserializedContext.Transactions[0], happening1);
+            Assert.AreEqual(deserializedContext.Transactions[1], happening2);
+            Assert.AreEqual(deserializedContext.Transactions[2], happening3);
+            Assert.AreEqual(deserializedContext.Transactions[3], happening4);
 
-            Assert.AreSame(deserializedContext.Clients[0].Books[0], deserializedContext.Descriptions[0]);
-            Assert.AreSame(deserializedContext.Clients[0].Books[1], deserializedContext.Descriptions[1]);
-            Assert.AreSame(deserializedContext.Clients[1].Books[0], deserializedContext.Descriptions[2]);
+
+            Assert.AreSame(deserializedContext.Books[1].Events[0].BookState.Book, deserializedContext.Books[1]);
+            Assert.AreSame(deserializedContext.Books[1].Events[1].BookState.Book, deserializedContext.Books[1]);
+            Assert.AreSame(deserializedContext.Books[2].Events[0].BookState.Book, deserializedContext.Books[2]);
+            Assert.AreSame(deserializedContext.Books[3].Events[0].BookState.Book, deserializedContext.Books[3]);
         }
     }
 }
