@@ -75,9 +75,17 @@ namespace SerializationConsole
 
             if (mode == 1)
             {
-                Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
-                serializator.Serialize(dataContext, stream);
-                stream.Close();
+                if(path != "")
+                {
+                    Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
+                    serializator.Serialize(dataContext, stream);
+                    stream.Close();
+                }
+                else
+                {
+                    Console.WriteLine("\nMusisz podać chociaz jedna literke w nazwie pliku.");
+                    return;
+                }
             }
             else
             {
