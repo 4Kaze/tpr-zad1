@@ -55,6 +55,7 @@ namespace SerializationConsole
             int mode = -1;
             while (mode == -1)
             {
+                Console.Write("Choice: ");
                 char choice = Console.ReadKey().KeyChar;
                 switch (choice)
                 {
@@ -88,38 +89,41 @@ namespace SerializationConsole
                 }
                 else
                 {
-                    Console.WriteLine("Nie mozna zdeserializowac pliku, ktory nie istnieje.");
+                    Console.WriteLine("\nNie mozna zdeserializowac pliku, ktory nie istnieje.");
+                    return;
                 }
             }
 
             Console.WriteLine();
-            /*            Console.WriteLine("Would you like to test? [y/n]");
-
-                        bool run = true;
-                        while (run)
-                        {
-                            char choice = Console.ReadKey().KeyChar;
-                            switch (choice)
-                            {
-                                case 'y':
-                                    run = false;
-                                    break;
-                                case 'n':
-                                    return;
-                                default:
-                                    Console.WriteLine("Invalid choice.");
-                                    break;
-                            }
-                        }*/
 
             if (mode == 1)
             {
+                bool run = true;
+                while (run)
+                {
+                    Console.Write("Would you like to test? [y/n]: ");
+                    char choice = Console.ReadKey().KeyChar;
+                    switch (choice)
+                    {
+                        case 'y':
+                            run = false;
+                            break;
+                        case 'n':
+                            return;
+                        default:
+                            Console.WriteLine("\nInvalid choice.");
+                            break;
+                    }
+                }
+
                 Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
                 deserializedContext = serializator.Deserialize(stream);
                 stream.Close();
+
+                Console.WriteLine();
             }
 
-            //printDataContext(deserializedContext);
+            printDataContext(deserializedContext);
         }
 
         private void doMainMenu()
@@ -127,12 +131,12 @@ namespace SerializationConsole
             Console.WriteLine("SERIALIZATION");
             Console.WriteLine("Choose a format you'd like to use:");
             Console.WriteLine("[1] - binary\n[2] - own");
-            Console.Write("Choice: ");
 
             bool run = true;
 
             while (run)
             {
+                Console.Write("Choice: ");
                 char choice = Console.ReadKey().KeyChar;
                 switch (choice)
                 {
@@ -145,7 +149,7 @@ namespace SerializationConsole
                         doSerializationMenu(Format.OWN);
                         break;
                     default:
-                        Console.WriteLine("Invalid choice.");
+                        Console.WriteLine("\nInvalid choice.");
                         break;
 
                 }
