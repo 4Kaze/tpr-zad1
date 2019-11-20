@@ -11,16 +11,18 @@ namespace SerializationModule
 {
     public class OwnSerialization : ISerializator
     {
-        private Dictionary<long, Object> DeserializedObjects { get; set; }
-        public List<string[]> DeserializedData { get; set; }
-        private string SerializedData { get; set; }
-
+        private Dictionary<long, Object> deserializedObjects;
+        private List<string[]> deserializedData;
+        private string serializedData;
         private Char separatorChar = ';';
+
+        public string Version { get; set; }
 
         public OwnSerialization()
         {
-            DeserializedObjects = new Dictionary<long, Object>();
-            DeserializedData = new List<string[]>();
+            Version = "1.0";
+            deserializedObjects = new Dictionary<long, Object>();
+            deserializedData = new List<string[]>();
         }
 
 
@@ -29,10 +31,11 @@ namespace SerializationModule
             DataContext answerContext = new DataContext();
             StreamReader sr = new StreamReader(stream);
             string line;
+            string version = sr.ReadLine();
+            Char[] spearator = { separatorChar };
             while ((line = sr.ReadLine()) != null)
             {
-                Char[] spearator = { separatorChar };
-                DeserializedData.Add(line.Split(spearator));
+                deserializedData.Add(line.Split(spearator));
             }
 
             DeserializationDecision(answerContext);
@@ -42,29 +45,29 @@ namespace SerializationModule
         public void Serialize(DataContext dataContext, Stream stream)
         {
             ObjectIDGenerator idGenerator = new ObjectIDGenerator();
-            SerializedData = "";
+            serializedData = Version+"\n";
             foreach(Person person in dataContext.Clients)
             {
-                SerializedData += person.Serialization(idGenerator) + "\n";
+                serializedData += person.Serialization(idGenerator) + "\n";
             }
 
             foreach(KeyValuePair<long, Catalog> book in dataContext.Books)
             {
-                SerializedData += book.Value.Serialization(idGenerator) + book.Key + separatorChar + "\n";
+                serializedData += book.Value.Serialization(idGenerator) + book.Key + separatorChar + "\n";
             }
 
             foreach (StateDescription description in dataContext.Descriptions)
             {
-                SerializedData += description.Serialization(idGenerator) + "\n";
+                serializedData += description.Serialization(idGenerator) + "\n";
             }
 
             foreach (Event transaction in dataContext.Transactions)
             {
-                SerializedData += transaction.Serialization(idGenerator) + "\n";
+                serializedData += transaction.Serialization(idGenerator) + "\n";
             }
 
             StreamWriter outputFile = new StreamWriter(stream);
-            outputFile.WriteLine(SerializedData);
+            outputFile.WriteLine(serializedData);
             outputFile.Flush();
         }
 
@@ -72,53 +75,62 @@ namespace SerializationModule
         private void DeserializationDecision(DataContext dataContext)
         {
             string dataType = "";
-            foreach (string[] data in this.DeserializedData)
+            Dictionary<object, List<long>> requiredPeople = new Dictionary<object, List<long>>();
+            Dictionary<object, List<long>> requiredStateDescriptions = new Dictionary<object, List<long>>();
+            
+            foreach (string[] data in this.deserializedData)
             {
-                try
-                {
-                    dataType = data[0];
-                }
-                catch (System.IndexOutOfRangeException e)  // CS0168
-                {
-                    dataType = "";
-                    Console.WriteLine("oststni element");
-                }
+                dataType = data[0];
                 switch (dataType)
                 {
                     case "Classes.Person":
                         Person person = new Person();
-                        person.Deserialization(data, this.DeserializedObjects);
+                        person.Deserialization(data, this.deserializedObjects, requiredStateDescriptions);
                         dataContext.Clients.Add(person);
-                        this.DeserializedObjects.Add(long.Parse(data[1]), person);
+                        this.deserializedObjects.Add(long.Parse(data[1]), person);
                         break;
                     case "Classes.Catalog":
                         Catalog catalog = new Catalog();
-                        catalog.Deserialization(data, this.DeserializedObjects);
+                        catalog.Deserialization(data, this.deserializedObjects, null);
                         dataContext.Books.Add(long.Parse(data[data.Length-2]), catalog);
-                        this.DeserializedObjects.Add(long.Parse(data[1]), catalog);
+                        this.deserializedObjects.Add(long.Parse(data[1]), catalog);
                         break;
                     case "Classes.BorrowEvent":
                         BorrowEvent borrowEvent = new BorrowEvent();
-                        borrowEvent.Deserialization(data, this.DeserializedObjects);
+                        borrowEvent.Deserialization(data, this.deserializedObjects, null);
                         dataContext.Transactions.Add(borrowEvent);
-                        this.DeserializedObjects.Add(long.Parse(data[1]), borrowEvent);
+                        this.deserializedObjects.Add(long.Parse(data[1]), borrowEvent);
                         break;
                     case "Classes.ReturnEvent":
                         ReturnEvent returnEvent = new ReturnEvent();
-                        returnEvent.Deserialization(data, this.DeserializedObjects);
+                        returnEvent.Deserialization(data, this.deserializedObjects, null);
                         dataContext.Transactions.Add(returnEvent);
-                        this.DeserializedObjects.Add(long.Parse(data[1]), returnEvent);
+                        this.deserializedObjects.Add(long.Parse(data[1]), returnEvent);
                         break;
                     case "Classes.StateDescription":
                         StateDescription stateDescription = new StateDescription();
-                        stateDescription.Deserialization(data, this.DeserializedObjects);
+                        stateDescription.Deserialization(data, this.deserializedObjects, requiredPeople);
                         dataContext.Descriptions.Add(stateDescription);
-                        this.DeserializedObjects.Add(long.Parse(data[1]), stateDescription);
+                        this.deserializedObjects.Add(long.Parse(data[1]), stateDescription);
                         break;
                     default:
                         break;
                 }
             }
+
+            foreach(KeyValuePair<object, List<long>> pair in requiredPeople)
+            {
+                ((StateDescription)pair.Key).Owner = (Person)deserializedObjects[pair.Value[0]];
+            }
+
+            foreach (KeyValuePair<object, List<long>> pair in requiredStateDescriptions)
+            {
+                foreach(long stateId in pair.Value)
+                {
+                    ((Person)pair.Key).Books.Add((StateDescription)deserializedObjects[stateId]);
+                }
+            }
+
         }
     }
 }

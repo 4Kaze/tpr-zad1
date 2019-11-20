@@ -7,13 +7,10 @@ using SerializationModule;
 namespace Classes
 {
     [Serializable]
-    [XmlRoot("DescriptionRoot")]
     public class StateDescription : ICloneable, IOwnSerializable
     {
         private static long nextID = 0;
-        [XmlIgnore]
         private long code;
-        [XmlElement("code")]
         public long Code
         {
             get { return code; }
@@ -24,14 +21,11 @@ namespace Classes
                 code = value;
             }
         }
-        [XmlElement("book")]
         public Catalog Book { set; get; }
-        [XmlElement("avaliable")]
         public bool Availabile { set; get; }
-        [XmlElement("purchaseDate")]
         public DateTimeOffset PurchaseDate { get; set; }
-        [XmlElement("location")]
         public string Location { set; get; }
+        public Person Owner { set; get; }
 
         public StateDescription(Catalog book, DateTimeOffset purchaseDate, string location)
         {
@@ -49,13 +43,14 @@ namespace Classes
             Availabile = description.Availabile;
             PurchaseDate = description.PurchaseDate;
             Location = description.Location;
+            Owner = description.Owner;
         }
 
         public StateDescription() { }
 
         public override string ToString()
         {
-            return "StateDescription id " + this.Code + " catalog: " + this.Book + ", purchase date: " + this.PurchaseDate + ", where " + this.Location + ".";
+            return "StateDescription id: " + this.Code + " catalog: " + this.Book.Code + ", purchase date: " + this.PurchaseDate + ", location: " + this.Location + ", owner: " + Owner.Code + ".";
         }
 
         public override bool Equals(Object obj)
@@ -92,16 +87,36 @@ namespace Classes
             serializedData += this.Availabile.ToString() + ";";
             serializedData += this.PurchaseDate.ToString() + ";";
             serializedData += this.Location + ";";
+            if (this.Owner != null)
+                serializedData += idGenerator.GetId(this.Owner, out firstTime) + ";";
+            else
+                serializedData += ";";
             return serializedData;
         }
 
-        public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects)
+        public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects, Dictionary<object, List<long>> requiredObjects)
         {
             this.Code = long.Parse(data[2]);
             this.Book = (Catalog)deserializedObjects[long.Parse(data[3])]; 
             this.Availabile = bool.Parse(data[4]);
             this.PurchaseDate = DateTimeOffset.Parse(data[5]);
             this.Location = data[6];
+            if (data[7].Length == 0)
+                return;
+            long personId = long.Parse(data[7]);
+            if (deserializedObjects.ContainsKey(personId))
+            {
+                this.Owner = (Person)deserializedObjects[personId];
+            }
+            else
+            {
+                {
+                    List<long> list = new List<long>();
+                    list.Add(personId);
+                    requiredObjects.Add(this, list);
+                }
+            }
+            
         }
     }
 }

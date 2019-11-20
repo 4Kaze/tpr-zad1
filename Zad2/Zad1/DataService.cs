@@ -20,6 +20,8 @@ namespace Classes
             if (!state.Availabile) throw new BookUnavailableException(state);
 
             state.Availabile = false;
+            person.Books.Add(state);
+            state.Owner = person;
             repository.AddTransaction(new BorrowEvent(person, state, DateTimeOffset.Now));
         }
 
@@ -31,6 +33,8 @@ namespace Classes
 
             Person person = GetPersonByBorrowedBook(state);
             state.Availabile = true;
+            person.Books.Remove(state);
+            state.Owner = null;
             repository.AddTransaction(new ReturnEvent(person, state, DateTimeOffset.Now));
         }
 

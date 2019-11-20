@@ -7,13 +7,10 @@ using System.Xml.Serialization;
 namespace Classes
 {
     [Serializable]
-    [XmlRoot("CatalogRoot")]
     public class Catalog : ICloneable, IOwnSerializable
     {
         private static long nextID = 0;
-        [XmlIgnore]
         private long code;
-        [XmlElement("code")]
         public long Code
         {
             get { return code; }
@@ -24,11 +21,9 @@ namespace Classes
                 code = value;
             }
         }
-        [XmlElement("title")]
+
         public string Title { get; set; }
-        [XmlElement("description")]
         public string Description { get; set; }
-        [XmlElement("author")]
         public string Author { get; set; }
 
         public Catalog(string title, string description, string author)
@@ -51,7 +46,7 @@ namespace Classes
 
         public override string ToString()
         {
-            return "Book id " + this.Code + " Title: " + this.Title + ", description: " + this.Description + ", author: " + this.Author;
+            return "Book id: " + this.Code + ", title: " + this.Title + ", description: " + this.Description + ", author: " + this.Author;
         }
 
         public override bool Equals(Object obj)
@@ -90,7 +85,7 @@ namespace Classes
             return serializedData;
         }
 
-        public void Deserialization(string[] data, Dictionary<long, Object>  deserializedObjects)
+        public void Deserialization(string[] data, Dictionary<long, Object>  deserializedObjects, Dictionary<object, List<long>> r)
         {
             this.Code = long.Parse(data[2]);
             this.Title = data[3];

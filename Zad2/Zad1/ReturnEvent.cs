@@ -5,7 +5,6 @@ using System.Xml.Serialization;
 namespace Classes
 {
     [Serializable]
-    [XmlRoot("Return")]
     public class ReturnEvent : Event
     {
         public ReturnEvent(Person causer, StateDescription bookState, DateTimeOffset date) : base(causer, bookState, date)

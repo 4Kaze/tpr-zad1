@@ -7,15 +7,10 @@ using SerializationModule;
 namespace Classes
 {
     [Serializable]
-    [XmlInclude(typeof(BorrowEvent))]
-    [XmlInclude(typeof(ReturnEvent))]
-    [XmlRoot("EventRoot")]
     public abstract class Event : ICloneable, IOwnSerializable
     {
         private static long nextID = 0;
-        [XmlIgnore]
         private long code;
-        [XmlElement("code")]
         public long Code
         {
             get { return code; }
@@ -26,11 +21,8 @@ namespace Classes
                 code = value;
             }
         }
-        [XmlElement("causer")]
         public Person Causer { get; set; }
-        [XmlElement("book")]
         public StateDescription BookState { get; set; }
-        [XmlElement("date")]
         public DateTimeOffset Date { get; set; }
 
         public Event(Person causer, StateDescription bookState, DateTimeOffset date)
@@ -48,7 +40,7 @@ namespace Classes
 
         public override string ToString()
         {
-            return "Event id " + this.Code + " causer: " + this.Causer + ", book state" + this.BookState + ", date: " + this.Date + ".";
+            return "Event id: " + this.Code + " causer: " + this.Causer.Code + ", book state" + this.BookState.Code + ", date: " + this.Date + ".";
         }
 
         public override bool Equals(Object obj)
@@ -87,7 +79,7 @@ namespace Classes
             return serializedData;
         }
 
-        public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects)
+        public void Deserialization(string[] data, Dictionary<long, Object> deserializedObjects, Dictionary<object, List<long>> r) 
         {
             this.Code = long.Parse(data[2]);
             this.Causer = (Person)deserializedObjects[long.Parse(data[3])];

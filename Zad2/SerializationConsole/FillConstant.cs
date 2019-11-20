@@ -11,24 +11,31 @@ namespace SerializationConsole
             Person person2 = new Person("Ugho", "Olkag", "Putar 34");
             Person person3 = new Person("Toby", "Vercer", "Palatem 51");
 
-            dataContext.Clients.Add(person1);
-            dataContext.Clients.Add(person2);
-            dataContext.Clients.Add(person3);
-
             // Catalog Data Fill
 
             Catalog catalog1 = new Catalog("Pride and Prejudice", "This is description1", "Jane Austen");
             Catalog catalog2 = new Catalog("War and Peace", "This is description2", "Lew Tolstoj");
             Catalog catalog3 = new Catalog("Metro 2033", "This is description3", "Dimitry Glukhovsky");
 
-            dataContext.Books.Add(1, catalog1);
-            dataContext.Books.Add(2, catalog2);
-            dataContext.Books.Add(3, catalog3);
-
             // StateDescription Data Fill
             StateDescription stateDescription1 = new StateDescription(catalog1, System.DateTimeOffset.Now, "Somewhere");
             StateDescription stateDescription2 = new StateDescription(catalog2, System.DateTimeOffset.Now, "There");
             StateDescription stateDescription3 = new StateDescription(catalog3, System.DateTimeOffset.Now, "Here");
+
+            stateDescription1.Owner = person1;
+            person1.Books.Add(stateDescription1);
+            stateDescription2.Owner = person1;
+            person1.Books.Add(stateDescription2);
+            stateDescription3.Owner = person2;
+            person2.Books.Add(stateDescription3);
+
+            dataContext.Clients.Add(person1);
+            dataContext.Clients.Add(person2);
+            dataContext.Clients.Add(person3);
+
+            dataContext.Books.Add(1, catalog1);
+            dataContext.Books.Add(2, catalog2);
+            dataContext.Books.Add(3, catalog3);
 
             dataContext.Descriptions.Add(stateDescription1);
             dataContext.Descriptions.Add(stateDescription2);
@@ -43,6 +50,7 @@ namespace SerializationConsole
             dataContext.Transactions.Add(happening1);
             dataContext.Transactions.Add(happening2);
             dataContext.Transactions.Add(happening3);
+
         }
     }
 }

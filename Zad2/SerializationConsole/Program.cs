@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Classes;
 using SerializationModule;
@@ -20,7 +21,7 @@ namespace SerializationConsole
             dataContext = new DataContext();
             fillInterface.FillData(dataContext);
 
-            while(true)
+            while (true)
             {
                 doMainMenu();
                 Console.WriteLine();
@@ -53,7 +54,7 @@ namespace SerializationConsole
             while (mode == -1)
             {
                 char choice = Console.ReadKey().KeyChar;
-                switch(choice)
+                switch (choice)
                 {
                     case '1':
                         mode = 1;
@@ -69,12 +70,13 @@ namespace SerializationConsole
 
             DataContext deserializedContext = null;
 
-            if(mode == 1)
+            if (mode == 1)
             {
                 Stream stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None);
                 serializator.Serialize(dataContext, stream);
                 stream.Close();
-            } else
+            }
+            else
             {
                 Stream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
                 deserializedContext = serializator.Deserialize(stream);
@@ -108,10 +110,7 @@ namespace SerializationConsole
                 stream.Close();
             }
 
-            foreach (Event e in deserializedContext.Transactions)
-            {
-                Console.WriteLine(e);
-            }
+            printDataContext(deserializedContext);
         }
 
         private void doMainMenu()
@@ -144,9 +143,29 @@ namespace SerializationConsole
             }
         }
 
+        public void printDataContext(DataContext dataContext)
+        {
+            Console.WriteLine("==================================\n\tDATA CONTEXT\n==================================\n");
+            Console.WriteLine("Clients:");
+            foreach (Person p in dataContext.Clients)
+                Console.WriteLine(p.ToString());
+            Console.WriteLine("\nBooks:");
+            foreach (KeyValuePair<long, Catalog> c in dataContext.Books)
+                Console.WriteLine("[" + c.Key + "]: " + c.Value.ToString());
+            Console.WriteLine("\nStates:");
+            foreach (StateDescription s in dataContext.Descriptions)
+                Console.WriteLine(s.ToString());
+            Console.WriteLine("\nTransactions:");
+            foreach (Event e in dataContext.Transactions)
+                Console.WriteLine(e.ToString());
+        }
+
         enum Format
         {
             BINARY, OWN
         }
+
     }
+
+
 }
