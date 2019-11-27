@@ -31,9 +31,9 @@ namespace ConsoleTask2
                 SerializationBinder binder = new StringBinder();
                 Formatter formatter = new StringFormatter(binder);
 
-                Console.WriteLine("Do you want to serialize [s] or deserialize [d]: \n");
+                Console.WriteLine("\nDo you want to serialize [s] or deserialize [d]: \n");
                 char choice = Console.ReadKey().KeyChar;
-                Console.WriteLine("Which class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: \n");
+                Console.WriteLine("\nWhich class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: \n");
                 char example = Console.ReadKey().KeyChar;
                 switch (choice)
                 {
@@ -146,9 +146,9 @@ namespace ConsoleTask2
             }
             if(format == Format.XML)
             {
-                Console.WriteLine("Do you want to serialize [s] or deserialize [d]: ");
+                Console.WriteLine("\nDo you want to serialize [s] or deserialize [d]: ");
                 char choice = Console.ReadKey().KeyChar;
-                Console.WriteLine("Which class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: ");
+                Console.WriteLine("\nWhich class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: ");
                 char example = Console.ReadKey().KeyChar;
                 switch (choice)
                 {
@@ -241,7 +241,7 @@ namespace ConsoleTask2
             }
             else
             {
-                Console.WriteLine("Wrong format was choosen.");
+                Console.WriteLine("\nWrong format was choosen.");
             }
         }
 
