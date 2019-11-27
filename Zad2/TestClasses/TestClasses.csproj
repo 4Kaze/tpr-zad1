@@ -57,7 +57,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\StringFormatter.cs" />
     <Compile Include="Serialization\StringBinder.cs" />
-    <Compile Include="Serialization\TestFormatter.cs" />
     <Compile Include="Serialization\XmlSerializationHelper.cs" />
   </ItemGroup>
   <ItemGroup>

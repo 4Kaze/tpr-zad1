@@ -57,7 +57,14 @@ namespace TestClasses.Serialization
                             {
                                 pendingObjects.Add(serializationInfo, new List<Tuple<string, Type, long>>());
                             }
-                            pendingObjects[serializationInfo].Add(new Tuple<string, Type, long>(parts[1], Type.GetType(parts[0]), long.Parse(parts[2].Substring(1))));
+                            if (parts[2].StartsWith("&-1"))
+                            {
+                                Type type = Type.GetType(parts[0]);
+                                serializationInfo.AddValue(parts[1], null, type);
+                            } else
+                            {
+                                pendingObjects[serializationInfo].Add(new Tuple<string, Type, long>(parts[1], Type.GetType(parts[0]), long.Parse(parts[2].Substring(1))));
+                            }                            
                         } else
                         {
                             Type type = Type.GetType(parts[0]);
@@ -138,7 +145,7 @@ namespace TestClasses.Serialization
 
         protected override void WriteDateTime(DateTime val, string name)
         {
-            SerilizedData += val.GetType() + "=" + name + "=" + val.ToUniversalTime().ToString() + ";";
+            SerilizedData += val.GetType() + "=" + name + "=" + val.ToString() + ";";
         }
 
         protected override void WriteDecimal(decimal val, string name)
@@ -223,7 +230,7 @@ namespace TestClasses.Serialization
             }
             else
             {
-                SerilizedData += "null" + "=" + name + "=-1" + ";";
+                SerilizedData += type + "=" + name + "=&-1;";
             }
         }
 
