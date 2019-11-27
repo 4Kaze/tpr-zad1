@@ -27,7 +27,7 @@ namespace ConsoleTask2
 
             a_own.Reference = b_own;
             b_own.Reference = c_own;
-            c_own.Reference = a_own;
+            //c_own.Reference = a_own;
 
 
 
