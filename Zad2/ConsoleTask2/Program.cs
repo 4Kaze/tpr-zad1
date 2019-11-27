@@ -42,6 +42,12 @@ namespace ConsoleTask2
                 f.Serialize(s, a_own);
             }
 
+            using (FileStream s = new FileStream("example-a.txt", FileMode.Open))
+            {
+                IFormatter f = new StringFormatter(binder);
+                object o = f.Deserialize(s);
+                o.ToString();
+            }
 
 
             if (desA.Reference.Reference.Reference.FloatTest != a.Reference.Reference.Reference.FloatTest)

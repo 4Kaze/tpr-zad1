@@ -36,5 +36,6 @@ namespace TestClasses
             info.AddValue("date", DateTest);
             info.AddValue("refercnceC", Reference, typeof(ExampleC));
         }
+
     }
 }

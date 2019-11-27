@@ -13,7 +13,7 @@ namespace TestClasses.Serialization
 
         public override void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
-            typeName = serializedType.Name;
+            typeName = serializedType.FullName;
             assemblyName = serializedType.Assembly.FullName;
         }
     }

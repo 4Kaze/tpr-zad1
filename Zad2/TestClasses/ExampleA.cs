@@ -25,6 +25,7 @@ namespace TestClasses
             this.StringTest = info.GetString("string");
             this.DateTest = info.GetDateTime("date");
             this.Reference = (ExampleB)info.GetValue("refercnceB", typeof(ExampleB));
+            Console.WriteLine("hej");
         }
 
 
@@ -36,5 +37,6 @@ namespace TestClasses
             info.AddValue("date", DateTest);
             info.AddValue("refercnceB", Reference, typeof(ExampleB));
         }
+
     }
 }
