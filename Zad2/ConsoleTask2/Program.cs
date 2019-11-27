@@ -27,217 +27,272 @@ namespace ConsoleTask2
         {
             if(format == Format.OWN)
             {
-
+                bool run = true;
+                bool walk = true;
                 SerializationBinder binder = new StringBinder();
                 Formatter formatter = new StringFormatter(binder);
 
-                Console.WriteLine("\nDo you want to serialize [s] or deserialize [d]: \n");
-                char choice = Console.ReadKey().KeyChar;
-                Console.WriteLine("\nWhich class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: \n");
-                char example = Console.ReadKey().KeyChar;
-                switch (choice)
+                while (run)
                 {
-                    case 's':
 
-                        ExampleA exampleA = new ExampleA(1.0f, "testA", new DateTime(1998, 12, 1, 0, 0, 0), null);
-                        ExampleB exampleB = new ExampleB(2.0f, "testB", new DateTime(1999, 12, 1, 0, 0, 0), null);
-                        ExampleC exampleC = new ExampleC(3.0f, "testC", new DateTime(2000, 12, 1, 0, 0, 0), null);
+                    Console.WriteLine("\nDo you want to serialize [s] or deserialize [d]: \n");
+                    char choice = Console.ReadKey().KeyChar;
 
-                        exampleA.Reference = exampleB;
-                        exampleB.Reference = exampleC;
-                        exampleC.Reference = exampleA;
+                    switch (choice)
+                    {
+                        case 's':
+
+                            ExampleA exampleA = new ExampleA(1.0f, "testA", new DateTime(1998, 12, 1, 0, 0, 0), null);
+                            ExampleB exampleB = new ExampleB(2.0f, "testB", new DateTime(1999, 12, 1, 0, 0, 0), null);
+                            ExampleC exampleC = new ExampleC(3.0f, "testC", new DateTime(2000, 12, 1, 0, 0, 0), null);
+
+                            exampleA.Reference = exampleB;
+                            exampleB.Reference = exampleC;
+                            exampleC.Reference = exampleA;
 
 
-                        switch (example)
-                        {
-                            case 'a':
-                                using(Stream stream = new FileStream("Own Serialization Example A.txt", FileMode.Create))
+                            while (walk)
+                            {
+                                Console.WriteLine("\nWhich class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: \n");
+                                char example = Console.ReadKey().KeyChar;
+
+                                switch (example)
                                 {
-                                    formatter.Serialize(stream, exampleA);
-                                }
-                                break;
+                                    case 'a':
+                                        using (Stream stream = new FileStream("Own Serialization Example A.txt", FileMode.Create))
+                                        {
+                                            formatter.Serialize(stream, exampleA);
+                                        }
+                                        walk = false;
+                                        break;
 
-                            case 'b':
-                                using (Stream stream = new FileStream("Own Serialization Example B.txt", FileMode.Create))
+                                    case 'b':
+                                        using (Stream stream = new FileStream("Own Serialization Example B.txt", FileMode.Create))
+                                        {
+                                            formatter.Serialize(stream, exampleB);
+                                        }
+                                        walk = false;
+                                        break;
+
+                                    case 'c':
+                                        using (Stream stream = new FileStream("Own Serialization Example C.txt", FileMode.Create))
+                                        {
+                                            formatter.Serialize(stream, exampleC);
+                                        }
+                                        walk = false;
+                                        break;
+
+                                    default:
+                                        Console.WriteLine("\nInvalid choice of clas for example.");
+                                        break;
+                                }
+                            }
+
+                            run = false;
+                            break;
+                        case 'd':
+
+                            ExampleA exampleA_Des = null;
+                            ExampleB exampleB_Des = null;
+                            ExampleC exampleC_Des = null;
+
+                            while (walk)
+                            {
+                                Console.WriteLine("\nWhich class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: \n");
+                                char example = Console.ReadKey().KeyChar;
+
+                                switch (example)
                                 {
-                                    formatter.Serialize(stream, exampleB);
-                                }
-                                break;
-
-                            case 'c':
-                                using (Stream stream = new FileStream("Own Serialization Example C.txt", FileMode.Create))
-                                {
-                                    formatter.Serialize(stream, exampleC);
-                                }
-                                break;
-
-                            default:
-                                Console.WriteLine("\nInvalid choice of clas for example.");
-                                break;
-                        }
-
-                        
-                        break;
-                    case 'd':
-
-                        ExampleA exampleA_Des = null;
-                        ExampleB exampleB_Des = null;
-                        ExampleC exampleC_Des = null;
+                                    case 'a':
+                                        using (Stream stream = new FileStream("Own Serialization Example A.txt", FileMode.Open))
+                                        {
+                                            exampleA_Des = (ExampleA)formatter.Deserialize(stream);
+                                        }
+                                        if (exampleA_Des.Reference.Reference.Reference == exampleA_Des)
+                                        {
+                                            Console.WriteLine("\nDeserialization ended correctly.");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("\nSomething went wrong.");
+                                        }
+                                        walk = false;
+                                        break;
 
 
-                        switch (example)
-                        {
-                            case 'a':
-                                using (Stream stream = new FileStream("Own Serialization Example A.txt", FileMode.Open))
-                                {
-                                    exampleA_Des = (ExampleA)formatter.Deserialize(stream);
-                                }
-                                if (exampleA_Des.Reference.Reference.Reference == exampleA_Des)
-                                {
-                                    Console.WriteLine("\nDeserialization ended correctly.");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nSomething went wrong.");
-                                }
-                                break;
+                                    case 'b':
+                                        using (Stream stream = new FileStream("Own Serialization Example B.txt", FileMode.Open))
+                                        {
+                                            exampleB_Des = (ExampleB)formatter.Deserialize(stream);
+                                        }
+                                        if (exampleB_Des.Reference.Reference.Reference == exampleB_Des)
+                                        {
+                                            Console.WriteLine("\nDeserialization ended correctly.");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("\nSomething went wrong.");
+                                        }
+                                        walk = false;
+                                        break;
 
+                                    case 'c':
+                                        using (Stream stream = new FileStream("Own Serialization Example C.txt", FileMode.Open))
+                                        {
+                                            exampleC_Des = (ExampleC)formatter.Deserialize(stream);
+                                        }
+                                        if (exampleC_Des.Reference.Reference.Reference == exampleC_Des)
+                                        {
+                                            Console.WriteLine("\nDeserialization ended correctly.");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("\nSomething went wrong.");
+                                        }
+                                        walk = false;
+                                        break;
 
-                            case 'b':
-                                using (Stream stream = new FileStream("Own Serialization Example B.txt", FileMode.Open))
-                                {
-                                    exampleB_Des = (ExampleB)formatter.Deserialize(stream);
+                                    default:
+                                        Console.WriteLine("\nInvalid choice of clas for example.");
+                                        break;
                                 }
-                                if (exampleB_Des.Reference.Reference.Reference == exampleB_Des)
-                                {
-                                    Console.WriteLine("\nDeserialization ended correctly.");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nSomething went wrong.");
-                                }
-                                break;
 
-                            case 'c':
-                                using (Stream stream = new FileStream("Own Serialization Example C.txt", FileMode.Open))
-                                {
-                                    exampleC_Des = (ExampleC)formatter.Deserialize(stream);
-                                }
-                                if (exampleC_Des.Reference.Reference.Reference == exampleC_Des)
-                                {
-                                    Console.WriteLine("\nDeserialization ended correctly.");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nSomething went wrong.");
-                                }
-                                break;
+                            }
+                            run = false;
+                            break;
 
-                            default:
-                                Console.WriteLine("\nInvalid choice of clas for example.");
-                                break;
-                        }
-
-                        break;
-                    default:
-                        Console.WriteLine("\nInvalid choice.");
-                        break;
+                        default:
+                            Console.WriteLine("\nInvalid choice.");
+                            break;
+                    }
                 }
             }
-            if(format == Format.XML)
+            else if(format == Format.XML)
             {
-                Console.WriteLine("\nDo you want to serialize [s] or deserialize [d]: ");
-                char choice = Console.ReadKey().KeyChar;
-                Console.WriteLine("\nWhich class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: ");
-                char example = Console.ReadKey().KeyChar;
-                switch (choice)
+                bool run = true;
+                bool walk = true;
+
+
+
+                while (run)
                 {
-                    case 's':
 
-                        ExampleXmlA exampleA = new ExampleXmlA(1.0f, "testA", new DateTime(1998, 12, 1, 0, 0, 0), null);
-                        ExampleXmlB exampleB = new ExampleXmlB(2.0f, "testB", new DateTime(1999, 12, 1, 0, 0, 0), null);
-                        ExampleXmlC exampleC = new ExampleXmlC(3.0f, "testC", new DateTime(2000, 12, 1, 0, 0, 0), null);
+                    Console.WriteLine("\nDo you want to serialize [s] or deserialize [d]: \n");
+                    char choice = Console.ReadKey().KeyChar;
 
-                        exampleA.Reference = exampleB;
-                        exampleB.Reference = exampleC;
-                        exampleC.Reference = exampleA;
+                    switch (choice)
+                    {
+                        case 's':
 
-                        switch (example)
-                        {
-                            case 'a':
-                                XmlSerializationHelper<ExampleXmlA>.Serialize("Xml Serialization Example A.txt", exampleA);
-                                break;
+                            ExampleXmlA exampleA = new ExampleXmlA(1.0f, "testA", new DateTime(1998, 12, 1, 0, 0, 0), null);
+                            ExampleXmlB exampleB = new ExampleXmlB(2.0f, "testB", new DateTime(1999, 12, 1, 0, 0, 0), null);
+                            ExampleXmlC exampleC = new ExampleXmlC(3.0f, "testC", new DateTime(2000, 12, 1, 0, 0, 0), null);
 
-                            case 'b':
-                                XmlSerializationHelper<ExampleXmlB>.Serialize("Xml Serialization Example B.txt", exampleB);
-                                break;
+                            exampleA.Reference = exampleB;
+                            exampleB.Reference = exampleC;
+                            exampleC.Reference = exampleA;
 
-                            case 'c':
-                                XmlSerializationHelper<ExampleXmlC>.Serialize("Xml Serialization Example C.txt", exampleC);
-                                break;
-
-                            default:
-                                Console.WriteLine("\nInvalid choice of clas for example.");
-                                break;
-                        }
-                        break;
+                            while (walk)
+                            {
+                                
+                                Console.WriteLine("\nWhich class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: ");
+                                char example = Console.ReadKey().KeyChar;
 
 
-                    case 'd':
 
-                        ExampleXmlA exampleA_Des = null;
-                        ExampleXmlB exampleB_Des = null;
-                        ExampleXmlC exampleC_Des = null;
-
-                        switch (example)
-                        {
-                            case 'a':
-                                exampleA_Des = XmlSerializationHelper<ExampleXmlA>.Deserilize("Xml Serialization Example A.txt");
-                                if (exampleA_Des.Reference.Reference.Reference == exampleA_Des)
+                                switch (example)
                                 {
-                                    Console.WriteLine("\nDeserialization ended correctly.");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nSomething went wrong.");
-                                }
-                                break;
+                                    case 'a':
+                                        XmlSerializationHelper<ExampleXmlA>.Serialize("Xml Serialization Example A.txt", exampleA);
+                                        walk = false;
+                                        break;
 
-                            case 'b':
-                                exampleB_Des = XmlSerializationHelper<ExampleXmlB>.Deserilize("Xml Serialization Example B.txt");
-                                if (exampleB_Des.Reference.Reference.Reference == exampleB_Des)
-                                {
-                                    Console.WriteLine("\nDeserialization ended correctly.");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nSomething went wrong.");
-                                }
-                                break;
+                                    case 'b':
+                                        XmlSerializationHelper<ExampleXmlB>.Serialize("Xml Serialization Example B.txt", exampleB);
+                                        walk = false;
+                                        break;
 
-                            case 'c':
-                                exampleC_Des = XmlSerializationHelper<ExampleXmlC>.Deserilize("Xml Serialization Example C.txt");
-                                if (exampleC_Des.Reference.Reference.Reference == exampleC_Des)
-                                {
-                                    Console.WriteLine("\nDeserialization ended correctly.");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("\nSomething went wrong.");
-                                }
-                                break;
+                                    case 'c':
+                                        XmlSerializationHelper<ExampleXmlC>.Serialize("Xml Serialization Example C.txt", exampleC);
+                                        walk = false;
+                                        break;
 
-                            default:
-                                Console.WriteLine("\nInvalid choice of clas for example.");
-                                break;
-                        }
-                        break;
+                                    default:
+                                        Console.WriteLine("\nInvalid choice of clas for example.");
+                                        break;
+                                }
+                            }
+                            run = false;
+                            break;
+
+                        case 'd':
+
+                            ExampleXmlA exampleA_Des = null;
+                            ExampleXmlB exampleB_Des = null;
+                            ExampleXmlC exampleC_Des = null;
 
 
-                    default:
-                        Console.WriteLine("\nInvalid choice.");
-                        break;
+                            while (walk)
+                            {
+                                Console.WriteLine("\nWhich class from test one you want to serialize, ExampleA [a], ExampleB [b], ExampleC [c]: ");
+                                char example = Console.ReadKey().KeyChar;
+                                switch (example)
+                                {
+                                    case 'a':
+                                        exampleA_Des = XmlSerializationHelper<ExampleXmlA>.Deserilize("Xml Serialization Example A.txt");
+                                        if (exampleA_Des.Reference.Reference.Reference == exampleA_Des)
+                                        {
+                                            Console.WriteLine("\nDeserialization ended correctly.");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("\nSomething went wrong.");
+                                        }
+                                        walk = false;
+                                        break;
+
+                                    case 'b':
+                                        exampleB_Des = XmlSerializationHelper<ExampleXmlB>.Deserilize("Xml Serialization Example B.txt");
+                                        if (exampleB_Des.Reference.Reference.Reference == exampleB_Des)
+                                        {
+                                            Console.WriteLine("\nDeserialization ended correctly.");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("\nSomething went wrong.");
+                                        }
+                                        walk = false;
+                                        break;
+
+                                    case 'c':
+                                        exampleC_Des = XmlSerializationHelper<ExampleXmlC>.Deserilize("Xml Serialization Example C.txt");
+                                        if (exampleC_Des.Reference.Reference.Reference == exampleC_Des)
+                                        {
+                                            Console.WriteLine("\nDeserialization ended correctly.");
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("\nSomething went wrong.");
+                                        }
+                                        walk = false;
+                                        break;
+
+                                    default:
+                                        Console.WriteLine("\nInvalid choice of clas for example.");
+                                        break;
+                                }
+                            }
+                                run = false;
+                            break;
+
+
+                        default:
+                            Console.WriteLine("\nInvalid choice.");
+                            break;
+                    }
                 }
+
+
             }
             else
             {
