@@ -40,11 +40,22 @@ namespace LinqTests
             String productsName = LinqTools.GetProductVendorByProductName("Adjustable Race");
             Assert.AreEqual(productsName, "Litware, Inc.");
         }
+
         [TestMethod]
         public void ProductsWithNReviews()
         {
-            List<Product> products = LinqTools.GetProductsWithNRecentReviews(4);
-            Assert.AreEqual(products.Count, 4);
+            List<Product> products = LinqTools.GetProductsWithNRecentReviews(1);
+            Assert.AreEqual(products.Count, 2);
+            Assert.IsNotNull(products.Find(product => product.ProductID == 709));
+            Assert.IsNotNull(products.Find(product => product.ProductID == 798));
+        }
+
+        [TestMethod]
+        public void ProductsWithNReviews2()
+        {
+            List<Product> products = LinqTools.GetProductsWithNRecentReviews(2);
+            Assert.AreEqual(products.Count, 1);
+            Assert.IsNotNull(products.Find(product => product.ProductID == 937));
         }
 
 

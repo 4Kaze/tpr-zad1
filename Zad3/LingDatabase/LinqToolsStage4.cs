@@ -8,7 +8,7 @@ namespace LingDatabase
 {
     public static class LinqToolsStage4
     {
-        public static List<Product> GetWithoutCategoryProducts(this List<Product> products)
+        public static List<Product> GetProductsWithoutCategory(this List<Product> products)
         {
             return products.Where(p => p.ProductSubcategory == null).ToList();
         }
@@ -17,7 +17,7 @@ namespace LingDatabase
 
         public static List<Product> GetProductsAsPage(this List<Product> products, int pageNumber, int productsNumber)
         {
-            return null;
+            return products.Skip(productsNumber * (pageNumber-1)).Take(productsNumber).ToList();
         }
 
 
@@ -28,10 +28,10 @@ namespace LingDatabase
             var answer = (from product in products
                           from vendor in vendors
                           where vendor.ProductID.Equals(product.ProductID)
-                          select product.Name + "-" + vendor.Vendor.Name + "\n").ToList();
+                          select product.Name + "-" + vendor.Vendor.Name).ToList();
             foreach(Object ans in answer)
             {
-                result += ans;
+                result += ans + Environment.NewLine;
             }
             return result;
 

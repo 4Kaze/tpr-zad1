@@ -49,7 +49,6 @@ namespace LingDatabase
             return answer[0];
         }
 
-        //I don't have any idea yet//
         public static List<Product> GetProductsWithNRecentReviews(int howManyReviews)
         {
             DataClasses1DataContext dataContext = new DataClasses1DataContext();
@@ -57,8 +56,7 @@ namespace LingDatabase
             Table<ProductReview> reviewes = dataContext.GetTable<ProductReview>();
 
             List<Product> answer = (from product in products
-                                    from review in reviewes
-                                    where product.ProductID.Equals(review.ProductID)
+                                    where product.ProductReviews.Count == howManyReviews
                                     select product).ToList();
             return answer;
         }
