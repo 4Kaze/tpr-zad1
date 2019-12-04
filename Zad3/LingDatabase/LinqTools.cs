@@ -32,7 +32,7 @@ namespace LingDatabase
         }
 
 
-        public static string GetProductNamesByVendorName(string vendorName)
+        public static List<string>  GetProductNamesByVendorName(string vendorName)
         {
             using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
             {
@@ -40,7 +40,7 @@ namespace LingDatabase
                 List<string> answer = (from productVendor in productsVendors
                                        where productVendor.Vendor.Name.Equals(vendorName)
                                        select productVendor.Product.Name).ToList();
-                return answer[0];
+                return answer;
             }
         }
 
@@ -79,7 +79,8 @@ namespace LingDatabase
                 Table<ProductReview> reviewes = dataContext.GetTable<ProductReview>();
                 List<Product> answer = (from review in reviewes
                                         orderby review.ReviewDate descending
-                                        select review.Product).Take(howManyProducts).ToList();
+                                        group review.Product by review.ProductID into p
+                                        select p.First()).Take(howManyProducts).ToList();
                 return answer;
             }
         }

@@ -29,8 +29,8 @@ namespace LinqTests
         [TestMethod]
         public void ProductNameByVendor()
         {
-            string productsName = LinqTools.GetProductNamesByVendorName("Litware, Inc.");
-            Assert.AreEqual(productsName, "Adjustable Race");
+            List<string> productsName = LinqTools.GetProductNamesByVendorName("Litware, Inc.");
+            Assert.AreEqual(productsName.Count, 1);
         }
 
 
@@ -76,7 +76,7 @@ namespace LinqTests
             Assert.AreEqual(products.Count, 3);
             Assert.AreEqual(products[0].Name, "HL Mountain Pedal");
             Assert.AreEqual(products[1].Name, "Road-550-W Yellow, 40");
-            Assert.AreEqual(products[2].Name, "HL Mountain Pedal");
+            Assert.AreEqual(products[2].Name, "Mountain Bike Socks, M");
         }
 
 
