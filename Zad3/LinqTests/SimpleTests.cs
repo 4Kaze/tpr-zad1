@@ -11,10 +11,10 @@ namespace LinqTests
         [TestMethod]
         public void NameContainsGet()
         {
-            List<Product> products = LinqTools.GetProductsByName("ball");
+            List<Product> products = LinqTools.GetProductsByName("Ball");
             Assert.AreEqual(products.Count, 3);
-            products = LinqTools.GetProductsByName("Ball");
-            Assert.AreEqual(products.Count, 3);
+            foreach (Product product in products)
+                Assert.IsTrue(product.Name.Contains("Ball"));
         }
 
 
@@ -29,15 +29,15 @@ namespace LinqTests
         [TestMethod]
         public void ProductNameByVendor()
         {
-            List<String> productsName = LinqTools.GetProductNamesByVendorName("Litware, Inc.");
-            Assert.AreEqual(productsName[0], "Adjustable Race");
+            string productsName = LinqTools.GetProductNamesByVendorName("Litware, Inc.");
+            Assert.AreEqual(productsName, "Adjustable Race");
         }
 
 
         [TestMethod]
         public void VendorNameByProduct()
         {
-            String productsName = LinqTools.GetProductVendorByProductName("Adjustable Race");
+            string productsName = LinqTools.GetProductVendorByProductName("Adjustable Race");
             Assert.AreEqual(productsName, "Litware, Inc.");
         }
 
@@ -60,6 +60,16 @@ namespace LinqTests
 
 
         [TestMethod]
+        public void NProductsFromCategory()
+        {
+            List<Product> products = LinqTools.GetNProductsFromCategory("Bikes", 5);
+            Assert.AreEqual(products.Count, 5);
+            foreach (Product product in products)
+                Assert.AreEqual(product.ProductSubcategory.ProductCategory.Name, "Bikes");
+        }
+
+
+        [TestMethod]
         public void NProductsByReviews()
         {
             List<Product> products = LinqTools.GetNRecentlyReviewedProducts(3);
@@ -67,19 +77,6 @@ namespace LinqTests
             Assert.AreEqual(products[0].Name, "HL Mountain Pedal");
             Assert.AreEqual(products[1].Name, "Road-550-W Yellow, 40");
             Assert.AreEqual(products[2].Name, "HL Mountain Pedal");
-        }
-
-
-        [TestMethod]
-        public void NProductsFromCategory()
-        {
-            List<Product> products = LinqTools.GetNProductsFromCategory("Bikes", 5);
-            Assert.AreEqual(products.Count, 5);
-            Assert.AreEqual(products[0].Name, "Mountain-100 Silver, 38");
-            Assert.AreEqual(products[1].Name, "Mountain-100 Silver, 42");
-            Assert.AreEqual(products[2].Name, "Mountain-100 Silver, 44");
-            Assert.AreEqual(products[3].Name, "Mountain-100 Silver, 48");
-            Assert.AreEqual(products[4].Name, "Mountain-100 Black, 38");
         }
 
 

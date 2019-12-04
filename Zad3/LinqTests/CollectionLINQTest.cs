@@ -29,7 +29,7 @@ namespace LinqTests
         }
 
         [TestMethod]
-        public void ProductsWithNReviews()
+            public void ProductsWithNReviews()
         {
             List<MyProduct> products = dataContext.GetProductsWithNRecentReviews(1);
             Assert.AreEqual(products.Count, 2);

@@ -8,68 +8,80 @@ namespace LingDatabase
     {
         public static List<Product> GetProductsByName(string nameContains)
         {
-            DataClasses1DataContext dataContext = new DataClasses1DataContext();
-            Table<Product> products = dataContext.GetTable<Product>();
-            List<Product> answer = (from product in products
-                                   where product.Name.Contains(nameContains)
-                                   select product).ToList();
-            return answer;
+            using(DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<Product> products = dataContext.GetTable<Product>();
+                List<Product> answer = (from product in products
+                                        where product.Name.Contains(nameContains)
+                                        select product).ToList();
+                return answer;
+            }
         }
 
 
         public static List<Product> GetProductsByVendorName(string vendorName)
         {
-            DataClasses1DataContext dataContext = new DataClasses1DataContext();
-            Table<ProductVendor> productsVendors = dataContext.GetTable<ProductVendor>();
-            List<Product> answer = (from productVendor in productsVendors
-                                    where productVendor.Vendor.Name.Equals(vendorName)
-                                    select productVendor.Product).ToList();
-            return answer;
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<ProductVendor> productsVendors = dataContext.GetTable<ProductVendor>();
+                List<Product> answer = (from productVendor in productsVendors
+                                        where productVendor.Vendor.Name.Equals(vendorName)
+                                        select productVendor.Product).ToList();
+                return answer;
+            }
         }
 
 
-        public static List<string> GetProductNamesByVendorName(string vendorName)
+        public static string GetProductNamesByVendorName(string vendorName)
         {
-            DataClasses1DataContext dataContext = new DataClasses1DataContext();
-            Table<ProductVendor> productsVendors = dataContext.GetTable<ProductVendor>();
-            List<string> answer = ( from productVendor in productsVendors
-                                    where productVendor.Vendor.Name.Equals(vendorName)
-                                    select productVendor.Product.Name).ToList();
-            return answer;
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<ProductVendor> productsVendors = dataContext.GetTable<ProductVendor>();
+                List<string> answer = (from productVendor in productsVendors
+                                       where productVendor.Vendor.Name.Equals(vendorName)
+                                       select productVendor.Product.Name).ToList();
+                return answer[0];
+            }
         }
 
 
         public static string GetProductVendorByProductName(string productName)
         {
-            DataClasses1DataContext dataContext = new DataClasses1DataContext();
-            Table<ProductVendor> productsVendors = dataContext.GetTable<ProductVendor>();
-            List<string> answer = (from productVendor in productsVendors
-                                   where productVendor.Product.Name.Equals(productName)
-                                   select productVendor.Vendor.Name).ToList();
-            return answer[0];
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<ProductVendor> productsVendors = dataContext.GetTable<ProductVendor>();
+                List<string> answer = (from productVendor in productsVendors
+                                       where productVendor.Product.Name.Equals(productName)
+                                       select productVendor.Vendor.Name).ToList();
+                return answer[0];
+            }
         }
 
         public static List<Product> GetProductsWithNRecentReviews(int howManyReviews)
         {
-            DataClasses1DataContext dataContext = new DataClasses1DataContext();
-            Table<Product> products = dataContext.GetTable<Product>();
-            Table<ProductReview> reviewes = dataContext.GetTable<ProductReview>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<Product> products = dataContext.GetTable<Product>();
+                Table<ProductReview> reviewes = dataContext.GetTable<ProductReview>();
 
-            List<Product> answer = (from product in products
-                                    where product.ProductReviews.Count == howManyReviews
-                                    select product).ToList();
-            return answer;
+                List<Product> answer = (from product in products
+                                        where product.ProductReviews.Count == howManyReviews
+                                        select product).ToList();
+                return answer;
+            }
         }
 
 
         public static List<Product> GetNRecentlyReviewedProducts(int howManyProducts)
         {
-            DataClasses1DataContext dataContext = new DataClasses1DataContext();
-            Table<ProductReview> reviewes = dataContext.GetTable<ProductReview>();
-            List<Product> answer = (from review in reviewes
-                                    orderby review.ReviewDate descending
-                                    select review.Product).Take(howManyProducts).ToList();
-            return answer;
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<ProductReview> reviewes = dataContext.GetTable<ProductReview>();
+                List<Product> answer = (from review in reviewes
+                                        orderby review.ReviewDate descending
+                                        select review.Product).Take(howManyProducts).ToList();
+                return answer;
+            }
         }
 
 
@@ -86,12 +98,14 @@ namespace LingDatabase
 
         public static int GetTotalStandardCostByCategory(ProductCategory category)
         {
-            DataClasses1DataContext dataContext = new DataClasses1DataContext();
-            Table<Product> products = dataContext.GetTable<Product>();;
-            decimal answer = (from product in products
-                                    where product.ProductSubcategory.ProductCategory.Name.Equals(category.Name)
-                                    select product.StandardCost).ToList().Sum();
-            return (int)answer;
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<Product> products = dataContext.GetTable<Product>(); ;
+                decimal answer = (from product in products
+                                  where product.ProductSubcategory.ProductCategory.Name.Equals(category.Name)
+                                  select product.StandardCost).ToList().Sum();
+                return (int)answer;
+            }
         }
     }
 }
