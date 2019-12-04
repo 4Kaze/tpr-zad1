@@ -26,7 +26,7 @@ namespace LingDatabase.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-6L1CB32\\MYSQL_BM_SERVER;Initial Catalog=AdventureWorks2017;In" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MAGI-1MELCHIOR\\SQLEXPRESS;Initial Catalog=AdventureWorks2017;In" +
             "tegrated Security=True")]
         public string AdventureWorks2017ConnectionString {
             get {

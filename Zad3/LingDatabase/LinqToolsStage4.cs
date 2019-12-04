@@ -29,8 +29,6 @@ namespace LingDatabase
             return products.Skip(productsNumber * (pageNumber-1)).Take(productsNumber).ToList();
         }
 
-
-
         public static string GetVendorProductList(this List<Product> products, List<ProductVendor> vendors)
         {
             string result = "";
@@ -38,9 +36,24 @@ namespace LingDatabase
                           from vendor in vendors
                           where vendor.ProductID.Equals(product.ProductID)
                           select product.Name + "-" + vendor.Vendor.Name).ToList();
-            foreach(Object ans in answer)
+            for(int i = 0; i < answer.Count; i++)
             {
-                result += ans + Environment.NewLine;
+                result += answer[i];
+                if (i != answer.Count-1) result += Environment.NewLine;
+            }
+            return result;
+
+        }
+
+        public static string GetVendorProductListLambda(this List<Product> products, List<ProductVendor> vendors)
+        {
+            string result = "";
+            var answer = products.Join(vendors, product => product.ProductID, vendor => vendor.ProductID, (product, vendor) => product.Name + "-" + vendor.Vendor.Name).ToList();
+
+            for (int i = 0; i < answer.Count; i++)
+            {
+                result += answer[i];
+                if (i != answer.Count - 1) result += Environment.NewLine;
             }
             return result;
 
