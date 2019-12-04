@@ -20,6 +20,17 @@ namespace LinqTests
             Assert.AreEqual(answer.Count, 209);
         }
 
+
+        [TestMethod]
+        public void ListProductsQuery()
+        {
+            DataClasses1DataContext dataContext = new DataClasses1DataContext();
+            List<Product> products = dataContext.GetTable<Product>().ToList();
+            List<Product> answer = products.GetProductsWithoutCategoryQuery();
+            Assert.AreEqual(answer[0].ProductSubcategory, null);
+            Assert.AreEqual(answer.Count, 209);
+        }
+
         [TestMethod]
         public void ListProductVendor()
         {

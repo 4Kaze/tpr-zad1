@@ -15,6 +15,15 @@ namespace LingDatabase
 
 
 
+        public static List<Product> GetProductsWithoutCategoryQuery(this List<Product> products)
+        {
+            List<Product> answer = (from product in products
+                                    where product.ProductSubcategory == null
+                                    select product).ToList();
+            return answer;
+        }
+
+
         public static List<Product> GetProductsAsPage(this List<Product> products, int pageNumber, int productsNumber)
         {
             return products.Skip(productsNumber * (pageNumber-1)).Take(productsNumber).ToList();
