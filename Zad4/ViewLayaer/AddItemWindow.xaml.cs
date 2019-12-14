@@ -30,7 +30,7 @@ namespace ViewLayaer
             base.OnInitialized(e);
             AddingControllcs ac = (AddingControllcs)DataContext;
             ac.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
-            ac.CloseWindow = () => this.Hide(); 
+            ac.CloseWindow = () => this.Hide();
         }
     }
 }

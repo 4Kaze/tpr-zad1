@@ -150,5 +150,168 @@ namespace Model
             }
             return 1;
         }
+
+        //Distincts
+
+
+
+        public static List<string> SelectDistinctColors()
+        {
+            List<string> answer = new List<string>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                List<Product> products = dataContext.Products.GroupBy(x => x.Color).Select(g => g.First()).ToList();
+                foreach(Product p in products)
+                {
+                    answer.Add(p.Color);
+                }
+
+            }
+            return answer;
+        }
+
+
+
+
+        public static List<string> SelectDistinctSizes()
+        {
+            List<string> answer = new List<string>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                List<Product> products = dataContext.Products.GroupBy(x => x.Size).Select(g => g.First()).ToList();
+                foreach (Product p in products)
+                {
+                    answer.Add(p.Size);
+                }
+
+            }
+            return answer;
+        }
+
+
+
+
+        public static List<string> SelectDistinctSizesUnits()
+        {
+            List<string> answer = new List<string>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                List<Product> products = dataContext.Products.GroupBy(x => x.SizeUnitMeasureCode).Select(g => g.First()).ToList();
+                foreach (Product p in products)
+                {
+                    answer.Add(p.SizeUnitMeasureCode);
+                }
+
+            }
+            return answer;
+        }
+
+
+
+
+        public static List<string> SelectDistinctWeightUnits()
+        {
+            List<string> answer = new List<string>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                List<Product> products = dataContext.Products.GroupBy(x => x.WeightUnitMeasureCode).Select(g => g.First()).ToList();
+                foreach (Product p in products)
+                {
+                    answer.Add(p.WeightUnitMeasureCode);
+                }
+
+            }
+            return answer;
+        }
+
+
+
+
+        public static List<string> SelectDistinctProductLines()
+        {
+            List<string> answer = new List<string>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                List<Product> products = dataContext.Products.GroupBy(x => x.ProductLine).Select(g => g.First()).ToList();
+                foreach (Product p in products)
+                {
+                    answer.Add(p.ProductLine);
+                }
+
+            }
+            return answer;
+        }
+
+
+
+
+        public static List<string> SelectDistinctClasses()
+        {
+            List<string> answer = new List<string>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                List<Product> products = dataContext.Products.GroupBy(x => x.Class).Select(g => g.First()).ToList();
+                foreach (Product p in products)
+                {
+                    answer.Add(p.Class);
+                }
+
+            }
+            return answer;
+        }
+
+
+
+
+        public static List<string> SelectDistinctStyles()
+        {
+            List<string> answer = new List<string>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                List<Product> products = dataContext.Products.GroupBy(x => x.Style).Select(g => g.First()).ToList();
+                foreach (Product p in products)
+                {
+                    answer.Add(p.Style);
+                }
+
+            }
+            return answer;
+        }
+
+
+
+
+        public static List<string> SelectDistinctSubcategories()
+        {
+            List<string> answer = new List<string>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                List<Product> products = dataContext.Products.GroupBy(x => x.ProductSubcategoryID).Select(g => g.First()).ToList();
+                foreach (Product p in products)
+                {
+                    answer.Add(p.ProductSubcategoryID.ToString());
+                }
+
+            }
+            return answer;
+        }
+
+
+
+
+        public static List<string> SelectDistinctModels()
+        {
+            List<string> answer = new List<string>();
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                List<Product> products = dataContext.Products.GroupBy(x => x.ProductModelID).Select(g => g.First()).ToList();
+                foreach (Product p in products)
+                {
+                    answer.Add(p.ProductModelID.ToString());
+                }
+
+            }
+            return answer;
+        }
     }
 }

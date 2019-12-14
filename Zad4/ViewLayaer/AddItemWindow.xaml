@@ -6,24 +6,60 @@
         xmlns:local="clr-namespace:ViewLayaer"
         xmlns:logic2="clr-namespace:ViewModelLayaer;assembly=LogicLayaer"
         mc:Ignorable="d"
-        Title="AddItemWindow" Height="450" Width="291.067" ResizeMode="NoResize">
+        Title="AddItemWindow" Height="776.533" Width="328.4" ResizeMode="NoResize">
     <Window.DataContext>
         <logic2:AddingControllcs/>
     </Window.DataContext>
-    <Grid>
-        <Button Content="Confirm" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,391,0,0" Command="{Binding AddItemToDataBase}"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding ProductName}" VerticalAlignment="Top" Width="158" Margin="111,10,0,0" />
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding ProductNumber}" VerticalAlignment="Top" Width="158" Margin="111,38,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding StandardCost}" VerticalAlignment="Top" Width="158" Margin="111,94,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding SafetyStockLevel}" VerticalAlignment="Top" Width="158" Margin="111,122,0,0"/>
-        <Label Content="Product name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,0,0" Height="23" FontSize="10" Width="90" />
-        <Label Content="Product number:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,38,0,0" Height="23" FontSize="10" Width="90" />
-        <Label Content="Color:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,66,0,0" Height="23" FontSize="10" Width="91" />
-        <Label Content="Safety stock level:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,122,0,0" Height="23" FontSize="10" Width="90" />
-        <Label Content="Standard cost:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,94,0,0" Height="23" FontSize="10" Width="90" />
-        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="111,66,0,0"/>
-        <Button Content="Rand number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="87" Margin="182,150,0,0"/>
-        <Button Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="90,391,0,0" Command="{Binding DisplayMessage}"/>
+    <Grid Margin="-2,0,1.8,0">
+        <Button Content="Confirm" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="16,717,0,0" Command="{Binding AddItemToDataBase}"/>
+        <Button Content="Test" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="96,717,0,0" Command="{Binding DisplayMessage}"/>
+        <Label Content="Product name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,10,0,0" Height="23" FontSize="10" Width="128" />
+        <Label Content="Make flag:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,38,0,0" Height="23" FontSize="10" Width="128" />
+        <Label Content="Finished Goods Flag:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,66,0,0" Height="23" FontSize="10" Width="128" />
+        <Label Content="Product number:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,94,0,0" Height="23" FontSize="10" Width="128" />
+        <Label Content="Color:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,122,0,0" Height="23" FontSize="10" Width="128" />
+        <Label Content="Safety stock level:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,150,0,0" Height="23" FontSize="10" Width="127" />
+        <Label Content="Standard cost:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,206,0,0" Height="23" FontSize="10" Width="127" />
+        <Label Content="Reorder point:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,178,0,0" Height="23" FontSize="10" Width="127" />
+        <Label Content="List price:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,234,0,0" Height="23" FontSize="10" Width="127" />
+        <Label Content="Size:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,262,0,0" Height="23" FontSize="10" Width="127" />
+        <Label Content="Size unit measure code:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,290,0,0" Height="23" FontSize="10" Width="127" />
+        <Label Content="Weight unit measure code:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,318,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Weight:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,346,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Days to manufacture:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,374,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Product line:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,402,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Class:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,430,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Style:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,458,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Product subcategory:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,486,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Product model:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,514,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Sell start date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,542,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Sell end date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,570,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Discount date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,598,0,0" Height="23" FontSize="10" Width="133" />
+        <Label Content="Modified date:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="13,626,0,0" Height="23" FontSize="10" Width="133" />
+
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding ProductName}" VerticalAlignment="Top" Width="158" Margin="154,10,0,0" />
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,39,0,0" ItemsSource="{Binding Flags}" SelectedItem="{Binding MakeFlag}"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,66,0,0" ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding ProductNumber}" VerticalAlignment="Top" Width="158" Margin="154,94,0,0"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,122,0,0" ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding SafetyStockLevel}" VerticalAlignment="Top" Width="158" Margin="154,150,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding ReorderPoint}" VerticalAlignment="Top" Width="158" Margin="154,178,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding StandardCost}" VerticalAlignment="Top" Width="158" Margin="154,206,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding ListPrice}" VerticalAlignment="Top" Width="158" Margin="154,234,0,0"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,264,0,0" ItemsSource="{Binding Sizes}"  SelectedItem="{Binding Size}"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,291,0,0" ItemsSource="{Binding SizesUnits}"  SelectedItem="{Binding SizeUnitMeasureCode}"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,318,0,0" ItemsSource="{Binding WeightUnits}"  SelectedItem="{Binding WeightUnitMeasureCode}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Weight}" VerticalAlignment="Top" Width="158" Margin="154,346,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding DaysToManufacture}" VerticalAlignment="Top" Width="158" Margin="154,374,0,0"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,403,0,0" ItemsSource="{Binding ProductLines}"  SelectedItem="{Binding ProductLine}"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,430,0,0" ItemsSource="{Binding Classes}"  SelectedItem="{Binding Class}"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,459,0,0" ItemsSource="{Binding Styles}"  SelectedItem="{Binding Style}"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,487,0,0" ItemsSource="{Binding ProductSubCategories}"  SelectedItem="{Binding ProductSubCategorie}"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="158" Margin="154,515,0,0" ItemsSource="{Binding ModelIds}"  SelectedItem="{Binding ModelId}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding DaysToManufacture}" VerticalAlignment="Top" Width="158" Margin="154,542,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding DaysToManufacture}" VerticalAlignment="Top" Width="158" Margin="154,570,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding DaysToManufacture}" VerticalAlignment="Top" Width="158" Margin="154,598,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding DaysToManufacture}" VerticalAlignment="Top" Width="158" Margin="154,626,0,0"/>
 
     </Grid>
 </Window>

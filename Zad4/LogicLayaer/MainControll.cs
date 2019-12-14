@@ -30,8 +30,8 @@ namespace ViewModelLayaer
             get { return products; }
             set
             {
+                NotifyPropertyChanged("Products");
                 products = value;
-                NotifyPropertyChanged("products");
             }
         }
         public Product Product { get; set; }
