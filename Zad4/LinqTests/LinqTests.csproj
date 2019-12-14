@@ -57,9 +57,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LingDatabase\DataLayaer.csproj">
+    <ProjectReference Include="..\LingDatabase\Model.csproj">
       <Project>{c3f7276e-b5ab-4914-8e4e-ea5f309a45b1}</Project>
-      <Name>DataLayaer</Name>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

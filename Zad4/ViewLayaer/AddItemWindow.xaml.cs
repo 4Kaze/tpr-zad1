@@ -1,5 +1,4 @@
-﻿using ViewModelLayaer;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,17 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModelLayaer;
 
 namespace ViewLayaer
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddItemWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddItemWindow : Window
     {
-        public MainWindow()
+        public AddItemWindow()
         {
             InitializeComponent();
         }
@@ -29,9 +28,9 @@ namespace ViewLayaer
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            MainControll mc = (MainControll)DataContext;
-            mc.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
-            mc.Window = new AddItemWindow();
+            AddingControllcs ac = (AddingControllcs)DataContext;
+            ac.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
+            ac.CloseWindow = () => this.Hide(); 
         }
     }
 }

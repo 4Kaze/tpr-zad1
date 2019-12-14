@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataLayaer;
+using Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LinqTests 

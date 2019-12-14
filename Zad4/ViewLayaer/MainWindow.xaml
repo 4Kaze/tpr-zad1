@@ -4,22 +4,24 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewLayaer"
-        xmlns:logic="clr-namespace:LogicLayaer;assembly=LogicLayaer"
+        xmlns:logic="clr-namespace:ViewModelLayaer;assembly=LogicLayaer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="450">
     <Window.DataContext>
         <logic:MainControll/>
     </Window.DataContext>
-    <Grid>
-        <ListBox ItemsSource="{Binding Products}" HorizontalAlignment="Left" Height="223" Margin="30,26,0,0" VerticalAlignment="Top" Width="286">
-            <ListBox.ItemTemplate>
-                <DataTemplate  >
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="{Binding Name}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
+    <Grid Margin="0,0,3.6,0">
+        <ListView x:Name="productListView" ItemsSource="{Binding Products, Mode=TwoWay}" SelectedItem="{Binding Product}" Margin="0,0,87.6,0" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductID}"  Width="80"/>
+                    <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding Name}" Width="250"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Add" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="357,10,0,0" Command="{Binding DisplayAddWindow}"/>
+        <Button Content="Remove" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="357,34,0,0" Command="{Binding RemoveEntity}"/>
+        <Button Content="Upadte" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="357,57,0,0"/>
+        <Button Content="Info" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="357,391,0,0" Command="{Binding DisplayMessage}"/>
     </Grid>
 </Window>

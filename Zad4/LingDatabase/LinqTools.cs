@@ -2,21 +2,23 @@
 using System.Linq;
 using System.Data.Linq;
 
-namespace DataLayaer
+namespace Model
 {
     public static class LinqTools
     {
-        public static List<Product> GetAllProducts()
+
+
+        public static IList<Product> GetAllProducts()
         {
             using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
             {
                 Table<Product> products = dataContext.GetTable<Product>();
-                List<Product> answer = (from product in products
-                                        select product).ToList();
-                return answer;
+                IQueryable<Product> answer = (from product in products
+                                        select product);
+                return answer.ToList();
             }
         }
-
+        
 
         public static List<Product> GetProductsByName(string nameContains)
         {
@@ -119,6 +121,34 @@ namespace DataLayaer
                                   select product.StandardCost).ToList().Sum();
                 return (int)answer;
             }
+        }
+
+
+        public static void AddNeProduct(Product product)
+        {
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                dataContext.Products.InsertOnSubmit(product);
+                dataContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+            }
+        }
+
+
+
+
+        public static int RemoveProduct(int productId)
+        {
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                var answer = dataContext.GetTable<Product>().Single(t => t.ProductID == productId); 
+                dataContext.Products.DeleteOnSubmit(answer);
+                dataContext.SubmitChanges(ConflictMode.ContinueOnConflict);
+                if(answer != null)
+                {
+                    return 0;
+                }
+            }
+            return 1;
         }
     }
 }

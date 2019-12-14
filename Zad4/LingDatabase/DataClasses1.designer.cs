@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DataLayaer
+namespace Model
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;

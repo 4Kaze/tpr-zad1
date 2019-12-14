@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayaer
+namespace Model
 {
     public static class LinqToolsStage4
     {
