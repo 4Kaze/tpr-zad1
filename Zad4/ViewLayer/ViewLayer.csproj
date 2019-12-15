@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A88C107A-C3B4-4018-A4FF-F21184209169}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ViewLayaer</RootNamespace>
-    <AssemblyName>ViewLayaer</AssemblyName>
+    <RootNamespace>ViewLayer</RootNamespace>
+    <AssemblyName>ViewLayer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,23 +55,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AddItemWindow.xaml">
+    <Page Include="ProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="ProductListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddItemWindow.xaml.cs">
-      <DependentUpon>AddItemWindow.xaml</DependentUpon>
+    <Compile Include="DI\ProductDetailsResolver.cs" />
+    <Compile Include="DI\ProductDetailsWindow.cs" />
+    <Compile Include="ProductView.xaml.cs">
+      <DependentUpon>ProductView.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="ProductListView.xaml.cs">
+      <DependentUpon>ProductListView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -102,9 +104,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LogicLayaer\ViewModelLayaer.csproj">
+    <ProjectReference Include="..\ViewModelLayer\ViewModelLayer.csproj">
       <Project>{8c36175d-442c-4729-acfe-d0282bad3491}</Project>
-      <Name>ViewModelLayaer</Name>
+      <Name>ViewModelLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

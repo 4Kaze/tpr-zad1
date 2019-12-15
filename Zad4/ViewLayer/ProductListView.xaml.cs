@@ -1,4 +1,4 @@
-﻿using ViewModelLayaer;
+﻿using ViewModelLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +13,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewLayer.DI;
 
-namespace ViewLayaer
+namespace ViewLayer
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ProductListView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ProductListView : Window
     {
-        public MainWindow()
+        public ProductListView()
         {
             InitializeComponent();
         }
@@ -29,9 +30,14 @@ namespace ViewLayaer
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            MainControll mc = (MainControll)DataContext;
+            ProductListViewModel mc = (ProductListViewModel)DataContext;
             mc.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
-            mc.Window = new AddItemWindow();
+            mc.WindowResolver = new ProductDetailsResolver();
+        }
+
+        private void ProductList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ((ProductListViewModel)DataContext).DisplayDetails.Execute(null);
         }
     }
 }

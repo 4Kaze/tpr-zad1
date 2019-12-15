@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace ViewModelLayaer.Commands
+namespace ViewModelLayer.Commands
 {
     public class OwnCommand : ICommand
     {

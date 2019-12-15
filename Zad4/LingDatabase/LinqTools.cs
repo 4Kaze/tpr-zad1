@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Data.Linq;
+using System;
 
 namespace Model
 {
@@ -124,17 +125,16 @@ namespace Model
         }
 
 
-        public static void AddNeProduct(Product product)
+        public static void AddNewProduct(Product product)
         {
             using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
             {
+                product.ModifiedDate = DateTime.Today;
+                product.rowguid = Guid.NewGuid();
                 dataContext.Products.InsertOnSubmit(product);
                 dataContext.SubmitChanges(ConflictMode.ContinueOnConflict);
             }
         }
-
-
-
 
         public static int RemoveProduct(int productId)
         {
@@ -149,6 +149,55 @@ namespace Model
                 }
             }
             return 1;
+        }
+
+        public static Product GetProductById(int productId)
+        {
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                try
+                {
+                    return dataContext.GetTable<Product>().Single(t => t.ProductID == productId);
+                }
+                catch
+                {
+                    return null;
+                }
+                
+            }
+
+        }
+
+        public static void UpdateProduct(Product product)
+        {
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Product originalProduct = dataContext.GetTable<Product>().Single(t => t.ProductID == product.ProductID);
+                originalProduct.Name = product.Name;
+                originalProduct.ProductNumber = product.ProductNumber;
+                originalProduct.MakeFlag = product.MakeFlag;
+                originalProduct.FinishedGoodsFlag = product.FinishedGoodsFlag;
+                originalProduct.Color = product.Color;
+                originalProduct.SafetyStockLevel = product.SafetyStockLevel;
+                originalProduct.ReorderPoint = product.ReorderPoint;
+                originalProduct.StandardCost = product.StandardCost;
+                originalProduct.ListPrice = product.ListPrice;
+                originalProduct.Size = product.Size;
+                originalProduct.SizeUnitMeasureCode = product.SizeUnitMeasureCode;
+                originalProduct.WeightUnitMeasureCode = product.WeightUnitMeasureCode;
+                originalProduct.Weight = product.Weight;
+                originalProduct.DaysToManufacture = product.DaysToManufacture;
+                originalProduct.ProductLine = product.ProductLine;
+                originalProduct.Class = product.Class;
+                originalProduct.Style = product.Style;
+                originalProduct.ProductSubcategoryID = product.ProductSubcategoryID;
+                originalProduct.ProductModelID = product.ProductModelID;
+                originalProduct.SellStartDate = product.SellStartDate;
+                originalProduct.SellEndDate = product.SellEndDate;
+                originalProduct.DiscontinuedDate = product.DiscontinuedDate;
+                originalProduct.ModifiedDate = DateTime.Today;
+                dataContext.SubmitChanges();
+            }
         }
 
         //Distincts

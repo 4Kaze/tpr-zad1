@@ -5,15 +5,18 @@ using System.Windows.Input;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ViewModelLayaer.Commands;
+using ViewModelLayer.Commands;
 using System.Windows;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using LogicLayer.Interfaces;
+using Service;
+using LogicLayer.Service;
 
-namespace ViewModelLayaer
+namespace ViewModelLayer
 {
-    public class MainControll : INotifyPropertyChanged
+    public class ProductListViewModel : INotifyPropertyChanged, IViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,16 +25,16 @@ namespace ViewModelLayaer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         //Static Data
-        public ObservableCollection<Product> products;
+        public List<Product> products;
 
 
-        public ObservableCollection<Product> Products
+        public List<Product> Products
         {
             get { return products; }
             set
             {
-                NotifyPropertyChanged("Products");
                 products = value;
+                NotifyPropertyChanged("Products");
             }
         }
         public Product Product { get; set; }
@@ -41,21 +44,33 @@ namespace ViewModelLayaer
 
         //CommandsData
         public string ActionText { get; set; }
-        public Window Window { get; set; }
+        public IWindowResolver WindowResolver { get; set; }
 
         //Commands
         public OwnCommand DisplayMessage { get; set; }
         public OwnCommand DisplayAddWindow { get; set; }
         public OwnCommand RemoveEntity { get; set; }
+        public OwnCommand DisplayDetails { get; set; }
 
+        public IProductService ProductService { get; set; }
+        public Action CloseWindow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public MainControll()   
+        public ProductListViewModel()   
         {
-            this.Products = new ObservableCollection<Product>(LinqTools.GetAllProducts());
+            this.ProductService = ServiceProvider.ProductService;
+            this.Products = ProductService.GetAllProducts();
             this.ActionText = "Message.";
             this.DisplayMessage = new OwnCommand(ShowPopupWindow);
             this.DisplayAddWindow = new OwnCommand(ShowAddWindow);
             this.RemoveEntity = new OwnCommand(RemoveProduct);
+            this.DisplayDetails = new OwnCommand(ShowDetails);
+
+            this.ProductService.CollectionChanged += OnProductsChanged;
+        }
+
+        private void OnProductsChanged()
+        {
+            this.Products = ProductService.GetAllProducts();
         }
 
         private void ShowPopupWindow()
@@ -65,12 +80,23 @@ namespace ViewModelLayaer
 
         private void ShowAddWindow()
         {
-            Window.Show();
+            ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel();
+            IOperationWindow window = WindowResolver.GetWindow();
+            window.BindViewModel(productDetailsViewModel);
+            window.Show();
         }
 
         private void RemoveProduct()
         {
             int flag = LinqTools.RemoveProduct(Product.ProductID);
+        }
+
+        private void ShowDetails()
+        {
+            ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel(Product);
+            IOperationWindow window = WindowResolver.GetWindow();
+            window.BindViewModel(productDetailsViewModel);
+            window.Show();
         }
     }
 }

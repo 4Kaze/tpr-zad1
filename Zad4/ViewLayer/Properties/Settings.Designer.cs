@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ViewLayaer.Properties
+namespace ViewLayer.Properties
 {
 
 
