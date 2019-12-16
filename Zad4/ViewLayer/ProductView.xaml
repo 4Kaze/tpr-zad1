@@ -4,9 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewLayer"
-        xmlns:logic="clr-namespace:ViewModelLayer;assembly=LogicLayer"
+        xmlns:validators="clr-namespace:LogicLayer.Validators;assembly=LogicLayer"
         mc:Ignorable="d"
-        Title="ProductView" Height="775" Width="330" ResizeMode="NoResize">
+        Title="ProductView" Height="971.5" Width="330" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="DisplayErrorMessage" TargetType="TextBox" BasedOn="{StaticResource DefaultTextBoxStyle}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder x:Name="placeholder" />
+                            <TextBlock FontSize="11" FontStyle="Italic" Foreground="Red"
+                                       Text="{Binding ElementName=placeholder, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <UniformGrid Rows="24" Columns="2" Margin="5">
         <UniformGrid.Resources>
             <Style TargetType="TextBox">
@@ -24,75 +43,129 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
         </UniformGrid.Resources>
-        
+
         <Label Content="Product name:" FontSize="10"/>
         <TextBox TextWrapping="Wrap" Text="{Binding ProductName}"/>
-        
+
         <Label Content="Make flag:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding MakeFlag}"/>
-        
+
         <Label Content="Finished Goods Flag:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}"/>
-        
+
         <Label Content="Product number:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding ProductNumber}"/>
-        
+        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+            <TextBox.Text>
+                <Binding Path="ProductNumber" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validators:ValidaterProductNumber ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
         <Label Content="Color:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}"/>
-        
+
         <Label Content="Safety stock level:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding SafetyStockLevel}"/>
-        
+        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+            <TextBox.Text>
+                <Binding Path="SafetyStockLevel" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validators:ValidateIntegerHigher ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
         <Label Content="Standard cost:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding ReorderPoint}"/>
+        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+            <TextBox.Text>
+                <Binding Path="ReorderPoint" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validators:ValidateRealNumberEqualHigher ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        
         
         <Label Content="Reorder point:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding StandardCost}"/>
-        
+        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+            <TextBox.Text>
+                <Binding Path="StandardCost" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validators:ValidateIntegerHigher ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
         <Label Content="List price:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding ListPrice}"/>
-        
+        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+            <TextBox.Text>
+                <Binding Path="ListPrice" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validators:ValidateRealNumberEqualHigher ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
         <Label Content="Size:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding Sizes}"  SelectedItem="{Binding Size}"/>
-        
+
         <Label Content="Size unit measure code:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding SizesUnits}"  SelectedItem="{Binding SizeUnitMeasureCode}"/>
-        
+
         <Label Content="Weight unit measure code:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding WeightUnits}"  SelectedItem="{Binding WeightUnitMeasureCode}"/>
-        
+
         <Label Content="Weight:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding Weight}"/>
+        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+            <TextBox.Text>
+                <Binding Path="Weight" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validators:ValidateRealHigher ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text> 
+        </TextBox>
         
         <Label Content="Days to manufacture:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding DaysToManufacture}"/>
-        
+        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+            <TextBox.Text>
+                <Binding Path="DaysToManufacture" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validators:ValidateDays ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
         <Label Content="Product line:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding ProductLines}"  SelectedItem="{Binding ProductLine}"/>
-        
+
         <Label Content="Class:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding Classes}"  SelectedItem="{Binding Class}"/>
-        
+
         <Label Content="Style:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding Styles}"  SelectedItem="{Binding Style}"/>
-        
+
         <Label Content="Product subcategory:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding ProductSubCategories}"  SelectedItem="{Binding ProductSubCategorie}"/>
-        
+
         <Label Content="Product model:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding ModelIds}"  SelectedItem="{Binding ModelId}"/>
-        
-        <Label Content="Sell start date:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding DaysToManufacture}"/>
-        
-        <Label Content="Sell end date:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding DaysToManufacture}"/>
-        
-        <Label Content="Discount date:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding DaysToManufacture}"/>
 
-        <Label Content="Modified date:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding DaysToManufacture}"/>
+        <Label Content="Sell start date:" FontSize="10"/>
+        <DatePicker Text="{Binding DaysToManufacture}"/>
+
+        <Label Content="Sell end date:" FontSize="10"/>
+        <DatePicker Text="{Binding DaysToManufacture}"/>
+
+        <Label Content="Discount date:" FontSize="10"/>
+        <DatePicker Text="{Binding DaysToManufacture}"/>
 
         <StackPanel Orientation="Horizontal">
             <StackPanel.Resources>
@@ -102,7 +175,7 @@
                     <Setter Property="Width" Value="73"/>
                 </Style>
             </StackPanel.Resources>
-            
+
             <Button Content="Confirm" Command="{Binding AddItemToDataBase}"/>
             <Button Content="Test" Command="{Binding DisplayMessage}"/>
         </StackPanel>

@@ -1,5 +1,6 @@
 ﻿using LogicLayer.Interfaces;
 using LogicLayer.Service;
+using LogicLayer.Validators;
 using Model;
 using Service;
 using System;
@@ -14,6 +15,8 @@ namespace ViewModelLayer
 {
     public class ProductDetailsViewModel : IViewModel
     {
+        //Validator
+
         //Static Data
         private int _productID { get; set; }
         public string ProductName { get; set; }
@@ -117,8 +120,11 @@ namespace ViewModelLayer
         private void SaveProduct()
         {
             Product product = GetProduct();
-            ProductService.Upsert(product);
-            CloseWindow();
+            if (ValidateProduct.CheckProduct(product))
+            {
+                ProductService.Upsert(product);
+                CloseWindow();
+            }
         }
 
         private Product GetProduct()
@@ -143,9 +149,10 @@ namespace ViewModelLayer
             product.Style = this.Style;
             product.ProductSubcategoryID = this.ProductSubcategoryID;
             product.ProductModelID = this.ModelId;
-            product.SellStartDate = DateTime.Today;//this.SellStartDate;
-            product.SellEndDate = null;// this.SellEndDate;
-            product.DiscontinuedDate = null;// this.DiscontinuedDate;
+            product.SellStartDate = this.SellStartDate;//this.SellStartDate;
+            product.SellEndDate = this.SellEndDate;// this.SellEndDate;
+            product.DiscontinuedDate = this.DiscontinuedDate;// this.DiscontinuedDate;
+            product.ModifiedDate = DateTime.Today;
             product.ProductID = _productID;
             return product;
         }
