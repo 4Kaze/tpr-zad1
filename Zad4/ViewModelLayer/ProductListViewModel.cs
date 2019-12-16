@@ -88,7 +88,7 @@ namespace ViewModelLayer
 
         private void RemoveProduct()
         {
-            int flag = LinqTools.RemoveProduct(Product.ProductID);
+            this.ProductService.Delete(Product.ProductID);
         }
 
         private void ShowDetails()
