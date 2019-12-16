@@ -2,3 +2,4 @@ bin/
 obj/
 .vs/
 generator.py
+Zad4/LingDatabase/Properties/Settings.Designer.cs
