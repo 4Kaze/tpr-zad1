@@ -27,12 +27,22 @@ namespace LogicLayer.Validators
             flag = p.ProductLine != null;
             flag = p.Class != null;
             flag = p.Style != null;
-            flag = p.ProductSubcategoryID != 0;
-            flag = p.ProductModelID != 0;
-            flag = p.SellStartDate != null; ;//this.SellStartDate;
-            flag = p.SellEndDate != null;// this.SellEndDate;
-            flag = p.DiscontinuedDate != null;// this.DiscontinuedDate;
+            //flag = p.ProductSubcategoryID != 0;
+            //flag = p.ProductModelID != 0;
             return flag;
         } 
+
+        public static bool CheckDate(Product p)
+        {
+            if(p.SellEndDate < p.SellStartDate)
+            {
+                return false;
+            }
+            if (p.SellStartDate < DateTime.Today)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

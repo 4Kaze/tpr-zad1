@@ -48,10 +48,10 @@
         <TextBox TextWrapping="Wrap" Text="{Binding ProductName}"/>
 
         <Label Content="Make flag:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding MakeFlag}"/>
+        <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding MakeFlag}" SelectedIndex="0"/>
 
         <Label Content="Finished Goods Flag:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}"/>
+        <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}" SelectedIndex="0"/>
 
         <Label Content="Product number:" FontSize="10"/>
         <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
@@ -65,7 +65,7 @@
         </TextBox>
 
         <Label Content="Color:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}"/>
+        <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}" SelectedIndex="0"/>
 
         <Label Content="Safety stock level:" FontSize="10"/>
         <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
@@ -113,13 +113,13 @@
         </TextBox>
 
         <Label Content="Size:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Sizes}"  SelectedItem="{Binding Size}"/>
+        <ComboBox ItemsSource="{Binding Sizes}"  SelectedItem="{Binding Size}" SelectedIndex="0"/>
 
         <Label Content="Size unit measure code:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding SizesUnits}"  SelectedItem="{Binding SizeUnitMeasureCode}"/>
+        <ComboBox ItemsSource="{Binding SizesUnits}"  SelectedItem="{Binding SizeUnitMeasureCode}" SelectedIndex="0"/>
 
         <Label Content="Weight unit measure code:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding WeightUnits}"  SelectedItem="{Binding WeightUnitMeasureCode}"/>
+        <ComboBox ItemsSource="{Binding WeightUnits}"  SelectedItem="{Binding WeightUnitMeasureCode}" SelectedIndex="0"/>
 
         <Label Content="Weight:" FontSize="10"/>
         <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
@@ -144,28 +144,28 @@
         </TextBox>
 
         <Label Content="Product line:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding ProductLines}"  SelectedItem="{Binding ProductLine}"/>
+        <ComboBox ItemsSource="{Binding ProductLines}"  SelectedItem="{Binding ProductLine}" SelectedIndex="0"/>
 
         <Label Content="Class:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Classes}"  SelectedItem="{Binding Class}"/>
+        <ComboBox ItemsSource="{Binding Classes}"  SelectedItem="{Binding Class}" SelectedIndex="0"/>
 
         <Label Content="Style:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Styles}"  SelectedItem="{Binding Style}"/>
+        <ComboBox ItemsSource="{Binding Styles}"  SelectedItem="{Binding Style}" SelectedIndex="0"/>
 
         <Label Content="Product subcategory:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding ProductSubCategories}"  SelectedItem="{Binding ProductSubCategorie}"/>
+        <ComboBox ItemsSource="{Binding ProductSubCategories}"  SelectedItem="{Binding ProductSubcategoryID}" SelectedIndex="0"/>
 
         <Label Content="Product model:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding ModelIds}"  SelectedItem="{Binding ModelId}"/>
+        <ComboBox ItemsSource="{Binding ModelIds}"  SelectedItem="{Binding ModelId}" SelectedIndex="0"/>
 
         <Label Content="Sell start date:" FontSize="10"/>
-        <DatePicker Text="{Binding DaysToManufacture}"/>
+        <DatePicker SelectedDate="{Binding SellStartDate}"/>
 
         <Label Content="Sell end date:" FontSize="10"/>
-        <DatePicker Text="{Binding DaysToManufacture}"/>
+        <DatePicker SelectedDate="{Binding SellEndDate}"/>
 
         <Label Content="Discount date:" FontSize="10"/>
-        <DatePicker Text="{Binding DaysToManufacture}"/>
+        <DatePicker SelectedDate="{Binding DiscontinuedDate}"/>
 
         <StackPanel Orientation="Horizontal">
             <StackPanel.Resources>

@@ -15,33 +15,34 @@ namespace ViewModelLayer
 {
     public class ProductDetailsViewModel : IViewModel
     {
-        //Validator
+        //Messages
+        public string MessageEmptyFields { get; set; } = "";
 
         //Static Data
-        private int _productID { get; set; }
-        public string ProductName { get; set; }
-        public string ProductNumber { get; set; }
+        private int _productID { get; set; } 
+        public string ProductName { get; set; } = null;
+        public string ProductNumber { get; set; } = null;
         public bool MakeFlag { get; set; }
         public bool FinishedGoodsFlag { get; set; }
-        public string Color { get; set; }
-        public short SafetyStockLevel { get; set; }
-        public short ReorderPoint { get; set; }
-        public decimal StandardCost { get; set; }
-        public decimal ListPrice { get; set; }
-        public string Size { get; set; }
-        public string SizeUnitMeasureCode { get; set; }
-        public string WeightUnitMeasureCode { get; set; }
-        public decimal? Weight { get; set; }
+        public string Color { get; set; } = null;
+        public short SafetyStockLevel { get; set; } = 0;
+        public short ReorderPoint { get; set; } = 0;
+        public decimal StandardCost { get; set; } = 0;
+        public decimal ListPrice { get; set; } = 0;
+        public string Size { get; set; } = null;
+        public string SizeUnitMeasureCode { get; set; } = null;
+        public string WeightUnitMeasureCode { get; set; } = null;
+        public decimal? Weight { get; set; } = 0;
         public int DaysToManufacture { get; set; }
-        public string ProductLine { get; set; }
-        public string Class { get; set; }
-        public string Style { get; set; }
-        public int? ProductSubcategoryID { get; set; }
-        public int? ModelId { get; set; }
-        public DateTime? SellEndDate { get; set; }
-        public DateTime SellStartDate { get; set; }
-        public DateTime? DiscontinuedDate { get; set; }
-        
+        public string ProductLine { get; set; } = null;
+        public string Class { get; set; } = null;
+        public string Style { get; set; } = null;
+        public string ProductSubcategoryID { get; set; } 
+        public string ModelId { get; set; } 
+        public DateTime? SellEndDate { get; set; } = DateTime.Today;
+        public DateTime SellStartDate { get; set; } = DateTime.Today;
+        public DateTime? DiscontinuedDate { get; set; } = DateTime.Today;
+
         //Display Data
         public List<string> Colors { get; set; }
         public List<bool> Flags { get; set; }
@@ -56,7 +57,7 @@ namespace ViewModelLayer
 
         //Actions
         public Action CloseWindow { get; set; }
-
+        public Action<string> DisplayErrorMessage { get; set; }
         //CommandsData
         public string ActionText { get; set; }
 
@@ -103,8 +104,8 @@ namespace ViewModelLayer
             ProductLine = product.ProductLine;
             Class = product.Class;
             Style = product.Style;
-            ProductSubcategoryID = product.ProductSubcategoryID;
-            ModelId = product.ProductModelID;
+            ProductSubcategoryID = "";
+            ModelId = "";
             _productID = product.ProductID;
             this.SellStartDate = product.SellStartDate;
             this.SellEndDate = product.SellEndDate;
@@ -114,22 +115,36 @@ namespace ViewModelLayer
 
         private void ShowPopupWindow()
         {
-            
+            DisplayErrorMessage(this.MessageEmptyFields);
         }
 
         private void SaveProduct()
         {
+            this.MessageEmptyFields = "";
             Product product = GetProduct();
             if (ValidateProduct.CheckProduct(product))
             {
-                ProductService.Upsert(product);
-                CloseWindow();
+                if (ValidateProduct.CheckDate(product))
+                {
+                    ProductService.Upsert(product);
+                }
+                else
+                {
+                    this.MessageEmptyFields = "złe daty gałganie + \n";
+                    ShowPopupWindow();
+                }
+            }
+            else
+            {
+                this.MessageEmptyFields = "pusto w polach "+ "\n" ;
+                ShowPopupWindow();
             }
         }
 
         private Product GetProduct()
         {
             Product product = new Product();
+            product.rowguid = new Guid();
             product.Name = this.ProductName;
             product.ProductNumber = this.ProductNumber;
             product.MakeFlag = this.MakeFlag;
@@ -147,8 +162,8 @@ namespace ViewModelLayer
             product.ProductLine = this.ProductLine;
             product.Class = this.Class;
             product.Style = this.Style;
-            product.ProductSubcategoryID = this.ProductSubcategoryID;
-            product.ProductModelID = this.ModelId;
+            product.ProductSubcategoryID = LinqTools.SelectSubcategoryId(this.ProductSubcategoryID);
+            product.ProductModelID = LinqTools.SelectModelId(this.ModelId);
             product.SellStartDate = this.SellStartDate;//this.SellStartDate;
             product.SellEndDate = this.SellEndDate;// this.SellEndDate;
             product.DiscontinuedDate = this.DiscontinuedDate;// this.DiscontinuedDate;

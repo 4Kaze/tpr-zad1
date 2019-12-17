@@ -81,6 +81,7 @@ namespace ViewModelLayer
         private void ShowAddWindow()
         {
             ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel();
+            productDetailsViewModel.DisplayErrorMessage = this.MessageBoxShowDelegate;
             IOperationWindow window = WindowResolver.GetWindow();
             window.BindViewModel(productDetailsViewModel);
             window.Show();

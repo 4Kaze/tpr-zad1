@@ -111,7 +111,6 @@ namespace Model
             return answer;
         }
 
-
         public static int GetTotalStandardCostByCategory(ProductCategory category)
         {
             using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
@@ -329,20 +328,84 @@ namespace Model
 
 
 
+        public static int SelectSubcategoryId(string subcategoryName)
+        {
+            if (subcategoryName == null)
+                return 0;
+            int answer = 0;
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<Product> products = dataContext.GetTable<Product>();
+                answer = (from product in products
+                          where product.ProductSubcategory.Name == subcategoryName
+                          select product.ProductSubcategory.ProductSubcategoryID).First();
+                return answer;
+            }
+        }
+
+
+        public static int SelectModelId(string modelName)
+        {
+            if (modelName == null)
+                return 0;
+            int answer = 0;
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<Product> products = dataContext.GetTable<Product>();
+                answer = (from product in products
+                          where product.ProductModel.Name == modelName
+                          select product.ProductModel.ProductModelID).First();
+
+            }
+            return answer;
+        }
+
+
+
+
+        public static string SelectSubcategoryName(int? subcategoryName)
+        {
+            if (subcategoryName == 0)
+                return  "";
+            string answer = "";
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<Product> products = dataContext.GetTable<Product>();
+                answer = (from product in products
+                          where product.ProductSubcategoryID == subcategoryName
+                          select product.ProductSubcategory.Name).First();
+                return answer;
+            }
+        }
+
+
+        public static string SelectModelName(int? modelName)
+        {
+            if (modelName == 0)
+                return "";
+            string answer = "";
+            using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
+            {
+                Table<Product> products = dataContext.GetTable<Product>();
+                answer = (from product in products
+                          where product.ProductModelID == modelName
+                          select product.ProductModel.Name).First();
+
+            }
+            return answer;
+        }
 
         public static List<string> SelectDistinctSubcategories()
         {
             List<string> answer = new List<string>();
             using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
             {
-                List<Product> products = dataContext.Products.GroupBy(x => x.ProductSubcategoryID).Select(g => g.First()).ToList();
-                foreach (Product p in products)
-                {
-                    answer.Add(p.ProductSubcategoryID.ToString());
-                }
-
+                Table<Product> products = dataContext.GetTable<Product>();
+                answer = (from product in products
+                          where product.ProductSubcategory != null
+                          select product.ProductSubcategory.Name).Distinct().ToList();
+                return answer;
             }
-            return answer;
         }
 
 
@@ -353,11 +416,10 @@ namespace Model
             List<string> answer = new List<string>();
             using (DataClasses1DataContext dataContext = new DataClasses1DataContext())
             {
-                List<Product> products = dataContext.Products.GroupBy(x => x.ProductModelID).Select(g => g.First()).ToList();
-                foreach (Product p in products)
-                {
-                    answer.Add(p.ProductModelID.ToString());
-                }
+                Table<Product> products = dataContext.GetTable<Product>();
+                answer = (from product in products
+                          where product.ProductModel != null
+                          select product.ProductModel.Name).Distinct().ToList();
 
             }
             return answer;
