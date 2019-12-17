@@ -27,8 +27,8 @@ namespace LogicLayer.Validators
             flag = p.ProductLine != null;
             flag = p.Class != null;
             flag = p.Style != null;
-            //flag = p.ProductSubcategoryID != 0;
-            //flag = p.ProductModelID != 0;
+            flag = p.ProductSubcategoryID != 0;
+            flag = p.ProductModelID != 0;
             return flag;
         } 
 

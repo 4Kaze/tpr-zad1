@@ -54,7 +54,7 @@
         <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}" SelectedIndex="0"/>
 
         <Label Content="Product number:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="ProductNumber" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
             <TextBox.Text>
                 <Binding Path="ProductNumber" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -68,7 +68,7 @@
         <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}" SelectedIndex="0"/>
 
         <Label Content="Safety stock level:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="SafetyStockLevel" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
             <TextBox.Text>
                 <Binding Path="SafetyStockLevel" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -79,7 +79,7 @@
         </TextBox>
 
         <Label Content="Standard cost:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="StandardCost" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
             <TextBox.Text>
                 <Binding Path="ReorderPoint" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -91,7 +91,7 @@
         
         
         <Label Content="Reorder point:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="ReorderPoint" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
             <TextBox.Text>
                 <Binding Path="StandardCost" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -102,7 +102,7 @@
         </TextBox>
 
         <Label Content="List price:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="ListPrice" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
             <TextBox.Text>
                 <Binding Path="ListPrice" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -122,7 +122,7 @@
         <ComboBox ItemsSource="{Binding WeightUnits}"  SelectedItem="{Binding WeightUnitMeasureCode}" SelectedIndex="0"/>
 
         <Label Content="Weight:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="Weight" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
             <TextBox.Text>
                 <Binding Path="Weight" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -133,7 +133,7 @@
         </TextBox>
         
         <Label Content="Days to manufacture:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="DaysToManufacture" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
             <TextBox.Text>
                 <Binding Path="DaysToManufacture" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -176,8 +176,31 @@
                 </Style>
             </StackPanel.Resources>
 
-            <Button Content="Confirm" Command="{Binding AddItemToDataBase}"/>
+            <Button Content="Confirm" Command="{Binding AddItemToDataBase}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="IsEnabled" Value="False"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ProductNumber}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=SafetyStockLevel}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StandardCost}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ReorderPoint}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ListPrice}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Weight}" Value="False"/>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=DaysToManufacture}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <Button Content="Test" Command="{Binding DisplayMessage}"/>
         </StackPanel>
+
+
+
     </UniformGrid>
 </Window>
