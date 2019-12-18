@@ -52,6 +52,17 @@ namespace GraphicDataTest
             productListViewModel.WindowResolver = new ProductDetailsResolver();
             Assert.IsNotNull(productListViewModel.MessageBoxShowDelegate);
             Assert.IsNotNull(productListViewModel.WindowResolver);
-    }
+            productListViewModel.ShowAddWindow();
+        }
+
+
+        public void ProductDetailsViewModelCommandsTest()
+        {
+            ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel(new ProductService());
+            productDetailsViewModel.DisplayErrorMessage = text => MessageBox.Show("Button interaction");
+            productDetailsViewModel.CloseWindow = () => { };
+            Assert.IsNotNull(productDetailsViewModel.DisplayErrorMessage);
+            Assert.IsNotNull(productDetailsViewModel.CloseWindow);
+        }
     }
 }
