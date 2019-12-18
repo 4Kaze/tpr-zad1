@@ -6,7 +6,7 @@
         xmlns:validators="clr-namespace:LogicLayer.Validators;assembly=LogicLayer"
         xmlns:conv="clr-namespace:ViewLayer.Converters"
         mc:Ignorable="d"
-        Title="ProductView" Width="330" ResizeMode="NoResize">
+        Title="ProductView" Width="500" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -23,24 +23,25 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Margin" Value="0,0,0,14"/>
         </Style>
     </Window.Resources>
 
     <UniformGrid Rows="24" Columns="2" Margin="5">
         <UniformGrid.Resources>
             <Style TargetType="TextBox">
-                <Setter Property="Height" Value="23"/>
+                <Setter Property="Margin" Value="0,0,0,14"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
             </Style>
             <Style TargetType="ComboBox">
                 <Setter Property="Height" Value="23"/>
                 <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
             </Style>
             <Style TargetType="Label">
                 <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
             </Style>
         </UniformGrid.Resources>
 
@@ -62,7 +63,7 @@
         <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}" SelectedIndex="0"/>
 
         <Label Content="Product number:" FontSize="10"/>
-        <TextBox Name="ProductNumber" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="ProductNumber" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="ProductNumber" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -76,7 +77,7 @@
         <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}" SelectedIndex="0"/>
 
         <Label Content="Safety stock level:" FontSize="10"/>
-        <TextBox Name="SafetyStockLevel" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="SafetyStockLevel" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="SafetyStockLevel" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -87,7 +88,7 @@
         </TextBox>
 
         <Label Content="Standard cost:" FontSize="10"/>
-        <TextBox Name="StandardCost" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="StandardCost" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="ReorderPoint" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -99,7 +100,7 @@
         
         
         <Label Content="Reorder point:" FontSize="10"/>
-        <TextBox Name="ReorderPoint" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="ReorderPoint" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="StandardCost" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -110,7 +111,7 @@
         </TextBox>
 
         <Label Content="List price:" FontSize="10"/>
-        <TextBox Name="ListPrice" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="ListPrice" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="ListPrice" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -130,7 +131,7 @@
         <ComboBox ItemsSource="{Binding WeightUnits}"  SelectedItem="{Binding WeightUnitMeasureCode}" SelectedIndex="0"/>
 
         <Label Content="Weight:" FontSize="10"/>
-        <TextBox Name="Weight" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="Weight" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="Weight" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -141,7 +142,7 @@
         </TextBox>
         
         <Label Content="Days to manufacture:" FontSize="10"/>
-        <TextBox Name="DaysToManufacture" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" Height="23" Margin="0,4">
+        <TextBox Name="DaysToManufacture" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="DaysToManufacture" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -200,7 +201,7 @@
 
                                     <Condition Binding="{Binding ElementName=ListPrice, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ListPrice}" Value="False"/>
-                                    
+
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Weight}" Value="False"/>
 
                                     <Condition Binding="{Binding ElementName=DaysToManufacture, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
@@ -213,8 +214,5 @@
                 </Button.Style>
             </Button>
         </StackPanel>
-
-
-
     </UniformGrid>
 </Window>
