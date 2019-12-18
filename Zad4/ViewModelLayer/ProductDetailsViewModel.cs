@@ -32,7 +32,7 @@ namespace ViewModelLayer
         public string Size { get; set; } = null;
         public string SizeUnitMeasureCode { get; set; }
         public string WeightUnitMeasureCode { get; set; }
-        public decimal? Weight { get; set; } = 0;
+        public decimal? Weight { get; set; }
         public int DaysToManufacture { get; set; }
         public string ProductLine { get; set; }
         public string Class { get; set; }
@@ -41,7 +41,6 @@ namespace ViewModelLayer
         public string ModelId { get; set; } 
         public DateTime? SellEndDate { get; set; }
         public DateTime SellStartDate { get; set; }
-        public DateTime? DiscontinuedDate { get; set; }
 
         //Display Data
         public List<string> Colors { get; set; }
@@ -109,7 +108,6 @@ namespace ViewModelLayer
             _productID = product.ProductID;
             this.SellStartDate = product.SellStartDate;
             this.SellEndDate = product.SellEndDate;
-            this.DiscontinuedDate = product.DiscontinuedDate;
         }
         
 
@@ -122,21 +120,14 @@ namespace ViewModelLayer
         {
             this.MessageEmptyFields = "";
             Product product = GetProduct();
-            if (ValidateProduct.CheckProduct(product))
+            if (ValidateProduct.CheckDate(product))
             {
-                if (ValidateProduct.CheckDate(product))
-                {
-                    ProductService.Upsert(product);
-                }
-                else
-                {
-                    this.MessageEmptyFields = "złe daty gałganie + \n";
-                    ShowPopupWindow();
-                }
+                ProductService.Upsert(product);
+                CloseWindow();
             }
             else
             {
-                this.MessageEmptyFields = "pusto w polach "+ "\n" ;
+                this.MessageEmptyFields = "złe daty gałganie + \n";
                 ShowPopupWindow();
             }
         }
@@ -166,9 +157,8 @@ namespace ViewModelLayer
                 ProductService.GetSubcategoryIDByName(this.ProductSubcategoryID) : (int?)null;
             product.ProductModelID = (this.ModelId != null && this.ModelId.Length > 0) ?
                 ProductService.GetModelIDByName(this.ModelId) : (int?)null; 
-            product.SellStartDate = this.SellStartDate;//this.SellStartDate;
-            product.SellEndDate = this.SellEndDate;// this.SellEndDate;
-            product.DiscontinuedDate = this.DiscontinuedDate;// this.DiscontinuedDate;
+            product.SellStartDate = this.SellStartDate;
+            product.SellEndDate = this.SellEndDate;
             product.ModifiedDate = DateTime.Today;
             product.ProductID = _productID;
             return product;

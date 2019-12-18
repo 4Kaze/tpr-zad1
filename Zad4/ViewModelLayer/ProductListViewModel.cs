@@ -47,7 +47,6 @@ namespace ViewModelLayer
         public IWindowResolver WindowResolver { get; set; }
 
         //Commands
-        public OwnCommand DisplayMessage { get; set; }
         public OwnCommand DisplayAddWindow { get; set; }
         public OwnCommand RemoveEntity { get; set; }
         public OwnCommand DisplayDetails { get; set; }
@@ -60,7 +59,6 @@ namespace ViewModelLayer
             this.ProductService = ServiceProvider.ProductService;
             this.Products = ProductService.GetAllProducts();
             this.ActionText = "Message.";
-            this.DisplayMessage = new OwnCommand(ShowPopupWindow);
             this.DisplayAddWindow = new OwnCommand(ShowAddWindow);
             this.RemoveEntity = new OwnCommand(RemoveProduct);
             this.DisplayDetails = new OwnCommand(ShowDetails);
@@ -71,11 +69,6 @@ namespace ViewModelLayer
         private void OnProductsChanged()
         {
             this.Products = ProductService.GetAllProducts();
-        }
-
-        private void ShowPopupWindow()
-        {
-            MessageBoxShowDelegate(Product.Name + " " + Product.ProductID);
         }
 
         private void ShowAddWindow()

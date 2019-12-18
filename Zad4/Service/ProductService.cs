@@ -13,7 +13,10 @@ namespace Service
 
         public void Delete(int productID)
         {
-            LinqTools.RemoveProduct(productID);
+            //LinqTools.RemoveProduct(productID);
+            Product product = LinqTools.GetProductById(productID);
+            product.DiscontinuedDate = DateTime.Today;
+            LinqTools.UpdateProduct(product);
             CollectionChanged?.Invoke();
         }
 
@@ -41,7 +44,12 @@ namespace Service
 
         public List<Product> GetAllProducts()
         {
-            return (List<Product>) LinqTools.GetAllProducts();
+            return (List<Product>) LinqTools.GetAllProducts().Where(product => !product.DiscontinuedDate.HasValue).ToList();
+        }
+
+        public List<Product> GetDeletedProducts()
+        {
+            return (List<Product>)LinqTools.GetAllProducts().Where(product => product.DiscontinuedDate.HasValue).ToList();
         }
 
         public List<string> GetProductClasses()

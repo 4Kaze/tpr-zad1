@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:validators="clr-namespace:LogicLayer.Validators;assembly=LogicLayer"
         mc:Ignorable="d"
-        Title="ProductView" Height="971.5" Width="330" ResizeMode="NoResize">
+        Title="ProductView" Width="330" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="DefaultTextBoxStyle" TargetType="TextBox">
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -171,19 +171,8 @@
         <Label Content="Sell end date:" FontSize="10"/>
         <DatePicker SelectedDate="{Binding SellEndDate}"/>
 
-        <Label Content="Discount date:" FontSize="10"/>
-        <DatePicker SelectedDate="{Binding DiscontinuedDate}"/>
-
         <StackPanel Orientation="Horizontal">
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="0,0,5,0"/>
-                    <Setter Property="Height" Value="23"/>
-                    <Setter Property="Width" Value="73"/>
-                </Style>
-            </StackPanel.Resources>
-
-            <Button Content="Confirm" Command="{Binding AddItemToDataBase}">
+            <Button Content="Confirm" Command="{Binding AddItemToDataBase}" Height="23" Width="73">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="IsEnabled" Value="False"/>
@@ -205,7 +194,6 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button Content="Test" Command="{Binding DisplayMessage}"/>
         </StackPanel>
 
 

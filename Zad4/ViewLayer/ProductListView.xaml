@@ -30,11 +30,15 @@
                     <Setter Property="Margin" Value="0,5,0,0" />
                     <Setter Property="HorizontalAlignment" Value="Stretch"/>
                 </Style>
+
+                <Style x:Key="deleted_entry"
+                   TargetType="MenuItem">
+                    <Setter Property="Background"
+                        Value="Yellow" />
+                </Style>
             </StackPanel.Resources>
             <Button Content="Add" Command="{Binding DisplayAddWindow}"/>
             <Button Content="Remove" Command="{Binding RemoveEntity}"/>
-            <Button Content="Update"/>
-            <Button Content="Info" Command="{Binding DisplayMessage}"/>
         </StackPanel>
     </Grid>
 </Window>
