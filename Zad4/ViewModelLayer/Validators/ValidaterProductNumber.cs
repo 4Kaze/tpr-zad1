@@ -24,7 +24,7 @@ namespace LogicLayer.Validators
                 return ValidationResult.ValidResult;
             }
 
-            return new ValidationResult(false, "value is not corrext with schema XX-NNNN where X is a letter and N is a digit.");
+            return new ValidationResult(false, "value is not corrext with schema LL-NNNN");
         }
     }
 }
