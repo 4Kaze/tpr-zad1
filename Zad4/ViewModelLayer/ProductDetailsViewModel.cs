@@ -127,7 +127,7 @@ namespace ViewModelLayer
             }
             else
             {
-                this.MessageEmptyFields = "złe daty gałganie + \n";
+                this.MessageEmptyFields = "Start date must be before end date";
                 ShowPopupWindow();
             }
         }
