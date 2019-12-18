@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using LogicLayer.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
@@ -65,6 +66,22 @@ namespace LogicLayerTest
             Assert.AreEqual(((ProductDetailsViewModel)resolver.Window.ViewModel).ProductName, "name");
             Assert.AreEqual(((ProductDetailsViewModel)resolver.Window.ViewModel).ReorderPoint, 12);
             Assert.AreEqual(resolver.Window.Showed, true);
+        }
+
+        [TestMethod]
+        public void DateValidationTest()
+        {
+            TestService service = new TestService();
+            ProductDetailsViewModel viewModel = new ProductDetailsViewModel(service);
+            viewModel.SellStartDate = DateTime.Today.AddDays(1);
+            viewModel.SellEndDate = DateTime.Today;
+            viewModel.DisplayErrorMessage = (s) => { };
+            viewModel.CloseWindow = () => { };
+            viewModel.AddItemToDataBase.Execute(null);
+            Assert.IsNull(service.AddedProduct);
+            viewModel.SellEndDate = viewModel.SellEndDate?.AddDays(3);
+            viewModel.AddItemToDataBase.Execute(null);
+            Assert.IsNotNull(service.AddedProduct);
         }
     }
 }

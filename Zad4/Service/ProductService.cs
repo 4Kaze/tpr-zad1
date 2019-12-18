@@ -13,33 +13,45 @@ namespace Service
 
         public void Delete(int productID)
         {
-            //LinqTools.RemoveProduct(productID);
-            Product product = LinqTools.GetProductById(productID);
-            product.DiscontinuedDate = DateTime.Today;
-            LinqTools.UpdateProduct(product);
-            CollectionChanged?.Invoke();
+            Task.Run(() =>
+            {
+                //LinqTools.RemoveProduct(productID);
+                Product product = LinqTools.GetProductById(productID);
+                product.DiscontinuedDate = DateTime.Today;
+                LinqTools.UpdateProduct(product);
+                CollectionChanged?.Invoke();
+            });
         }
 
         public void Insert(Product product)
         {
-            LinqTools.AddNewProduct(product);
-            CollectionChanged?.Invoke();
+            Task.Run(() =>
+            {
+                LinqTools.AddNewProduct(product);
+                CollectionChanged?.Invoke();
+            });
         }
 
         public void Update(Product product)
         {
-            LinqTools.UpdateProduct(product);
-            CollectionChanged?.Invoke();
+            Task.Run(() =>
+            {
+                LinqTools.UpdateProduct(product);
+                CollectionChanged?.Invoke();
+            });
         }
 
         public void Upsert(Product product)
         {
-            if (LinqTools.GetProductById(product.ProductID) != null)
-                LinqTools.UpdateProduct(product);
-            else
-                LinqTools.AddNewProduct(product);
+            Task.Run(() =>
+            {
+                if (LinqTools.GetProductById(product.ProductID) != null)
+                    LinqTools.UpdateProduct(product);
+                else
+                    LinqTools.AddNewProduct(product);
 
-            CollectionChanged?.Invoke();
+                CollectionChanged?.Invoke();
+            });
         }
 
         public List<Product> GetAllProducts()

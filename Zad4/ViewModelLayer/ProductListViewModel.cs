@@ -88,12 +88,12 @@ namespace ViewModelLayer
 
         private void RemoveProduct()
         {
-            Task.Run(() => this.ProductService.Delete(Product.ProductID));
+            ProductService.Delete(Product.ProductID);
         }
 
         private void ShowDetails()
         {
-            ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel(Product);
+            ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel(Product, this.ProductService);
             ShowDetailsViewModel(productDetailsViewModel);
         }
 
