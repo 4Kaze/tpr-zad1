@@ -1,5 +1,4 @@
-﻿using LogicLayer.Service;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,7 +16,6 @@ namespace ViewLayer
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ServiceProvider.Initialize();
         }
     }
 }

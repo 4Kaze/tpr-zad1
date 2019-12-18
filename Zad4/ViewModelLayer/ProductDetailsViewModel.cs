@@ -1,5 +1,4 @@
 ﻿using LogicLayer.Interfaces;
-using LogicLayer.Service;
 using LogicLayer.Validators;
 using Model;
 using Service;
@@ -67,23 +66,10 @@ namespace ViewModelLayer
 
         public IProductService ProductService { get; set; }
 
-        public ProductDetailsViewModel()
+        public ProductDetailsViewModel(): this(new ProductService())
         {
-            this.ProductService = ServiceProvider.ProductService;
-            this.DisplayMessage = new OwnCommand(ShowPopupWindow);
-            this.AddItemToDataBase = new OwnCommand(SaveProduct);
-            this.Colors = ProductService.GetProductColors();
-            this.Sizes = ProductService.GetProductSizes();
-            this.SizesUnits = ProductService.GetSizeUnits();
-            this.WeightUnits = ProductService.GetWeightUnits();
-            this.Flags = new List<bool> { true, false };
-            this.ProductLines = ProductService.GetProductLines();
-            this.Classes = ProductService.GetProductClasses();
-            this.Styles = ProductService.GetProductStyles();
-            this.ProductSubCategories = ProductService.GetProductSubcategories();
-            this.ModelIds = ProductService.GetProductModels();
-        }
 
+        }
 
         public ProductDetailsViewModel(IProductService productService)
         {

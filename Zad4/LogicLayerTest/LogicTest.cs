@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using LogicLayer.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
 using Service;
+using ViewModelLayer;
 
 namespace LogicLayerTest
 {
@@ -47,6 +49,22 @@ namespace LogicLayerTest
 
             //productService.Delete(product.ProductID);
             //Assert.AreEqual(length, products.Count);
+        }
+
+        [TestMethod]
+        public void ShowWindowDetailsTest()
+        {
+            ProductListViewModel viewModel = new ProductListViewModel(new TestService());
+            Product product = new Product();
+            product.Name = "name";
+            product.ReorderPoint = 12;
+            viewModel.Product = product;
+            TestWindowResolver resolver = new TestWindowResolver();
+            viewModel.WindowResolver = resolver;
+            viewModel.DisplayDetails.Execute(null);
+            Assert.AreEqual(((ProductDetailsViewModel)resolver.Window.ViewModel).ProductName, "name");
+            Assert.AreEqual(((ProductDetailsViewModel)resolver.Window.ViewModel).ReorderPoint, 12);
+            Assert.AreEqual(resolver.Window.Showed, true);
         }
     }
 }

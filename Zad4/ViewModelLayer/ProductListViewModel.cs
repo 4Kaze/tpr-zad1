@@ -12,7 +12,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using LogicLayer.Interfaces;
 using Service;
-using LogicLayer.Service;
 
 namespace ViewModelLayer
 {
@@ -54,18 +53,10 @@ namespace ViewModelLayer
         public IProductService ProductService { get; set; }
         public Action CloseWindow { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public ProductListViewModel()   
+        public ProductListViewModel(): this(new ProductService())
         {
-            this.ProductService = ServiceProvider.ProductService;
-            this.Products = ProductService.GetAllProducts();
-            this.ActionText = "Message.";
-            this.DisplayAddWindow = new OwnCommand(ShowAddWindow);
-            this.RemoveEntity = new OwnCommand(RemoveProduct);
-            this.DisplayDetails = new OwnCommand(ShowDetails);
 
-            this.ProductService.CollectionChanged += OnProductsChanged;
         }
-
 
         public ProductListViewModel(IProductService productService)
         {
@@ -75,7 +66,6 @@ namespace ViewModelLayer
             this.DisplayAddWindow = new OwnCommand(ShowAddWindow);
             this.RemoveEntity = new OwnCommand(RemoveProduct);
             this.DisplayDetails = new OwnCommand(ShowDetails);
-
             this.ProductService.CollectionChanged += OnProductsChanged;
         }
 
