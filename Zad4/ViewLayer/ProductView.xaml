@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:validators="clr-namespace:LogicLayer.Validators;assembly=LogicLayer"
+        xmlns:conv="clr-namespace:ViewLayer.Converters"
         mc:Ignorable="d"
         Title="ProductView" Width="330" ResizeMode="NoResize">
     <Window.Resources>
@@ -173,19 +174,36 @@
 
         <StackPanel Orientation="Horizontal">
             <Button Content="Confirm" Command="{Binding AddItemToDataBase}" Height="23" Width="73">
+                <Button.Resources>
+                    <conv:IsEmptyConverter x:Key="isEmptyConverter"/>
+                </Button.Resources>
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="IsEnabled" Value="False"/>
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ElementName=ProductName, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ProductName}" Value="False"/>
+
+                                    <Condition Binding="{Binding ElementName=ProductNumber, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ProductNumber}" Value="False"/>
+
+                                    <Condition Binding="{Binding ElementName=SafetyStockLevel, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=SafetyStockLevel}" Value="False"/>
+
+                                    <Condition Binding="{Binding ElementName=StandardCost, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StandardCost}" Value="False"/>
+
+                                    <Condition Binding="{Binding ElementName=ReorderPoint, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ReorderPoint}" Value="False"/>
+
+                                    <Condition Binding="{Binding ElementName=ListPrice, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ListPrice}" Value="False"/>
+                                    
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Weight}" Value="False"/>
+
+                                    <Condition Binding="{Binding ElementName=DaysToManufacture, Path=Text, Converter={StaticResource isEmptyConverter}}" Value="True"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=DaysToManufacture}" Value="False"/>
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="IsEnabled" Value="True"/>

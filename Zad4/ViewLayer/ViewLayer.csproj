@@ -63,6 +63,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Converters\IsEmptyConverter.cs" />
     <Compile Include="DI\ProductDetailsResolver.cs" />
     <Compile Include="DI\ProductDetailsWindow.cs" />
     <Compile Include="ProductView.xaml.cs">
