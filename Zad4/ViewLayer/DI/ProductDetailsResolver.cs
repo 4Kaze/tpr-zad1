@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ViewLayer.DI
 {
-    class ProductDetailsResolver : IWindowResolver
+    public class ProductDetailsResolver : IWindowResolver
     {
         public IOperationWindow GetWindow()
         {

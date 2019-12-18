@@ -84,6 +84,24 @@ namespace ViewModelLayer
             this.ModelIds = ProductService.GetProductModels();
         }
 
+
+        public ProductDetailsViewModel(IProductService productService)
+        {
+            this.ProductService = productService;
+            this.DisplayMessage = new OwnCommand(ShowPopupWindow);
+            this.AddItemToDataBase = new OwnCommand(SaveProduct);
+            this.Colors = ProductService.GetProductColors();
+            this.Sizes = ProductService.GetProductSizes();
+            this.SizesUnits = ProductService.GetSizeUnits();
+            this.WeightUnits = ProductService.GetWeightUnits();
+            this.Flags = new List<bool> { true, false };
+            this.ProductLines = ProductService.GetProductLines();
+            this.Classes = ProductService.GetProductClasses();
+            this.Styles = ProductService.GetProductStyles();
+            this.ProductSubCategories = ProductService.GetProductSubcategories();
+            this.ModelIds = ProductService.GetProductModels();
+        }
+
         public ProductDetailsViewModel(Product product) : this()
         {
             ProductName = product.Name;

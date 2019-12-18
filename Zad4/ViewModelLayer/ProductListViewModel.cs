@@ -66,12 +66,25 @@ namespace ViewModelLayer
             this.ProductService.CollectionChanged += OnProductsChanged;
         }
 
+
+        public ProductListViewModel(IProductService productService)
+        {
+            this.ProductService = productService;
+            this.Products = ProductService.GetAllProducts();
+            this.ActionText = "Message.";
+            this.DisplayAddWindow = new OwnCommand(ShowAddWindow);
+            this.RemoveEntity = new OwnCommand(RemoveProduct);
+            this.DisplayDetails = new OwnCommand(ShowDetails);
+
+            this.ProductService.CollectionChanged += OnProductsChanged;
+        }
+
         private void OnProductsChanged()
         {
             this.Products = ProductService.GetAllProducts();
         }
 
-        private void ShowAddWindow()
+        public void ShowAddWindow()
         {
             ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel();
             ShowDetailsViewModel(productDetailsViewModel);
