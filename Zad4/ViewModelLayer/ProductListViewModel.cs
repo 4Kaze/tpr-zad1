@@ -81,10 +81,7 @@ namespace ViewModelLayer
         private void ShowAddWindow()
         {
             ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel();
-            productDetailsViewModel.DisplayErrorMessage = this.MessageBoxShowDelegate;
-            IOperationWindow window = WindowResolver.GetWindow();
-            window.BindViewModel(productDetailsViewModel);
-            window.Show();
+            ShowDetailsViewModel(productDetailsViewModel);
         }
 
         private void RemoveProduct()
@@ -95,8 +92,14 @@ namespace ViewModelLayer
         private void ShowDetails()
         {
             ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel(Product);
+            ShowDetailsViewModel(productDetailsViewModel);
+        }
+
+        private void ShowDetailsViewModel(ProductDetailsViewModel viewModel)
+        {
+            viewModel.DisplayErrorMessage = this.MessageBoxShowDelegate;
             IOperationWindow window = WindowResolver.GetWindow();
-            window.BindViewModel(productDetailsViewModel);
+            window.BindViewModel(viewModel);
             window.Show();
         }
     }

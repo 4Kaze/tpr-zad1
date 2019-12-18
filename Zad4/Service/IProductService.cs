@@ -27,6 +27,11 @@ namespace Service
         List<string> GetProductSubcategories();
         List<string> GetProductModels();
         List<string> GetSizeUnits();
+
+        int GetSubcategoryIDByName(string name);
+        int GetModelIDByName(string name);
+        string GetSubcategoryNameByID(int id);
+        string GetModelNameByID(int id);
     }
 
     public delegate void VoidHandler();

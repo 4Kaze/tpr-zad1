@@ -55,6 +55,7 @@
     <Compile Include="Validators\ValidateDays.cs" />
     <Compile Include="Validators\ValidateIntegerHigher.cs" />
     <Compile Include="Validators\ValidateProduct.cs" />
+    <Compile Include="Validators\ValidateProductName.cs" />
     <Compile Include="Validators\ValidateRealHigher.cs" />
     <Compile Include="Validators\ValidateRealNumberEqualHigher.cs" />
     <Compile Include="Validators\ValidaterProductNumber.cs" />

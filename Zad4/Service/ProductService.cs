@@ -88,5 +88,25 @@ namespace Service
         {
             return LinqTools.SelectDistinctSizesUnits();
         }
+
+        public int GetSubcategoryIDByName(string name)
+        {
+            return LinqTools.SelectSubcategoryId(name);
+        }
+
+        public int GetModelIDByName(string name)
+        {
+            return LinqTools.SelectModelId(name);
+        }
+
+        public string GetSubcategoryNameByID(int id)
+        {
+            return LinqTools.SelectSubcategoryName(id);
+        }
+
+        public string GetModelNameByID(int id)
+        {
+            return LinqTools.SelectModelName(id);
+        }
     }
 }

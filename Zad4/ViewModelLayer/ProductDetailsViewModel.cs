@@ -16,32 +16,32 @@ namespace ViewModelLayer
     public class ProductDetailsViewModel : IViewModel
     {
         //Messages
-        public string MessageEmptyFields { get; set; } = "";
+        public string MessageEmptyFields { get; set; }
 
         //Static Data
         private int _productID { get; set; } 
-        public string ProductName { get; set; } = null;
-        public string ProductNumber { get; set; } = null;
+        public string ProductName { get; set; }
+        public string ProductNumber { get; set; }
         public bool MakeFlag { get; set; }
         public bool FinishedGoodsFlag { get; set; }
         public string Color { get; set; } = null;
-        public short SafetyStockLevel { get; set; } = 0;
-        public short ReorderPoint { get; set; } = 0;
-        public decimal StandardCost { get; set; } = 0;
-        public decimal ListPrice { get; set; } = 0;
+        public short SafetyStockLevel { get; set; }
+        public short ReorderPoint { get; set; }
+        public decimal StandardCost { get; set; }
+        public decimal ListPrice { get; set; }
         public string Size { get; set; } = null;
-        public string SizeUnitMeasureCode { get; set; } = null;
-        public string WeightUnitMeasureCode { get; set; } = null;
+        public string SizeUnitMeasureCode { get; set; }
+        public string WeightUnitMeasureCode { get; set; }
         public decimal? Weight { get; set; } = 0;
         public int DaysToManufacture { get; set; }
-        public string ProductLine { get; set; } = null;
-        public string Class { get; set; } = null;
-        public string Style { get; set; } = null;
+        public string ProductLine { get; set; }
+        public string Class { get; set; }
+        public string Style { get; set; }
         public string ProductSubcategoryID { get; set; } 
         public string ModelId { get; set; } 
-        public DateTime? SellEndDate { get; set; } = DateTime.Today;
-        public DateTime SellStartDate { get; set; } = DateTime.Today;
-        public DateTime? DiscontinuedDate { get; set; } = DateTime.Today;
+        public DateTime? SellEndDate { get; set; }
+        public DateTime SellStartDate { get; set; }
+        public DateTime? DiscontinuedDate { get; set; }
 
         //Display Data
         public List<string> Colors { get; set; }
@@ -104,8 +104,8 @@ namespace ViewModelLayer
             ProductLine = product.ProductLine;
             Class = product.Class;
             Style = product.Style;
-            ProductSubcategoryID = "";
-            ModelId = "";
+            ProductSubcategoryID = product.ProductSubcategoryID.HasValue ? ProductService.GetSubcategoryNameByID(product.ProductSubcategoryID ?? 0) : null;
+            ModelId = product.ProductModelID.HasValue ? ProductService.GetModelNameByID(product.ProductModelID ?? 0) : null;
             _productID = product.ProductID;
             this.SellStartDate = product.SellStartDate;
             this.SellEndDate = product.SellEndDate;
@@ -162,8 +162,10 @@ namespace ViewModelLayer
             product.ProductLine = this.ProductLine;
             product.Class = this.Class;
             product.Style = this.Style;
-            product.ProductSubcategoryID = LinqTools.SelectSubcategoryId(this.ProductSubcategoryID);
-            product.ProductModelID = LinqTools.SelectModelId(this.ModelId);
+            product.ProductSubcategoryID = (this.ProductSubcategoryID != null && this.ProductSubcategoryID.Length > 0) ? 
+                ProductService.GetSubcategoryIDByName(this.ProductSubcategoryID) : (int?)null;
+            product.ProductModelID = (this.ModelId != null && this.ModelId.Length > 0) ?
+                ProductService.GetModelIDByName(this.ModelId) : (int?)null; 
             product.SellStartDate = this.SellStartDate;//this.SellStartDate;
             product.SellEndDate = this.SellEndDate;// this.SellEndDate;
             product.DiscontinuedDate = this.DiscontinuedDate;// this.DiscontinuedDate;

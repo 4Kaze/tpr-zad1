@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ViewLayer"
         xmlns:validators="clr-namespace:LogicLayer.Validators;assembly=LogicLayer"
         mc:Ignorable="d"
         Title="ProductView" Height="971.5" Width="330" ResizeMode="NoResize">
@@ -45,7 +44,15 @@
         </UniformGrid.Resources>
 
         <Label Content="Product name:" FontSize="10"/>
-        <TextBox TextWrapping="Wrap" Text="{Binding ProductName}"/>
+        <TextBox Name="ProductName" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}">
+            <TextBox.Text>
+                <Binding Path="ProductName" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <validators:ValidateProductName ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <Label Content="Make flag:" FontSize="10"/>
         <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding MakeFlag}" SelectedIndex="0"/>
@@ -183,6 +190,7 @@
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ProductName}" Value="False"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=ProductNumber}" Value="False"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=SafetyStockLevel}" Value="False"/>
                                     <Condition Binding="{Binding Path=(Validation.HasError), ElementName=StandardCost}" Value="False"/>

@@ -11,34 +11,18 @@ namespace LogicLayer.Validators
     {
         public static bool CheckProduct(Product p)
         {
-            bool flag = true;
-            flag = p.Name != null;
-            flag = p.ProductNumber != null;
-            flag = p.Color != null;
-            flag = p.SafetyStockLevel != 0;
-            flag = p.ReorderPoint != 0;
-            flag = p.StandardCost != 0;
-            flag = p.ListPrice != 0;
-            flag = p.Size != null;
-            flag = p.SizeUnitMeasureCode != null;
-            flag = p.WeightUnitMeasureCode != null;
-            flag = p.Weight != null;
-            flag = p.DaysToManufacture >= 0;
-            flag = p.ProductLine != null;
-            flag = p.Class != null;
-            flag = p.Style != null;
-            flag = p.ProductSubcategoryID != 0;
-            flag = p.ProductModelID != 0;
-            return flag;
+            return true;
+            return !string.IsNullOrEmpty(p.Name) && !string.IsNullOrEmpty(p.ProductNumber) && p.SafetyStockLevel >= 0 && p.ReorderPoint >= 0
+                && p.ListPrice >= 0 && p.DaysToManufacture >= 0 && p.SellStartDate != null;
         } 
 
         public static bool CheckDate(Product p)
         {
-            if(p.SellEndDate < p.SellStartDate)
+            if(p.SellEndDate != null && p.SellEndDate < p.SellStartDate)
             {
                 return false;
             }
-            if (p.SellStartDate < DateTime.Today)
+            if (p.DiscontinuedDate != null && p.DiscontinuedDate < p.SellStartDate)
             {
                 return false;
             }
