@@ -88,7 +88,7 @@ namespace ViewModelLayer
             this.ModelIds = ProductService.GetProductModels();
         }
 
-        public ProductDetailsViewModel(Product product) : this()
+        public ProductDetailsViewModel(Product product, IProductService productService) : this(productService)
         {
             ProductName = product.Name;
             ProductNumber = product.ProductNumber;
@@ -126,7 +126,7 @@ namespace ViewModelLayer
             Product product = GetProduct();
             if (ValidateProduct.CheckDate(product))
             {
-                Task.Run(() => ProductService.Upsert(product));
+                ProductService.Upsert(product);
                 CloseWindow();
             }
             else

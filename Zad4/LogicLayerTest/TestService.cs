@@ -12,6 +12,7 @@ namespace LogicLayerTest
     class TestService : IProductService
     {
         public event VoidHandler CollectionChanged;
+        public Product AddedProduct { get; set; }
 
         public void Delete(int productID)
         {
@@ -100,7 +101,7 @@ namespace LogicLayerTest
 
         public void Upsert(Product product)
         {
-            
+            AddedProduct = product;
         }
     }
 }
