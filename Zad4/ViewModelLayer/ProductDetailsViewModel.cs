@@ -122,7 +122,7 @@ namespace ViewModelLayer
             Product product = GetProduct();
             if (ValidateProduct.CheckDate(product))
             {
-                ProductService.Upsert(product);
+                Task.Run(() => ProductService.Upsert(product));
                 CloseWindow();
             }
             else

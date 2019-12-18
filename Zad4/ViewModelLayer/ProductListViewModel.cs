@@ -79,7 +79,7 @@ namespace ViewModelLayer
 
         private void RemoveProduct()
         {
-            this.ProductService.Delete(Product.ProductID);
+            Task.Run(() => this.ProductService.Delete(Product.ProductID));
         }
 
         private void ShowDetails()

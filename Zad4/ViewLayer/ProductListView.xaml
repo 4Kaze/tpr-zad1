@@ -16,15 +16,25 @@
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <ListView x:Name="productListView" ItemsSource="{Binding Products}" SelectedItem="{Binding Product}" Grid.Column="0" MouseDoubleClick="ProductList_MouseDoubleClick">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding ProductID}"  Width="80"/>
-                    <GridViewColumn Header="Product Name" DisplayMemberBinding="{Binding Name}" Width="250"/>
-                </GridView>
-            </ListView.View>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="5,0,0,0" Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
+            <TextBlock Text="ID" Width="80"/>
+            <TextBlock Text="Name" Width="250"/>
+        </StackPanel>
+        <ListView x:Name="productListView" ItemsSource="{Binding Products}" SelectedItem="{Binding Product}" Grid.Column="0" Grid.Row="1" MouseDoubleClick="ProductList_MouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding ProductID}" Width="80"/>
+                        <TextBlock Text="{Binding Name}" Width="250"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-        <StackPanel Orientation = "Vertical" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,-5,0,5">
+        <StackPanel Orientation = "Vertical" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Margin="5,-5,0,5">
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="0,5,0,0" />
