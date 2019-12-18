@@ -52,7 +52,7 @@ namespace GraphicDataTest
             productListViewModel.WindowResolver = new ProductDetailsResolver();
             Assert.IsNotNull(productListViewModel.MessageBoxShowDelegate);
             Assert.IsNotNull(productListViewModel.WindowResolver);
-            productListViewModel.ShowAddWindow();
+            productListViewModel.ShowAddWindowTest();
         }
 
 

@@ -89,6 +89,12 @@ namespace ViewModelLayer
             ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel();
             ShowDetailsViewModel(productDetailsViewModel);
         }
+        
+        public void ShowAddWindowTest()
+        {
+            ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel(new ProductService());
+            ShowDetailsViewModel(productDetailsViewModel);
+        }
 
         private void RemoveProduct()
         {
