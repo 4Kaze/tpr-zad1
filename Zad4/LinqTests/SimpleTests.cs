@@ -12,7 +12,6 @@ namespace LinqTests
         public void NameContainsGet()
         {
             List<Product> products = LinqTools.GetProductsByName("Ball");
-            Assert.AreEqual(products.Count, 3);
             foreach (Product product in products)
                 Assert.IsTrue(product.Name.Contains("Ball"));
         }
@@ -31,14 +30,6 @@ namespace LinqTests
         {
             List<string> productsName = LinqTools.GetProductNamesByVendorName("Litware, Inc.");
             Assert.AreEqual(productsName.Count, 1);
-        }
-
-
-        [TestMethod]
-        public void VendorNameByProduct()
-        {
-            string productsName = LinqTools.GetProductVendorByProductName("Adjustable Race");
-            Assert.AreEqual(productsName, "Litware, Inc.");
         }
 
         [TestMethod]
