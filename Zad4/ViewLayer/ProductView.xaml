@@ -24,31 +24,45 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Margin" Value="0,0,0,14"/>
         </Style>
     </Window.Resources>
 
-    <UniformGrid Rows="24" Columns="2" Margin="5">
-        <UniformGrid.Resources>
-            <Style TargetType="ComboBox">
-                <Setter Property="Height" Value="25"/>
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-            </Style>
-            <Style TargetType="DatePicker">
-                <Setter Property="Height" Value="25"/>
-                <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-            </Style>
-            <Style TargetType="Label">
-                <Setter Property="Height" Value="25"/>
-                <Setter Property="HorizontalAlignment" Value="Left"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-            </Style>
-        </UniformGrid.Resources>
+    <Grid>
 
-        <Label Content="Product name:" FontSize="10"/>
-        <TextBox Name="ProductName" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="1" Grid.Row="0" Content="Product name:" FontSize="10"/>
+        <TextBox Grid.Column="2" Grid.Row="0" Name="ProductName" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}">
             <TextBox.Text>
                 <Binding Path="ProductName" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -58,14 +72,14 @@
             </TextBox.Text>
         </TextBox>
 
-        <Label Content="Make flag:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding MakeFlag}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="1" Content="Make flag:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="1" ItemsSource="{Binding Flags}" SelectedItem="{Binding MakeFlag}" SelectedIndex="0"/>
 
-        <Label Content="Finished Goods Flag:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="2" Content="Finished Goods Flag:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="2" ItemsSource="{Binding Flags}" SelectedItem="{Binding FinishedGoodsFlag}" SelectedIndex="0"/>
 
-        <Label Content="Product number:" FontSize="10"/>
-        <TextBox Name="ProductNumber" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
+        <Label Grid.Column="1" Grid.Row="3" Content="Product number:" FontSize="10"/>
+        <TextBox Grid.Column="2" Grid.Row="3" Name="ProductNumber" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="ProductNumber" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -75,11 +89,11 @@
             </TextBox.Text>
         </TextBox>
 
-        <Label Content="Color:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="4" Content="Color:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="4" ItemsSource="{Binding Colors}" SelectedItem="{Binding Color}" SelectedIndex="0"/>
 
-        <Label Content="Safety stock level:" FontSize="10"/>
-        <TextBox Name="SafetyStockLevel" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
+        <Label Grid.Column="1" Grid.Row="5" Content="Safety stock level:" FontSize="10"/>
+        <TextBox Grid.Column="2" Grid.Row="5" Name="SafetyStockLevel" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="SafetyStockLevel" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -89,8 +103,8 @@
             </TextBox.Text>
         </TextBox>
 
-        <Label Content="Standard cost:" FontSize="10"/>
-        <TextBox Name="StandardCost" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
+        <Label Grid.Column="1" Grid.Row="6" Content="Standard cost:" FontSize="10"/>
+        <TextBox Grid.Column="2" Grid.Row="6" Name="StandardCost" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="ReorderPoint" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -99,10 +113,10 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        
-        
-        <Label Content="Reorder point:" FontSize="10"/>
-        <TextBox Name="ReorderPoint" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
+
+
+        <Label Grid.Column="1" Grid.Row="7" Content="Reorder point:" FontSize="10"/>
+        <TextBox Grid.Column="2" Grid.Row="7" Name="ReorderPoint" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="StandardCost" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -112,8 +126,8 @@
             </TextBox.Text>
         </TextBox>
 
-        <Label Content="List price:" FontSize="10"/>
-        <TextBox Name="ListPrice" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
+        <Label Grid.Column="1" Grid.Row="8" Content="List price:" FontSize="10"/>
+        <TextBox Grid.Column="2" Grid.Row="8" Name="ListPrice" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="ListPrice" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -123,17 +137,17 @@
             </TextBox.Text>
         </TextBox>
 
-        <Label Content="Size:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Sizes}"  SelectedItem="{Binding Size}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="9" Content="Size:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="9" ItemsSource="{Binding Sizes}"  SelectedItem="{Binding Size}" SelectedIndex="0"/>
 
-        <Label Content="Size unit measure code:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding SizesUnits}"  SelectedItem="{Binding SizeUnitMeasureCode}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="10" Content="Size unit measure code:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="10" ItemsSource="{Binding SizesUnits}"  SelectedItem="{Binding SizeUnitMeasureCode}" SelectedIndex="0"/>
 
-        <Label Content="Weight unit measure code:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding WeightUnits}"  SelectedItem="{Binding WeightUnitMeasureCode}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="11" Content="Weight unit measure code:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="11" ItemsSource="{Binding WeightUnits}"  SelectedItem="{Binding WeightUnitMeasureCode}" SelectedIndex="0"/>
 
-        <Label Content="Weight:" FontSize="10"/>
-        <TextBox Name="Weight" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
+        <Label Grid.Column="1" Grid.Row="12" Content="Weight:" FontSize="10"/>
+        <TextBox Grid.Column="2" Grid.Row="12" Name="Weight" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="Weight" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -142,9 +156,9 @@
                 </Binding>
             </TextBox.Text> 
         </TextBox>
-        
-        <Label Content="Days to manufacture:" FontSize="10"/>
-        <TextBox Name="DaysToManufacture" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
+
+        <Label Grid.Column="1" Grid.Row="13" Content="Days to manufacture:" FontSize="10"/>
+        <TextBox Grid.Column="2" Grid.Row="13" Name="DaysToManufacture" TextWrapping="Wrap" Style="{StaticResource DisplayErrorMessage}" >
             <TextBox.Text>
                 <Binding Path="DaysToManufacture" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -154,29 +168,29 @@
             </TextBox.Text>
         </TextBox>
 
-        <Label Content="Product line:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding ProductLines}"  SelectedItem="{Binding ProductLine}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="14" Content="Product line:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="14" ItemsSource="{Binding ProductLines}"  SelectedItem="{Binding ProductLine}" SelectedIndex="0"/>
 
-        <Label Content="Class:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Classes}"  SelectedItem="{Binding Class}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="15" Content="Class:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="15" ItemsSource="{Binding Classes}"  SelectedItem="{Binding Class}" SelectedIndex="0"/>
 
-        <Label Content="Style:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding Styles}"  SelectedItem="{Binding Style}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="16" Content="Style:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="16" ItemsSource="{Binding Styles}"  SelectedItem="{Binding Style}" SelectedIndex="0"/>
 
-        <Label Content="Product subcategory:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding ProductSubCategories}"  SelectedItem="{Binding ProductSubcategoryID}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="17" Content="Product subcategory:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="17" ItemsSource="{Binding ProductSubCategories}"  SelectedItem="{Binding ProductSubcategoryID}" SelectedIndex="0"/>
 
-        <Label Content="Product model:" FontSize="10"/>
-        <ComboBox ItemsSource="{Binding ModelIds}"  SelectedItem="{Binding ModelId}" SelectedIndex="0"/>
+        <Label Grid.Column="1" Grid.Row="18" Content="Product model:" FontSize="10"/>
+        <ComboBox Grid.Column="2" Grid.Row="18" ItemsSource="{Binding ModelIds}"  SelectedItem="{Binding ModelId}" SelectedIndex="0"/>
 
-        <Label Content="Sell start date:" FontSize="10"/>
-        <DatePicker SelectedDate="{Binding SellStartDate}"/>
+        <Label Grid.Column="1" Grid.Row="19" Content="Sell start date:" FontSize="10"/>
+        <DatePicker Grid.Column="2" Grid.Row="19" SelectedDate="{Binding SellStartDate}"/>
 
-        <Label Content="Sell end date:" FontSize="10"/>
-        <DatePicker SelectedDate="{Binding SellEndDate}"/>
+        <Label Grid.Column="1" Grid.Row="20" Content="Sell end date:" FontSize="10"/>
+        <DatePicker Grid.Column="2" Grid.Row="20" SelectedDate="{Binding SellEndDate}"/>
 
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Confirm" Command="{Binding AddItemToDataBase}" Height="23" Width="73">
+        <StackPanel Grid.Column="1" Grid.Row="22" Orientation="Horizontal">
+            <Button Content="Confirm" Command="{Binding AddItemToDataBase}" Height="23" Width="124" Margin="0,0,0,-1">
                 <Button.Resources>
                     <conv:IsEmptyConverter x:Key="isEmptyConverter"/>
                 </Button.Resources>
@@ -216,5 +230,5 @@
                 </Button.Style>
             </Button>
         </StackPanel>
-    </UniformGrid>
+    </Grid>
 </Window>
