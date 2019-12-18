@@ -61,7 +61,6 @@ namespace ViewModelLayer
 
         //Commands
         public OwnCommand DisplayMessage { get; set; }
-        public OwnCommand DisplayAddWindow { get; set; }
         public OwnCommand AddItemToDataBase { get; set; }
 
         public IProductService ProductService { get; set; }

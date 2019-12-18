@@ -13,10 +13,11 @@ namespace LogicLayerTest
     {
         public event VoidHandler CollectionChanged;
         public Product AddedProduct { get; set; }
+        public int DeletedProductID { get; set; }
 
         public void Delete(int productID)
         {
-            
+            DeletedProductID = productID;
         }
 
         public List<Product> GetAllProducts()
