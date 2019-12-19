@@ -79,5 +79,67 @@ namespace LogicLayerTest
             viewModel.DisplayMessage.Execute(null);
             Assert.IsTrue(invoked);
         }
+        [TestMethod]
+        public void ProductServiceUpdateTest()
+        {
+            IProductService productService = new ProductService();
+
+            List<Product> products = productService.GetAllProducts();
+            Product product = products[0];
+            Assert.AreEqual(product.Name, "Adjustabl");
+
+            product.Name = "testowy";
+            Assert.AreEqual(product.Name, "testowy");
+
+            productService.Update(product);
+        }
+
+
+
+
+        [TestMethod]
+        public void ProductServiceTestGets()
+        {
+               IProductService productService = new ProductService();
+
+            //Classes
+            Assert.AreEqual(productService.GetProductClasses().Count, 4);
+
+            //Colors
+            Assert.AreEqual(productService.GetProductColors().Count, 10);
+
+            //Lines
+            Assert.AreEqual(productService.GetProductLines().Count, 5);
+
+            //Models
+            Assert.AreEqual(productService.GetProductModels().Count, 119);
+
+            //Sizes
+            Assert.AreEqual(productService.GetProductSizes().Count, 19);
+
+            //Subcategories
+            Assert.AreEqual(productService.GetProductStyles().Count, 4);
+            
+            //Subcategories
+            Assert.AreEqual(productService.GetProductSubcategories().Count, 37);
+
+            //WeigthUnits
+            Assert.AreEqual(productService.GetWeightUnits().Count, 3);
+
+            //SizeUnits
+            Assert.AreEqual(productService.GetSizeUnits().Count, 2);
+
+            //ClassID
+            Assert.AreEqual(productService.GetSubcategoryIDByName("Mountain Bikes"), 1);
+
+            //ModelID
+            Assert.AreEqual(productService.GetModelIDByName("Classic Vest"), 1);
+
+            //ClassName
+            Assert.AreEqual(productService.GetSubcategoryNameByID(1), "Mountain Bikes");
+
+            //ModelName
+            Assert.AreEqual(productService.GetModelNameByID(1), "Classic Vest");
+        }
     }
 }

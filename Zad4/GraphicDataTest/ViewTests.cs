@@ -18,7 +18,6 @@ namespace GraphicDataTest
             ProductDetailsViewModel productDetailsViewModel = new ProductDetailsViewModel(new ProductService());
             Assert.IsNotNull(productDetailsViewModel.DisplayMessage);
             Assert.IsNotNull(productDetailsViewModel.AddItemToDataBase);
-            Assert.IsNull(productDetailsViewModel.DisplayAddWindow);
             Assert.IsNotNull(productDetailsViewModel.Colors);
             Assert.IsNotNull(productDetailsViewModel.Sizes);
             Assert.IsNotNull(productDetailsViewModel.SizesUnits);
