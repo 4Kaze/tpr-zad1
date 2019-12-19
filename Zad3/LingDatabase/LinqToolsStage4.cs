@@ -49,7 +49,7 @@ namespace LingDatabase
         {
             string result = "";
             var answer = products.Join(vendors, product => product.ProductID, vendor => vendor.ProductID, (product, vendor) => product.Name + "-" + vendor.Vendor.Name).ToList();
-
+            
             for (int i = 0; i < answer.Count; i++)
             {
                 result += answer[i];
