@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ViewLayer"
+        xmlns:di="clr-namespace:ViewLayer.DI"
         xmlns:logic="clr-namespace:ViewModelLayer;assembly=LogicLayer"
         mc:Ignorable="d"
         Title="ProductListView" Height="450" Width="450">
@@ -24,7 +25,7 @@
             <TextBlock Text="ID" Width="80"/>
             <TextBlock Text="Name" Width="250"/>
         </StackPanel>
-        <ListView x:Name="productListView" ItemsSource="{Binding Products}" SelectedItem="{Binding Product}" Grid.Column="0" Grid.Row="1" MouseDoubleClick="ProductList_MouseDoubleClick">
+        <ListView x:Name="productListView" ItemsSource="{Binding Products}" SelectedItem="{Binding Product}" Grid.Column="0" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -47,6 +48,7 @@
                         Value="Yellow" />
                 </Style>
             </StackPanel.Resources>
+            <Button Content="Details" Command="{Binding DisplayDetails}"/>
             <Button Content="Add" Command="{Binding DisplayAddWindow}"/>
             <Button Content="Remove" Command="{Binding RemoveEntity}"/>
         </StackPanel>

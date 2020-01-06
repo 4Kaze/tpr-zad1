@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace LogicLayer.Validators
+namespace ViewLayer.Validators
 {
-    public class ValidateDays : ValidationRule
+    public class ValidateRealNumberEqualHigher : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -19,19 +19,17 @@ namespace LogicLayer.Validators
             }
             else
             {
-                int example;
-                flag = int.TryParse((string)value, out example);
+                flag = decimal.TryParse((string)value, out decimal example);
                 if (!flag)
                 {
                     return new ValidationResult(false, "value must be decimal number.");
                 }
-                if (example < 0)
+                if(example < 0)
                 {
-                    return new ValidationResult(false, "value must be higher than 0.");
+                    return new ValidationResult(false, "value must be higher or equal 0.");
                 }
             }
             return ValidationResult.ValidResult;
         }
-        
     }
 }

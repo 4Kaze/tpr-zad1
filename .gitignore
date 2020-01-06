@@ -3,3 +3,5 @@ obj/
 .vs/
 generator.py
 Zad4/LingDatabase/Properties/Settings.Designer.cs
+Zad4/LingDatabase/Properties/Settings.settings
+Zad4/LingDatabase/Properties/app.config

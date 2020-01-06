@@ -1,5 +1,4 @@
 ﻿using LogicLayer.Interfaces;
-using LogicLayer.Validators;
 using Model;
 using Service;
 using System;
@@ -123,7 +122,7 @@ namespace ViewModelLayer
         {
             this.MessageEmptyFields = "";
             Product product = GetProduct();
-            if (ValidateProduct.CheckDate(product))
+            if (product.SellEndDate == null || product.SellEndDate > product.SellStartDate)
             {
                 ProductService.Upsert(product);
                 CloseWindow();

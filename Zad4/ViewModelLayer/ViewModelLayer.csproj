@@ -31,8 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,14 +49,6 @@
     <Compile Include="Commands\OwnCommand.cs" />
     <Compile Include="ProductListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validators\ValidateDays.cs" />
-    <Compile Include="Validators\ValidateIntegerHigher.cs" />
-    <Compile Include="Validators\ValidateProduct.cs" />
-    <Compile Include="Validators\ValidateProductName.cs" />
-    <Compile Include="Validators\ValidateRealHigher.cs" />
-    <Compile Include="Validators\ValidateRealNumberEqualHigher.cs" />
-    <Compile Include="Validators\ValidaterProductNumber.cs" />
-    <Compile Include="Validators\ValidateIntegerEqualHigher.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LingDatabase\Model.csproj">

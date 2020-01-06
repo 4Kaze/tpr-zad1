@@ -55,6 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Validators\ValidateDays.cs" />
+    <Compile Include="Validators\ValidateIntegerEqualHigher.cs" />
+    <Compile Include="Validators\ValidateIntegerHigher.cs" />
+    <Compile Include="Validators\ValidateProductName.cs" />
+    <Compile Include="Validators\ValidateRealHigher.cs" />
+    <Compile Include="Validators\ValidateRealNumberEqualHigher.cs" />
+    <Compile Include="Validators\ValidaterProductNumber.cs" />
     <Page Include="ProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

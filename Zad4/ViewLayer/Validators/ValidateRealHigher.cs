@@ -6,27 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace LogicLayer.Validators
+namespace ViewLayer.Validators
 {
-    public class ValidateIntegerEqualHigher : ValidationRule
+    public class ValidateRealHigher : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            bool flag;
-            if(value == null)
+            bool flag = true;
+            if (value == null)
             {
                 return new ValidationResult(false, "value cannot be empty.");
             }
             else
             {
-                flag = int.TryParse((string)value, out int example);
+                flag = decimal.TryParse((string)value, out decimal example);
                 if (!flag)
                 {
-                    return new ValidationResult(false, "value must be integer number.");
+                    return new ValidationResult(false, "value must be decimal number.");
                 }
-                if (example < 0)
+                if (example <= 0)
                 {
-                    return new ValidationResult(false, "value must be higher or equal 0.");
+                    return new ValidationResult(false, "value must be higher than 0.");
                 }
             }
             return ValidationResult.ValidResult;

@@ -34,10 +34,5 @@ namespace ViewLayer
             mc.MessageBoxShowDelegate = text => MessageBox.Show(text, "Button interaction", MessageBoxButton.OK, MessageBoxImage.Information);
             mc.WindowResolver = new ProductDetailsResolver();
         }
-
-        private void ProductList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ((ProductListViewModel)DataContext).DisplayDetails.Execute(null);
-        }
     }
 }
